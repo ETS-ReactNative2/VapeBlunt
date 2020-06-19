@@ -22,8 +22,6 @@ const Blog = () => {
             You are on Blog Screen
           </Text>
         </View>
-       
-       
       </View>
     </SafeAreaView>
   );

@@ -1,70 +1,32 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-// React Native Bottom Navigation - Example using React Navigation V5 //
-// https://aboutreact.com/react-native-bottom-navigation //
-import 'react-native-gesture-handler';
-
+// React
 import * as React from 'react';
 import { Button, View, Text, TouchableOpacity, Image, SafeAreaView, ScrollView } from 'react-native';
-
+//Screens
+import Carrito from './screens/Carrito';
+import Blog from './screens/Blog';
+import Tienda from './screens/Tienda';
+//Components
+import Header from './components/Header';
+//extra
+import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
-import Carrito from './screens/Carrito';
-import Blog from './screens/Blog';
-import Tienda from './screens/Tienda';
 
 const StackTienda = createStackNavigator();
 const StackCarrito = createStackNavigator();
 const StackBlog = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function CustomHeader({ navigation }) {
-  return (
-    <View style={{ flexDirection: "row", height: 50, borderWidth: 1, borderColor: 'black' }}>
-      <View style={{ flex: 1, justifyContent: 'center', borderColor: 'black', borderWidth: 1, backgroundColor: "black" }}  >
-        <TouchableOpacity onPress={() => navigation.openDrawer()} style={{ backgroundColor: "black" }} >
-          <Image style={{ alignContent: "center", backgroundColor: "black", height: 30, width: 30, marginLeft: 4 }}
-            source={require('./assets/icons/jamburger.png')}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      </View>
-
-      <View style={{ flex: 4, borderColor: 'black', borderWidth: 1, backgroundColor: 'black' }}></View>
-    </View>
-  )
-
-}
-
 function InicioStack({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <CustomHeader navigation={navigation} />
-      <View style={{ flex: 1, padding: 16 }}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text
-            style={{
-              fontSize: 25,
-              textAlign: 'center',
-              marginBottom: 16
-            }}>
+      <Header navigation={navigation} />
+      <View style={{ flex: 1, padding: 16, alignItems: 'center', justifyContent: 'center', }}>
+          <Text style={{ fontSize: 25, textAlign: 'center', marginBottom: 16 }}>
             You are on Inicio Screen
           </Text>
-        </View>
       </View>
     </SafeAreaView>
   );
@@ -80,8 +42,7 @@ function TiendaStack() {
 
 function CarritoStack() {
   return (
-    <StackCarrito.Navigator
-      initialRouteName="Carrito"
+    <StackCarrito.Navigator initialRouteName="Carrito"
       screenOptions={{
         headerStyle: { backgroundColor: '#42f44b' },
         headerTintColor: '#fff',
@@ -95,8 +56,7 @@ function CarritoStack() {
 
 function BlogStack() {
   return (
-    <StackBlog.Navigator
-      initialRouteName="Blog"
+    <StackBlog.Navigator initialRouteName="Blog"
       screenOptions={{
         headerStyle: { backgroundColor: '#42f44b' },
         headerTintColor: '#fff',
@@ -117,8 +77,7 @@ function NotificationsScreen({ navigation }) {
 }
 
 
-function CustomDrawerContent(props) {
-
+function LateralMenu(props) {
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <View style={{ alignItems: 'center', backgroundColor: 'black', height: 50, flexDirection: 'row' }}>
@@ -292,7 +251,7 @@ function App() {
   return (
     <NavigationContainer>
       <SafeAreaView style={{ flex: 0, backgroundColor: "black" }} />
-      <Drawer.Navigator initialRouteName="Menutab" drawerContent={props => CustomDrawerContent(props)}>
+      <Drawer.Navigator initialRouteName="Menutab" drawerContent={props => LateralMenu(props)}>
 
         <Drawer.Screen name="Inicio" component={TabNavigator} />
         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
