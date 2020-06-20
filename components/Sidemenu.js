@@ -4,7 +4,7 @@ import NavigationButton from '../mini_components/NavigationButton';
 
 function Sidemenu(props) {
   return (
-    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: "black", flex: 1 }}>
       <View style={{ height: 50, flexDirection: 'row', alignItems: 'center', backgroundColor: 'black', paddingLeft: 10, paddingRight: 10}}>
           <TouchableOpacity onPress={() => props.navigation.navigate('Inicio')}>
             <Image style={{ height: 30, width: 30 }} source={require('../assets/icons/hamburger.png')} />
@@ -14,7 +14,7 @@ function Sidemenu(props) {
           </View>
       </View>
 
-      <ScrollView>
+      <ScrollView style={{backgroundColor:'white'}}>
         <NavigationButton text="Tienda" onPress={() => props.navigation.navigate('Tienda')}/>
         <NavigationButton text="Blog" onPress={() => props.navigation.navigate('Blog')}/>
         <NavigationButton text="Noticias y promociones" onPress={() => props.navigation.navigate('Blog')}/>
