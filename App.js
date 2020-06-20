@@ -143,36 +143,24 @@ function TabNavigator() {
         inactiveTintColor: 'gray',
       }} >
 
-      <Tab.Screen
-        name="Inicio"
-        component={InicioStack}
+      <Tab.Screen name="Inicio" component={InicioStack}
         options={{
           tabBarLabel: 'Inicio',
-
         }} />
 
-      <Tab.Screen
-        name="Tienda"
-        component={TiendaStack}
+      <Tab.Screen name="Tienda" component={TiendaStack}
         options={{
           tabBarLabel: 'Tienda',
-
         }} />
 
-      <Tab.Screen
-        name="Carrito"
-        component={CarritoStack}
+      <Tab.Screen name="Carrito" component={CarritoStack}
         options={{
           tabBarLabel: 'Carrito',
-
         }} />
 
-      <Tab.Screen
-        name="Blog"
-        component={BlogStack}
+      <Tab.Screen name="Blog" component={BlogStack}
         options={{
           tabBarLabel: 'Blog',
-
         }} />
 
     </Tab.Navigator>
@@ -184,7 +172,6 @@ function App() {
     <NavigationContainer>
       <SafeAreaView style={{ flex: 0, backgroundColor: "black" }} />
       <Drawer.Navigator initialRouteName="Menutab" drawerContent={props => Sidemenu(props)}>
-
         <Drawer.Screen name="Inicio" component={TabNavigator} />
         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
       </Drawer.Navigator>
