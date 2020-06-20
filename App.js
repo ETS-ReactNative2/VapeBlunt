@@ -35,11 +35,7 @@ function InicioStack({ navigation }) {
 
 function TiendaStack() {
   return (
-    <StackTienda.Navigator initialRouteName="Tienda"
-    screenOptions={{
-      headerStyle: {height:0}
-      }}
-   >
+    <StackTienda.Navigator initialRouteName="Tienda" headerMode="none" >
       <StackTienda.Screen name="Tienda" component={Tienda}/>
     </StackTienda.Navigator>
   );
@@ -47,11 +43,7 @@ function TiendaStack() {
 
 function CarritoStack() {
   return (
-    <StackCarrito.Navigator initialRouteName="Carrito"
-      screenOptions={{
-        headerStyle: {height:0 },
-        
-      }}>
+    <StackCarrito.Navigator initialRouteName="Carrito" headerMode="none">
       <StackCarrito.Screen name="Carrtio" component={Carrito}  />
     </StackCarrito.Navigator>
   );
@@ -60,11 +52,7 @@ function CarritoStack() {
 
 function BlogStack() {
   return (
-    <StackBlog.Navigator initialRouteName="Blog"
-      screenOptions={{
-        headerStyle: { height:0 },
-        
-      }}>
+    <StackBlog.Navigator initialRouteName="Blog" headerMode="none">
       <StackBlog.Screen name="Blog" component={Blog} options={{ title: 'Pagina Blog' }} />
     </StackBlog.Navigator>
   );
@@ -172,7 +160,6 @@ function TabNavigator() {
 function App() {
   return (
     <NavigationContainer>
-     
       <Drawer.Navigator initialRouteName="Menutab" drawerContent={props => Sidemenu(props)}>
         <Drawer.Screen name="Inicio" component={TabNavigator} />
         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
