@@ -1,19 +1,18 @@
-// React Native Bottom Navigation - Example using React Navigation V5 //
-// https://aboutreact.com/react-native-bottom-navigation //
 import * as React from 'react';
-import { TouchableOpacity, StyleSheet, View, Text, SafeAreaView,Image,ScrollView } from 'react-native';
+import Header from '../components/Header';
+import {  View, Text, SafeAreaView} from 'react-native';
 
-
-const Tienda = ({ route, navigation }) => {
-  return (
-
-
-<SafeAreaView style={{ flex: 1 ,backgroundColor:'white'}}>
-      
-
-             
-          
-</SafeAreaView>
+const Tienda = ({  navigation }) => {
+ 
+  return(
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+      <Header onPress = {()=>{navigation.navigate('Inicio')} } arrow/>
+      <View style={{ flex: 1, padding: 16, alignItems: 'center', justifyContent: 'center', backgroundColor:'white'}}>
+        <Text style={{ fontSize: 25, textAlign: 'center', marginBottom: 16 }}>
+          You are on Tienda Screen
+        </Text>
+      </View>
+    </SafeAreaView>
   );
 }
 

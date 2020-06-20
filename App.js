@@ -22,9 +22,9 @@ const Tab = createBottomTabNavigator();
 
 function InicioStack({ navigation }) {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <Header navigation={navigation} />
-      <View style={{ flex: 1, padding: 16, alignItems: 'center', justifyContent: 'center', }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+      <Header onPress={()=> navigation.openDrawer()}/>
+      <View style={{ flex: 1, padding: 16, alignItems: 'center', justifyContent: 'center', backgroundColor:'white'}}>
           <Text style={{ fontSize: 25, textAlign: 'center', marginBottom: 16 }}>
             You are on Inicio Screen
           </Text>
@@ -35,8 +35,12 @@ function InicioStack({ navigation }) {
 
 function TiendaStack() {
   return (
-    <StackTienda.Navigator initialRouteName="Tiendda">
-      <StackTienda.Screen name="Tienda" component={Tienda} />
+    <StackTienda.Navigator initialRouteName="Tienda"
+    screenOptions={{
+      headerStyle: {height:0}
+      }}
+   >
+      <StackTienda.Screen name="Tienda" component={Tienda}/>
     </StackTienda.Navigator>
   );
 }
@@ -45,11 +49,10 @@ function CarritoStack() {
   return (
     <StackCarrito.Navigator initialRouteName="Carrito"
       screenOptions={{
-        headerStyle: { backgroundColor: '#42f44b' },
-        headerTintColor: '#fff',
-        headerTitleStyle: { fontWeight: 'bold' }
+        headerStyle: {height:0 },
+        
       }}>
-      <StackCarrito.Screen name="Carrtio" component={Carrito} options={{ title: 'Pagina Carrito' }} />
+      <StackCarrito.Screen name="Carrtio" component={Carrito}  />
     </StackCarrito.Navigator>
   );
 }
@@ -59,9 +62,8 @@ function BlogStack() {
   return (
     <StackBlog.Navigator initialRouteName="Blog"
       screenOptions={{
-        headerStyle: { backgroundColor: '#42f44b' },
-        headerTintColor: '#fff',
-        headerTitleStyle: { fontWeight: 'bold' }
+        headerStyle: { height:0 },
+        
       }}>
       <StackBlog.Screen name="Blog" component={Blog} options={{ title: 'Pagina Blog' }} />
     </StackBlog.Navigator>
@@ -170,7 +172,7 @@ function TabNavigator() {
 function App() {
   return (
     <NavigationContainer>
-      <SafeAreaView style={{ flex: 0, backgroundColor: "black" }} />
+     
       <Drawer.Navigator initialRouteName="Menutab" drawerContent={props => Sidemenu(props)}>
         <Drawer.Screen name="Inicio" component={TabNavigator} />
         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
