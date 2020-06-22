@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
-
+//libraries
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
-
 //Screens
 import Carrito from './Carrito';
 import Blog from './Blog';
 import Tienda from './Tienda';
-
 //Components
 import Header from '../components/Header';
 

@@ -2,8 +2,13 @@ import * as React from 'react';
 import { TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 
 function NavigationButton(props) {
+  var {backgroundColor} = props;
+  if(!backgroundColor){
+    backgroundColor = 'transparent'
+  }
   return (
-    <TouchableOpacity style={styles.container} onPress={() => props.onPress()}>
+    <TouchableOpacity style={[styles.container, {backgroundColor: backgroundColor}]}
+    onPress={() => props.onPress()} >
         <Text style={{ fontSize: 20 }}> {props.text} </Text>
         <Image source={require('../assets/icons/flechaSideMenu.png')} />
     </TouchableOpacity>
