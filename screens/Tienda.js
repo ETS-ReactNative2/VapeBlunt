@@ -7,6 +7,8 @@ import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import NavigationButton from '../mini_components/NavigationButton';
 
+const colors = require('../assets/colors');
+
 export default class Tienda extends React.Component{
   constructor(props){
     super(props)
@@ -29,7 +31,7 @@ export default class Tienda extends React.Component{
         <ImageBackground source={require('../assets/images/pax3.jpg')} 
           style={[styles.imgBackgroundStyle, {width: jumbo.width, height: jumbo.height}]}>
           <TouchableHighlight style={styles.buttonStyle} onPress={() => console.log("hi")}>
-            <Text style={{color: '#82E21B', textAlign: 'center'}}>Comprar</Text>
+            <Text style={{color: colors.lightgreen, textAlign: 'center'}}>Comprar</Text>
           </TouchableHighlight>
         </ImageBackground>
 
@@ -39,7 +41,7 @@ export default class Tienda extends React.Component{
         <View style={{marginTop: 30, paddingHorizontal: 20}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>Nuevos</Text>
-            <Text style={{color: '#82E21B', fontSize: 16}}>Ver todo</Text>
+            <Text style={{color: colors.lightgreen, fontSize: 16}}>Ver todo</Text>
           </View>
           {/* Start Product cards */}
           <View>
@@ -58,7 +60,7 @@ export default class Tienda extends React.Component{
         <View style={{marginTop: 30, paddingHorizontal: 20}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>Los más vendidos</Text>
-            <Text style={{color: '#82E21B', fontSize: 16}}>Ver todo</Text>
+            <Text style={{color: colors.lightgreen, fontSize: 16}}>Ver todo</Text>
           </View>
           {/* Start Product cards */}
           <View>
