@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { ScrollView, Text, SafeAreaView, ImageBackground, Dimensions, StyleSheet, View} from 'react-native';
+import { ScrollView, Text, SafeAreaView, ImageBackground, Dimensions, StyleSheet, View, Button} from 'react-native';
 import resolveAssetSource from 'resolveAssetSource';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
 import Header from '../components/Header';
+import BlackButton from '../mini_components/BlackButton'
 import ProductCard from '../components/ProductCard';
 import NavigationButton from '../mini_components/NavigationButton';
 
@@ -30,9 +31,7 @@ export default class Tienda extends React.Component{
       <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80}}>
         <ImageBackground source={require('../assets/images/pax3.jpg')} 
           style={[styles.imgBackgroundStyle, {width: jumbo.width, height: jumbo.height}]}>
-          <TouchableHighlight style={styles.buttonStyle} onPress={() => console.log("hi")}>
-            <Text style={{color: colors.lightgreen, textAlign: 'center'}}>Comprar</Text>
-          </TouchableHighlight>
+          <BlackButton width={100} height={30} text={"Comprar"} onPress={()=>console.log()}/>
         </ImageBackground>
 
         <NavigationButton text="Vaporizadores" onPress={()=>{}}/>
@@ -41,7 +40,10 @@ export default class Tienda extends React.Component{
         <View style={{marginTop: 30, paddingHorizontal: 20}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>Nuevos</Text>
-            <Text style={{color: colors.lightgreen, fontSize: 16}}>Ver todo</Text>
+            <Text accessibilityRole='button' onPress={()=>console.log()}
+              style={{color: colors.lightgreen, fontSize: 16}} >
+              Ver todo
+            </Text>
           </View>
           {/* Start Product cards */}
           <View>
@@ -60,7 +62,10 @@ export default class Tienda extends React.Component{
         <View style={{marginTop: 30, paddingHorizontal: 20}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>Los más vendidos</Text>
-            <Text style={{color: colors.lightgreen, fontSize: 16}}>Ver todo</Text>
+            <Text accessibilityRole='button' onPress={()=>console.log()}
+              style={{color: colors.lightgreen, fontSize: 16}} >
+              Ver todo
+            </Text>
           </View>
           {/* Start Product cards */}
           <View>
@@ -87,12 +92,5 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     padding: 20,
-  },
-  buttonStyle: {
-    backgroundColor: 'black',
-    width: 100,
-    height: 30,
-    justifyContent: "center",
-    borderRadius: 20
   }
 })

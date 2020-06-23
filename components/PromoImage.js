@@ -1,22 +1,18 @@
 import * as React from 'react';
-import{Image,Text, TouchableOpacity,Dimensions} from 'react-native';
+import {Image, TouchableOpacity, Dimensions} from 'react-native';
 import resolveAssetSource from 'resolveAssetSource'
 
-const width  = Dimensions.get('window').width;
 let image = resolveAssetSource(require('../assets/images/PromoImage.png'))
+const width  = Dimensions.get('window').width;
 const  height  = Dimensions.get('window').width*(image.height/image.width);
 
 function PromoImage(props){
-    
     return(
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.onPress()}>
             <Image source={require('../assets/images/PromoImage.png')} 
             style={{ width:width,height:height}}/>
         </TouchableOpacity>
     )
 }
 
-
 export default PromoImage;
-
-
