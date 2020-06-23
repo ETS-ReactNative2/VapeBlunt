@@ -29,7 +29,7 @@ function InicioStack({ navigation }) {
 
 function TiendaStack() {
   return (
-    <StackTienda.Navigator initialRouteName="Categorias" headerMode="none" >
+    <StackTienda.Navigator initialRouteName="Tienda" headerMode="none" >
       <StackTienda.Screen name="Tienda" component={Tienda}/>
       <StackTienda.Screen name="Categorias" component={Categorias}/>
     </StackTienda.Navigator>

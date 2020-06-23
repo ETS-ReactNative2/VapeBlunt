@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Tienda"
+      initialRouteName="Inicio"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
           let iconName;
