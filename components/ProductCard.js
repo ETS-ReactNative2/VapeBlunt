@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TouchableOpacity, Image, Text } from 'react-native';
+import { TouchableOpacity, Image, Text, View } from 'react-native';
 
 function ProductCard(props) {
   return (
@@ -8,8 +8,10 @@ function ProductCard(props) {
         style={{ width: 100, height: 150, marginBottom: 10}}
         source={require('../assets/images/davinci-black.png')}
       />
-      <Text style={{color: 'black'}}>Davinci miqro amethyst</Text>
-      <Text style={{color: 'black', fontWeight: 'bold'}}>$3,290</Text>
+      <View>
+        <Text style={{color: 'black'}}>Davinci miqro amethyst</Text>
+        <Text style={{color: 'black', fontWeight: 'bold', textAlign: 'left'}}>$3,290</Text>
+      </View>
     </TouchableOpacity>
   )
 }

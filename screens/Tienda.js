@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ScrollView, Text, SafeAreaView, ImageBackground, Dimensions, StyleSheet, View, Button} from 'react-native';
 import resolveAssetSource from 'resolveAssetSource';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 
 import Header from '../components/Header';
 import BlackButton from '../mini_components/BlackButton'
@@ -24,8 +23,8 @@ export default class Tienda extends React.Component{
 
 
   render(){
-    var {navigation} = this.props;
-    var {jumbo} = this.state;
+    var { navigation } = this.props;
+    var { jumbo } = this.state;
     return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
       <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow/>
