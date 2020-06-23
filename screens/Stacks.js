@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Carrito from './Carrito';
 import Blog from './Blog';
 import Tienda from './Tienda';
+import Inicio from './Inicio';
 //Components
 import Header from '../components/Header';
 
@@ -18,10 +19,8 @@ function InicioStack({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
       <Header onPress={()=> navigation.openDrawer()}/>
-      <View style={{ flex: 1, padding: 16, alignItems: 'center', justifyContent: 'center', backgroundColor:'white'}}>
-          <Text style={{ fontSize: 25, textAlign: 'center', marginBottom: 16 }}>
-            You are on Inicio Screen
-          </Text>
+      <View style={{flex:1, backgroundColor:'white'}}>
+          <Inicio navigation={navigation}/>
       </View>
     </SafeAreaView>
   );
