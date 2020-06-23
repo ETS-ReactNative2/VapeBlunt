@@ -4,10 +4,11 @@ import { View, Text, SafeAreaView } from 'react-native';
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
 //Screens
+import Inicio from './Inicio';
+import Tienda from './Tienda';
+import Categorias from './Categorias';
 import Carrito from './Carrito';
 import Blog from './Blog';
-import Tienda from './Tienda';
-import Inicio from './Inicio';
 //Components
 import Header from '../components/Header';
 
@@ -28,8 +29,9 @@ function InicioStack({ navigation }) {
 
 function TiendaStack() {
   return (
-    <StackTienda.Navigator initialRouteName="Tienda" headerMode="none" >
+    <StackTienda.Navigator initialRouteName="Categorias" headerMode="none" >
       <StackTienda.Screen name="Tienda" component={Tienda}/>
+      <StackTienda.Screen name="Categorias" component={Categorias}/>
     </StackTienda.Navigator>
   );
 }
@@ -37,7 +39,7 @@ function TiendaStack() {
 function CarritoStack() {
   return (
     <StackCarrito.Navigator initialRouteName="Carrito" headerMode="none">
-      <StackCarrito.Screen name="Carrtio" component={Carrito}  />
+      <StackCarrito.Screen name="Carrito" component={Carrito}  />
     </StackCarrito.Navigator>
   );
 }

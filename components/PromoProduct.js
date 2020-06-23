@@ -15,7 +15,7 @@ function PromoProduct(props){
                 <Image source={require('../assets/images/PromoProduct.png')} 
                 style={{resizeMode:'contain', width:width,height:height}}/>
             </TouchableOpacity>
-            <BlackButton text={'Comprar'} width={100} height={35} onPress ={ ()=> props.onPress()} />
+            <BlackButton text={'Comprar'} style={{width: 100, height: 35}} onPress ={ ()=> props.onPress()} />
         </View>
     )
 }

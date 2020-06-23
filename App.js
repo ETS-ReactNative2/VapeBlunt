@@ -16,11 +16,10 @@ const Tab = createBottomTabNavigator();
 function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Inicio"
+      initialRouteName="Tienda"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
           let iconName;
-          console.log(route);
           if (route.name === 'Inicio') {
             iconName = focused
               ? require('./assets/icons/inicio.png')
@@ -49,25 +48,10 @@ function TabNavigator() {
         inactiveTintColor: 'gray',
       }} >
 
-      <Tab.Screen name="Inicio" component={InicioStack}
-        options={{
-          tabBarLabel: 'Inicio',
-        }} />
-
-      <Tab.Screen name="Tienda" component={TiendaStack}
-        options={{
-          tabBarLabel: 'Tienda',
-        }} />
-
-      <Tab.Screen name="Carrito" component={CarritoStack}
-        options={{
-          tabBarLabel: 'Carrito',
-        }} />
-
-      <Tab.Screen name="Blog" component={BlogStack}
-        options={{
-          tabBarLabel: 'Blog',
-        }} />
+      <Tab.Screen name="Inicio" component={InicioStack}/>
+      <Tab.Screen name="Tienda" component={TiendaStack}/>
+      <Tab.Screen name="Carrito" component={CarritoStack}/>
+      <Tab.Screen name="Blog" component={BlogStack}/>
 
     </Tab.Navigator>
   )
@@ -78,8 +62,8 @@ const Drawer = createDrawerNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Menutab" drawerContent={props => Sidemenu(props)}>
-        <Drawer.Screen name="Inicio" component={TabNavigator} />
+      <Drawer.Navigator drawerContent={props => Sidemenu(props)}>
+        <Drawer.Screen name="App" component={TabNavigator} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

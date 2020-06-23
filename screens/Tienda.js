@@ -22,6 +22,7 @@ export default class Tienda extends React.Component{
     }
   }
 
+
   render(){
     var {navigation} = this.props;
     var {jumbo} = this.state;
@@ -31,10 +32,10 @@ export default class Tienda extends React.Component{
       <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80}}>
         <ImageBackground source={require('../assets/images/pax3.jpg')} 
           style={[styles.imgBackgroundStyle, {width: jumbo.width, height: jumbo.height}]}>
-          <BlackButton width={100} height={30} text={"Comprar"} onPress={()=>console.log()}/>
+          <BlackButton style={{width: 100, height: 30}} text={"Comprar"} onPress={()=>console.log()}/>
         </ImageBackground>
 
-        <NavigationButton text="Vaporizadores" onPress={()=>{}}/>
+        <NavigationButton text="Vaporizadores" onPress={()=>{navigation.navigate('Categorias')}}/>
         <NavigationButton text="Accesorios" onPress={()=>{}}/>
         
         <View style={{marginTop: 30, paddingHorizontal: 20}}>
