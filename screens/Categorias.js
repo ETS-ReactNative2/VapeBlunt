@@ -5,7 +5,6 @@ import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import BlackButton from '../mini_components/BlackButton';
 
-const colors = require('../assets/colors');
 
 function SubCategoryButton(props){
   if(props.active){
@@ -31,8 +30,8 @@ export default class Categorias extends React.Component{
     return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
       <Header onPress = {()=>{ navigation.navigate('Tienda') }} arrow/>
-      <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80, paddingTop: 10, paddingHorizontal: 20}}>
-        <ScrollView horizontal style={{paddingVertical: 10}}>
+      <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{alignItems: 'center',paddingBottom: 80, paddingTop: 10, paddingHorizontal: 20}}>
+        <ScrollView horizontal style={{paddingVertical: 10, marginBottom: 10}}>
           <SubCategoryButton text="Portátil" active/>
           <SubCategoryButton text="De Mesa"/>
           <SubCategoryButton text="Estilo pluma"/>
@@ -41,15 +40,14 @@ export default class Categorias extends React.Component{
           <SubCategoryButton text="Estilo pluma"/>
           <SubCategoryButton text="Herbales"/>
         </ScrollView>
-        <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+        <View style={{alignSelf: 'stretch',flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16}}>
           <ProductCard/>
           <ProductCard/>
         </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+        <View style={{alignSelf: 'stretch',flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16}}>
           <ProductCard/>
           <ProductCard/>
-        </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+        </View><View style={{alignSelf: 'stretch',flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16}}>
           <ProductCard/>
           <ProductCard/>
         </View>

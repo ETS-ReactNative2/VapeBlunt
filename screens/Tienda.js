@@ -27,61 +27,61 @@ export default class Tienda extends React.Component{
     var { jumbo } = this.state;
     return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
-      <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow/>
-      <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80}}>
-        <ImageBackground source={require('../assets/images/pax3.jpg')} 
-          style={[styles.imgBackgroundStyle, {width: jumbo.width, height: jumbo.height}]}>
-          <BlackButton style={{width: 100, height: 30}} text={"Comprar"} onPress={()=>console.log()}/>
-        </ImageBackground>
+        <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow/>
+        <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80}}>
+          <ImageBackground source={require('../assets/images/pax3.jpg')} 
+            style={[styles.imgBackgroundStyle, {width: jumbo.width, height: jumbo.height}]}>
+            <BlackButton style={{width: 100, height: 30}} text={"Comprar"} onPress={()=>console.log()}/>
+          </ImageBackground>
 
-        <NavigationButton text="Vaporizadores" onPress={()=>{navigation.navigate('Categorias')}}/>
-        <NavigationButton text="Accesorios" onPress={()=>{}}/>
-        
-        <View style={{marginTop: 30, paddingHorizontal: 20}}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Nuevos</Text>
-            <Text accessibilityRole='button' onPress={()=>console.log()}
-              style={{color: colors.lightgreen, fontSize: 16}} >
-              Ver todo
-            </Text>
+          <NavigationButton text="Vaporizadores" onPress={()=>{navigation.navigate('Categorias')}}/>
+          <NavigationButton text="Accesorios" onPress={()=>{}}/>
+          
+          <View style={{marginTop: 30, paddingHorizontal: 20}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <Text style={{fontSize: 20, fontWeight: 'bold'}}>Nuevos</Text>
+              <Text accessibilityRole='button' onPress={()=>console.log()}
+                style={{color: colors.lightgreen, fontSize: 16}} >
+                Ver todo
+              </Text>
+            </View>
+            {/* Start Product cards */}
+            <View>
+              <ScrollView horizontal={true} style={{paddingVertical: 20}}>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+              </ScrollView>
+            </View>
+            {/* End Product cards */}
           </View>
-          {/* Start Product cards */}
-          <View>
-            <ScrollView horizontal={true} style={{padding: 20}}>
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-            </ScrollView>
-          </View>
-          {/* End Product cards */}
-        </View>
 
-        <View style={{marginTop: 30, paddingHorizontal: 20}}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Los más vendidos</Text>
-            <Text accessibilityRole='button' onPress={()=>console.log()}
-              style={{color: colors.lightgreen, fontSize: 16}} >
-              Ver todo
-            </Text>
+          <View style={{marginTop: 30, paddingHorizontal: 20}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <Text style={{fontSize: 20, fontWeight: 'bold'}}>Los más vendidos</Text>
+              <Text accessibilityRole='button' onPress={()=>console.log()}
+                style={{color: colors.lightgreen, fontSize: 16}} >
+                Ver todo
+              </Text>
+            </View>
+            {/* Start Product cards */}
+            <View>
+              <ScrollView horizontal={true} style={{paddingVertical: 20}}>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+                <ProductCard width={100} style={{marginRight: 20}}/>
+              </ScrollView>
+            </View>
+            {/* End Product cards */}
           </View>
-          {/* Start Product cards */}
-          <View>
-            <ScrollView horizontal={true} style={{padding: 20}}>
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-            </ScrollView>
-          </View>
-          {/* End Product cards */}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
     )
   }
 }

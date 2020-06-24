@@ -2,10 +2,7 @@ import * as React from 'react';
 import { TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 
 function NavigationButton(props) {
-  var {backgroundColor} = props;
-  if(!backgroundColor){
-    backgroundColor = 'transparent'
-  }
+  var backgroundColor = props.backgroundColor || 'transparent';
   return (
     <TouchableOpacity style={[styles.container, {backgroundColor: backgroundColor}]}
     onPress={() => props.onPress()} >
