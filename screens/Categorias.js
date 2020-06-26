@@ -41,7 +41,7 @@ export default class Categorias extends React.Component{
           <SubCategoryButton text="Herbales"/>
         </ScrollView>
         <View style={{alignSelf: 'stretch',flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16}}>
-          <ProductCard/>
+          <ProductCard onPress={()=> navigation.navigate('Producto')}/>
           <ProductCard/>
         </View>
         <View style={{alignSelf: 'stretch',flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16}}>

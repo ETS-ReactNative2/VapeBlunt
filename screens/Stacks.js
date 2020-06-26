@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 //Screens
 import Inicio from './Inicio';
 import Tienda from './Tienda';
+import Producto from './Producto';
 import Categorias from './Categorias';
 import Carrito from './Carrito';
 import Blog from './Blog';
@@ -32,6 +33,7 @@ function TiendaStack() {
     <StackTienda.Navigator initialRouteName="Tienda" headerMode="none" >
       <StackTienda.Screen name="Tienda" component={Tienda}/>
       <StackTienda.Screen name="Categorias" component={Categorias}/>
+      <StackTienda.Screen name="Producto" component={Producto}/>
     </StackTienda.Navigator>
   );
 }
