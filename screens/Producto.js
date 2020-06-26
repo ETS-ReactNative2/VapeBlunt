@@ -1,19 +1,11 @@
 import * as React from 'react';
-import { ScrollView, Text, SafeAreaView, TouchableOpacity, View, Image, Dimensions} from 'react-native';
+import { ScrollView, Text, SafeAreaView, TouchableOpacity, View, Dimensions} from 'react-native';
 import Header from '../components/Header';
 import DynamicImage from '../mini_components/DynamicImage'
+import InfoTab from './InfoTab'
 
 const colors = require('../assets/colors')
 const winWidth = Math.round(Dimensions.get('window').width)
-
-function InfoScreen(props){
-  return(
-    <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, paddingTop: 10}}>
-      <Text style={{fontWeight: 'bold', fontSize: 18}}>Davinci miqro amethyst</Text>
-      <Text style={{fontSize: 16}}>$3,290</Text>
-    </View>
-  )
-}
 
 function MiniTab({text, active, onPress}){
   if(active){
@@ -34,7 +26,6 @@ function MiniTab({text, active, onPress}){
 
 
 export default class Producto extends React.Component {
-
   constructor(props){
     super(props)
     this.state = {
@@ -43,12 +34,7 @@ export default class Producto extends React.Component {
       tab: 'Info',
       rating: 4,
     }
-  }
-
-  nextImage = () => {
-    this.setState(prev => ({
-      selectedIndex: prev.selectedIndex === this.props.images -1 ? 0 : prev.selectedIndex +1
-    }))
+    this.renderImageIndicator = this.renderImageIndicator.bind(this)
   }
 
   setSelectedIndex = event => {
@@ -58,29 +44,46 @@ export default class Producto extends React.Component {
     this.setState({ selectedIndex })
   }
 
+  renderTab = () => {
+    if(this.state.tab == 'Info'){
+      return <InfoTab rating={this.state.rating}/>
+    }
+  }
+
+  renderImageIndicator = (i) => {
+    let color = (i == this.state.selectedIndex) ? colors.black : colors.grey
+    return <Text key={i} style={{textAlign: 'center', fontSize: 40, color: color}}>{`\u2022`}</Text>
+  }
+  
   render(){
     var {images, tab} = this.state
+    var {navigation} = this.props
     return(
-      <SafeAreaView>
-        <Header onPress = {()=>{ navigation.navigate('Categorias') }} arrow/>
-        <ScrollView horizontal pagingEnabled
+      <SafeAreaView style={{backgroundColor: 'white'}}>
+        <Header color={colors.lightgrey} onPress = {()=>{ navigation.navigate('Categorias') }} arrow/>
+        <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}
         onMomentumScrollEnd={this.setSelectedIndex}
         ref={this.scrollRef} >
           {images.map((image, i) => (
             <DynamicImage 
             key={i}
+            backgroundColor={colors.lightgrey}
             containerWidth={winWidth}
-            containerHeight={winWidth/2}
             width={winWidth/3}
             source={image} />
           ))}
         </ScrollView>
+        {/* Carousel indicators */}
+        <View style={{flexDirection: 'row', height: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.lightgrey}}>
+          {images.map((_, i) => this.renderImageIndicator(i))}
+        </View>
+        {/* END Carousel indicators  */}
         <View style={{flexDirection: 'row'}}>
           <MiniTab text="INFORMACIÓN" active={tab === 'Info'}/>
           <MiniTab text="RESEÑAS" active={tab === 'Res'}/>
         </View>
-        <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80}}>
-          {this.state.info ? <InfoScreen /> : <InfoScreen />}
+        <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 290}}>
+          {this.renderTab()}
         </ScrollView>
       </SafeAreaView>
     )
