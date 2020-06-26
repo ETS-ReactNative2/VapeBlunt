@@ -17,7 +17,7 @@ function Sidemenu(props) {
       <ScrollView style={{backgroundColor:'white'}}>
         <NavigationButton text="Tienda" onPress={() => props.navigation.navigate('Tienda')}/>
         <NavigationButton text="Blog" onPress={() => props.navigation.navigate('Blog')}/>
-        <NavigationButton text="Noticias y promociones" onPress={() => props.navigation.navigate('Blog')}/>
+        <NavigationButton text="Noticias y promociones" onPress={() => props.navigation.navigate('Noticias')}/>
         <NavigationButton text="Carrito" onPress={() => props.navigation.navigate('Carrito')}/>
 
         <View style={{ alignItems: 'center', marginTop: 20, opacity: .4 }}>
