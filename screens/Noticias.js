@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Header from '../components/Header';
-import {  View, Text, SafeAreaView} from 'react-native';
+import {  View, SafeAreaView} from 'react-native';
 import BlogCard from '../components/BlogCard';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const   Noticias= () => {
-
+const Noticias = (props) => {
+    var {navigation} = props
     return(
         <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
             <Header onPress = {()=>{navigation.navigate('Inicio')} } arrow/>

@@ -10,12 +10,14 @@ import Producto from './Producto';
 import Categorias from './Categorias';
 import Carrito from './Carrito';
 import Blog from './Blog';
+import Noticias from './Noticias';
 //Components
 import Header from '../components/Header';
 
 const StackTienda = createStackNavigator();
 const StackCarrito = createStackNavigator();
 const StackBlog = createStackNavigator();
+const StackNoticias = createStackNavigator();
 
 function InicioStack({ navigation }) {
   return (
@@ -25,7 +27,7 @@ function InicioStack({ navigation }) {
           <Inicio navigation={navigation}/>
       </View>
     </SafeAreaView>
-  );
+  )
 }
 
 function TiendaStack() {
@@ -35,7 +37,7 @@ function TiendaStack() {
       <StackTienda.Screen name="Categorias" component={Categorias}/>
       <StackTienda.Screen name="Producto" component={Producto}/>
     </StackTienda.Navigator>
-  );
+  )
 }
 
 function CarritoStack() {
@@ -43,20 +45,29 @@ function CarritoStack() {
     <StackCarrito.Navigator initialRouteName="Carrito" headerMode="none">
       <StackCarrito.Screen name="Carrito" component={Carrito}  />
     </StackCarrito.Navigator>
-  );
+  )
 }
 
 function BlogStack() {
   return (
     <StackBlog.Navigator initialRouteName="Blog" headerMode="none">
-      <StackBlog.Screen name="Blog" component={Blog} options={{ title: 'Pagina Blog' }} />
+      <StackBlog.Screen name="Blog" component={Blog} options={{ title: 'Blogs' }} />
     </StackBlog.Navigator>
-  );
+  )
+}
+
+function NoticiasStack() {
+  return (
+    <StackBlog.Navigator initialRouteName="Noticias" headerMode="none">
+      <StackNoticias.Screen name="Noticias" component={Noticias} options={{ title: 'Noticias y promociones' }} />
+    </StackBlog.Navigator>
+  )
 }
 
 export {
   InicioStack,
   TiendaStack,
   CarritoStack,
-  BlogStack
+  BlogStack,
+  NoticiasStack
 }
