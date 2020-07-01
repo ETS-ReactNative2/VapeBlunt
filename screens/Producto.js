@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ScrollView, Text, SafeAreaView, TouchableOpacity, View, Dimensions} from 'react-native';
 import Header from '../components/Header';
-import DynamicImage from '../mini_components/DynamicImage'
+import DynamicImage from '../components/DynamicImage'
 import InfoTab from './InfoTab'
 
 const colors = require('../assets/colors')
@@ -47,6 +47,8 @@ export default class Producto extends React.Component {
   renderTab = () => {
     if(this.state.tab == 'Info'){
       return <InfoTab rating={this.state.rating}/>
+    }else if(this.state.tab == 'Res'){
+      return <InfoTab rating={this.state.rating}/>
     }
   }
 
@@ -79,8 +81,8 @@ export default class Producto extends React.Component {
         </View>
         {/* END Carousel indicators  */}
         <View style={{flexDirection: 'row'}}>
-          <MiniTab text="INFORMACIÓN" active={tab === 'Info'}/>
-          <MiniTab text="RESEÑAS" active={tab === 'Res'}/>
+          <MiniTab text="INFORMACIÓN" onPress={() => this.setState({tab: 'Info'})} active={tab === 'Info'}/>
+          <MiniTab text="RESEÑAS" onPress={() => this.setState({tab: 'Res'})} active={tab === 'Res'}/>
         </View>
         <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 290}}>
           {this.renderTab()}

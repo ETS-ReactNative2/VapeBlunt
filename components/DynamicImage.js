@@ -5,7 +5,7 @@ import resolveAssetSource from 'resolveAssetSource';
 
 const colors = require('../assets/colors')
 //Image inside its own container we can adjust container width and height
-//through props. Can also adjust image width through props and will adjust
+//through props. Can also adjust image width and will adjust
 //height automatically with the image ratio
 //By default the container has the image's dimensions (+ 10 padding)
 function DynamicImage(props) {

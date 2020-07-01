@@ -7,6 +7,8 @@ import BlackButton from '../mini_components/BlackButton'
 import ProductCard from '../components/ProductCard';
 import NavigationButton from '../mini_components/NavigationButton';
 
+import { newProducts, bestSellers } from '../lib/graphql-shopify'
+
 const colors = require('../assets/colors');
 
 export default class Tienda extends React.Component{
@@ -17,14 +19,26 @@ export default class Tienda extends React.Component{
       jumbo: {
         width: Math.round(Dimensions.get('window').width),
         height: Math.round(Dimensions.get('window').width*(image.height/image.width)),
-      }
+      },
+      newProducts: [],
+      bestSellers: [],
     }
+  }
+
+  componentDidMount(){
+    newProducts().then((res) => {
+      this.setState({newProducts: res})
+    })
+    //best sellers
+    bestSellers().then((res) => {
+      this.setState({bestSellers: res})
+    })
   }
 
 
   render(){
     var { navigation } = this.props;
-    var { jumbo } = this.state;
+    var { jumbo, newProducts, bestSellers } = this.state;
     return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
         <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow/>
@@ -48,12 +62,10 @@ export default class Tienda extends React.Component{
             {/* Start Product cards */}
             <View>
               <ScrollView horizontal={true} style={{paddingVertical: 20}}>
-                <ProductCard width={100} style={{marginRight: 20}}/>
-                <ProductCard width={100} style={{marginRight: 20}}/>
-                <ProductCard width={100} style={{marginRight: 20}}/>
-                <ProductCard width={100} style={{marginRight: 20}}/>
-                <ProductCard width={100} style={{marginRight: 20}}/>
-                <ProductCard width={100} style={{marginRight: 20}}/>
+                {newProducts.map((product) => {
+                  return <ProductCard key={product.id} title={product.title} source={{uri: product.featuredImage.transformedSrc}}
+                  width={140} style={{marginRight: 20}}/>
+                })}
               </ScrollView>
             </View>
             {/* End Product cards */}
@@ -70,12 +82,10 @@ export default class Tienda extends React.Component{
             {/* Start Product cards */}
             <View>
               <ScrollView horizontal={true} style={{paddingVertical: 20}}>
-                <ProductCard width={100} style={{marginRight: 20}}/>
-                <ProductCard width={100} style={{marginRight: 20}}/>
-                <ProductCard width={100} style={{marginRight: 20}}/>
-                <ProductCard width={100} style={{marginRight: 20}}/>
-                <ProductCard width={100} style={{marginRight: 20}}/>
-                <ProductCard width={100} style={{marginRight: 20}}/>
+                {bestSellers.map((product) => {
+                  return <ProductCard key={product.id} title={product.title} source={{uri: product.featuredImage.transformedSrc}}
+                  width={140} style={{marginRight: 20}}/>
+                })}
               </ScrollView>
             </View>
             {/* End Product cards */}
