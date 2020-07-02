@@ -9,10 +9,22 @@ const colors = require('../assets/colors')
 //height automatically with the image ratio
 //By default the container has the image's dimensions (+ 10 padding)
 function DynamicImage(props) {
-  let image = resolveAssetSource(props.source)
+  //let image = resolveAssetSource(props.source)
 
+  let source = require('../assets/images/davinci-black.png')
   let width = props.width || 120
-  let height = Math.round(width*(image.height/image.width))
+  let height = width
+  if(props.source && props.source.uri){
+    let uri = props.source.uri
+    Image.getSize(uri, (w, h)=>{
+      height = Math.round(width*(h/w))
+    })
+    source = props.source
+  }else{
+    source = props.source || require('../assets/images/davinci-black.png')
+    let image = resolveAssetSource(source)
+    height = Math.round(width*(image.height/image.width))
+  }
 
   let containerWidth = props.containerWidth || (width + 10)
   let containerHeight = props.containerHeight || (height + 10)

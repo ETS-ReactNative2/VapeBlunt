@@ -64,7 +64,7 @@ export default class Tienda extends React.Component{
               <ScrollView horizontal={true} style={{paddingVertical: 20}}>
                 {newProducts.map((product) => {
                   return <ProductCard key={product.id} title={product.title} source={{uri: product.featuredImage.transformedSrc}}
-                  width={140} style={{marginRight: 20}}/>
+                  width={140} style={{marginRight: 20}} onPress={() => navigation.navigate('Producto', {productId: product.id})}/>
                 })}
               </ScrollView>
             </View>
@@ -84,7 +84,7 @@ export default class Tienda extends React.Component{
               <ScrollView horizontal={true} style={{paddingVertical: 20}}>
                 {bestSellers.map((product) => {
                   return <ProductCard key={product.id} title={product.title} source={{uri: product.featuredImage.transformedSrc}}
-                  width={140} style={{marginRight: 20}}/>
+                  width={140} style={{marginRight: 20}} onPress={() => navigation.navigate('Producto', {productId: product.id})}/>
                 })}
               </ScrollView>
             </View>

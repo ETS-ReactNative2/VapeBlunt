@@ -52,18 +52,19 @@ export default class Categorias extends React.Component{
   renderProducts = () => {
     let rendered = [];
     let {products} = this.state
+    let {navigation} = this.props
     for(let i=0; i<products.length; i+=2){
       if(products[i+1]){
         rendered.push(<View key={i} style={styles.productsRow}>
           <ProductCard title={products[i].title} source={{uri: products[i].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto')}/>
+            onPress={()=> navigation.navigate('Producto', {productId: products[i].id})}/>
           <ProductCard title={products[i+1].title} source={{uri: products[i+1].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto')}/>
+            onPress={()=> navigation.navigate('Producto', {productId: products[i+1].id})}/>
         </View>)
       }else{
         rendered.push(<View key={i} style={styles.productsRow}>
           <ProductCard title={products[i].title} source={{uri: products[i].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto')}/>
+            onPress={()=> navigation.navigate('Producto', {productId: products[i].id})}/>
         </View>)
       }
     }
