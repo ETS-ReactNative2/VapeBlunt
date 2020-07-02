@@ -41,7 +41,7 @@ export default class Tienda extends React.Component{
     var { jumbo, newProducts, bestSellers } = this.state;
     return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
-        <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow/>
+        <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow searchBar text={'Vaporizadores'}/>
         <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80}}>
           <ImageBackground source={require('../assets/images/pax3.jpg')} 
             style={[styles.imgBackgroundStyle, {width: jumbo.width, height: jumbo.height}]}>
@@ -49,12 +49,12 @@ export default class Tienda extends React.Component{
           </ImageBackground>
 
           <NavigationButton text="Vaporizadores" onPress={()=>{navigation.navigate('Categorias')}}/>
-          <NavigationButton text="Accesorios" onPress={()=>{}}/>
+          <NavigationButton text="Accesorios" onPress={()=>{navigation.navigate('Accesorios')}}/>
           
           <View style={{marginTop: 30, paddingHorizontal: 20}}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
               <Text style={{fontSize: 20, fontWeight: 'bold'}}>Nuevos</Text>
-              <Text accessibilityRole='button' onPress={()=>console.log()}
+              <Text accessibilityRole='button' onPress={()=>{}}
                 style={{color: colors.lightgreen, fontSize: 16}} >
                 Ver todo
               </Text>

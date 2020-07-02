@@ -61,7 +61,9 @@ export default class Producto extends React.Component {
 
   componentDidMount(){
     let id = this.props.route.params.productId
-    productInfo(id).then((data)=> this.setState({product: data}))
+    productInfo(id).then((data)=> this.setState({
+      product: data
+    }))
   }
   
   render(){
