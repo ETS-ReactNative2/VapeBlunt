@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Text, TouchableOpacity, View, Image} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import ColorPicker from '../components/ColorPicker';
 import BlackButton from '../mini_components/BlackButton';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -37,7 +36,7 @@ export default class InfoTab extends React.Component{
             containerStyle={{height: 40}}
             style={{backgroundColor: '#fafafa'}}
             dropDownStyle={{backgroundColor: '#fafafa'}}
-            onChangeItem={item => console.log(item.value)}
+            onChangeItem={item => this.props.onVariantSelect(item.value)}
         />
       )
     }
@@ -69,21 +68,19 @@ export default class InfoTab extends React.Component{
           ))}
         </View>
         {this.renderPicker()}
-        <Text style={{color: colors.grey}}>Selecciona un color</Text>
-        <ColorPicker onSelected={(color) => console.log(color)} colors={[colors.black,'#466895']} size={16}/>
-        <View>
+        <View style={{marginTop: 20}}>
           <Text style={{fontWeight: 'bold', fontSize: 20}}>Descripción</Text>
           <ScrollView style={{height: 100}}>
             <Text style={{color: colors.grey, textAlign: 'justify'}}>{product.description}</Text>
           </ScrollView>
         </View>
-        <View style={{marginTop: 10}}>
+        {/* <View style={{marginTop: 10}}>
           <Text style={{fontWeight: 'bold', fontSize: 20}}>Características</Text>
           <Text>{`\u2022 Tamaño del horno ajustable`}</Text>
           <Text>{`\u2022 Herramienta para herbas incoroporada`}</Text>
           <Text>{`\u2022 Tecnología Smart Path`}</Text>
           <Text>{`\u2022 Control de temperatura con posición`}</Text>
-        </View>
+        </View> */}
         <View style={{marginTop: 30}}>
           <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center',
             borderWidth: 2, borderColor: colors.black, height: 45, borderRadius: 22.5}}>

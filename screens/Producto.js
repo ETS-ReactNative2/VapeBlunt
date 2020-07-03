@@ -31,50 +31,85 @@ export default class Producto extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      selectedIndex: 0,
+      selectedImageIndex: 0,
       images: [require('../assets/images/davinci-black.png'), require('../assets/images/davinci-blue.png')],
       tab: 'Info',
       rating: 4,
       product: {},
+      selectedVariant: '',
+      images: [],
     }
     this.renderImageIndicator = this.renderImageIndicator.bind(this)
+    this.selectVariant = this.selectVariant.bind(this)
   }
 
-  setSelectedIndex = event => {
+  setselectedImageIndex = event => {
     const contentOffset = event.nativeEvent.contentOffset;
-    const selectedIndex = Math.round(contentOffset.x / winWidth)
-    this.setState({ selectedIndex })
+    const selectedImageIndex = Math.round(contentOffset.x / winWidth)
+    this.setState({ selectedImageIndex })
   }
 
   renderTab = () => {
     if(this.state.tab === 'Info'){
-      return <InfoTab rating={this.state.rating} product={this.state.product}/>
+      return <InfoTab rating={this.state.rating} product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}/>
     }else if(this.state.tab === 'Res'){
       return <InfoTab rating={this.state.rating} product={this.state.product}/>
     }
   }
 
   renderImageIndicator = (i) => {
-    let color = (i === this.state.selectedIndex) ? colors.black : colors.grey
+    let color = (i === this.state.selectedImageIndex) ? colors.black : colors.grey
     return <Text key={i} style={{textAlign: 'center', fontSize: 40, color: color}}>{`\u2022`}</Text>
+  }
+
+  prepareImages = (product) => {
+    images = product.images
+    if(product.variants.length > 1){
+      product.variants.forEach(variant => {
+        if(images.indexOf(variant.image) === -1){
+          images.push(variant.image)
+        }
+      })
+    }
+    return images
   }
 
   componentDidMount(){
     let id = this.props.route.params.productId
-    productInfo(id).then((data)=> this.setState({
-      product: data
-    }))
+    productInfo(id).then((data)=> {
+      images = this.prepareImages(data)
+      this.setState({product: data, selectedVariant: data.variants[0].title, images: images})
+    })
+  }
+
+  selectVariant = (variantTitle) => {
+    // //change image
+    // let {product, selectedImageIndex, images} = this.state
+    // let index = selectedImageIndex
+    // let imageURL = ""
+    // product.variants.forEach((variant) => {
+    //   if(variant.title === variantTitle){
+    //     imageURL = variant.image
+    //   }
+    // })
+    // images.forEach((image, i) => {
+    //   if(image === imageURL){
+    //     index = i
+    //   }
+    // })
+    // //set scrollview index here
+    this.setState({selectedVariant: variantTitle})
   }
   
   render(){
-    var {tab, product} = this.state
+    var {tab} = this.state
     var {navigation} = this.props
-    var images = product.images || [] 
+    var images = this.state.images
     return(
       <SafeAreaView style={{backgroundColor: 'white'}}>
         <Header color={colors.white} onPress = {()=>{ navigation.pop() }} arrow/>
         <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}
-        onMomentumScrollEnd={this.setSelectedIndex}
+        onMomentumScrollEnd={this.setselectedImageIndex}
         ref={this.scrollRef}>
           {images.map((image, i) => (
             <DynamicImage 
