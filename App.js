@@ -1,10 +1,20 @@
 // React
 import * as React from 'react';
-import { Image } from 'react-native';
+import { Image, Text } from 'react-native';
 //Stacks
 import { InicioStack, TiendaStack, CarritoStack, BlogStack,  NoticiasStack } from './screens/Stacks'
+//Redux
+import {createStore} from 'redux'
+import {Provider, connect} from 'react-redux'
+import AsyncStorage from '@react-native-community/async-storage'
+import {persistStore, persistReducer} from 'redux-persist'
+import {PersistGate} from 'redux-persist/integration/react'
+import cartItems from './reducers/cartItems'
+import store from './store'
+import rootReducer from './reducers'
 //Components
 import Sidemenu from './components/Sidemenu';
+import ShoppingCartIcon from './mini_components/ShoppingCartIcon';
 //extra
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,7 +27,7 @@ const Tab = createBottomTabNavigator();
 function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Inicio"
+      initialRouteName='Inicio'
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
           let iconName;
@@ -34,6 +44,7 @@ function TabNavigator() {
             iconName = focused
               ? require('./assets/icons/carrito.png')
               : require('./assets/icons/carritob.png');
+              return <ShoppingCartIcon active={focused}/>
           }
           else if (route.name === 'Blog') {
             iconName = focused
@@ -65,13 +76,25 @@ function TabNavigator() {
 
 const Drawer = createDrawerNavigator();
 
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+}
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+const store_ = createStore(persistedReducer)
+const persistor = persistStore(store_)
+
 function App() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator drawerContent={props => Sidemenu(props)}>
-        <Drawer.Screen name="App" component={TabNavigator} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Provider store={store_}>
+    <PersistGate loading={null} persistor={persistor}>
+      <NavigationContainer>
+        <Drawer.Navigator drawerContent={props => Sidemenu(props)}>
+          <Drawer.Screen name="App" component={TabNavigator} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </PersistGate>
+    </Provider>
   );
 }
 

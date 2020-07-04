@@ -22,15 +22,15 @@ class Carrito extends React.Component {
   }
 
   render(){
-    let {navigation} = this.props
+    let {navigation, cartItems} = this.props
     return(
       <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
         <Header onPress = {()=>{navigation.navigate('Inicio')} } arrow/>
         <View style={{ flex: 1, backgroundColor:'white'}}>
           <ScrollView>
-            <ItemCarrito/>
-            <ItemCarrito/>
-            <ItemCarrito/>
+            {cartItems.map((item, i) => (
+              <ItemCarrito key={i} item={item} />
+            ))}
           </ScrollView>
           <View style={{justifyContent:'space-between',flexDirection:"row", borderTopColor:"rgba(0, 0, 0, 0.1)", borderTopWidth:1}}>
               <Text style={{fontSize:15,fontWeight:'bold',padding:10}}>Subtotal</Text>
@@ -56,7 +56,7 @@ class Carrito extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cartItems: state
+    cartItems: state.cartItems
   }
 }
 

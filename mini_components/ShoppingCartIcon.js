@@ -26,7 +26,7 @@ const ShoppingCartIcon = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        cartItems: state
+        cartItems: state.cartItems
     }
 }
 
