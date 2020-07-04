@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ScrollView, Text, SafeAreaView, TouchableOpacity, View, Dimensions} from 'react-native';
+import {connect} from 'react-redux';
 import Header from '../components/Header';
 import DynamicImage from '../components/DynamicImage'
 import InfoTab from './InfoTab'
@@ -27,7 +28,7 @@ function MiniTab({text, active, onPress}){
 }
 
 
-export default class Producto extends React.Component {
+class Producto extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -51,7 +52,8 @@ export default class Producto extends React.Component {
 
   renderTab = () => {
     if(this.state.tab === 'Info'){
-      return <InfoTab rating={this.state.rating} product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}/>
+      return <InfoTab rating={this.state.rating} product={this.state.product} 
+        onVariantSelect={variant=>this.selectVariant(variant)} onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)}/>
     }else if(this.state.tab === 'Res'){
       return <InfoTab rating={this.state.rating} product={this.state.product}/>
     }
@@ -78,6 +80,7 @@ export default class Producto extends React.Component {
     let id = this.props.route.params.productId
     productInfo(id).then((data)=> {
       images = this.prepareImages(data)
+      data.id = id
       this.setState({product: data, selectedVariant: data.variants[0].title, images: images})
     })
   }
@@ -136,3 +139,11 @@ export default class Producto extends React.Component {
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        addItemToCart: (product) => dispatch({type: 'ADD_TO_CART', payload: product})
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Producto)

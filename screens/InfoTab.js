@@ -14,6 +14,7 @@ export default class InfoTab extends React.Component{
       options: []
     }
     this.renderPicker = this.renderPicker.bind(this)
+    this.addToCart = this.addToCart.bind(this)
   }
 
   componentDidUpdate(){
@@ -40,6 +41,11 @@ export default class InfoTab extends React.Component{
         />
       )
     }
+  }
+
+  addToCart = () => {
+    let cartItem = {id: this.props.product.id, variant: this.state.option, quantity: 1}
+    this.props.onAddToCart(cartItem)
   }
 
   render(){
@@ -83,7 +89,7 @@ export default class InfoTab extends React.Component{
         </View> */}
         <View style={{marginTop: 30}}>
           <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center',
-            borderWidth: 2, borderColor: colors.black, height: 45, borderRadius: 22.5}}>
+            borderWidth: 2, borderColor: colors.black, height: 45, borderRadius: 22.5}} onPress={this.addToCart}>
             <Text style={{fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>Agregar al carrito</Text>
           </TouchableOpacity>
           {/* receives text, style, fontSize, and onPress */}
