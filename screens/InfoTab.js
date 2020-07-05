@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View, Image} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import BlackButton from '../mini_components/BlackButton';
 import { ScrollView } from 'react-native-gesture-handler';
+import HTML from 'react-native-render-html';
 
 const colors = require('../assets/colors')
 
@@ -79,20 +80,13 @@ export default class InfoTab extends React.Component{
           ))}
         </View>
         {this.renderPicker()}
-        <View style={{marginTop: 20}}>
-          <Text style={{fontWeight: 'bold', fontSize: 20}}>Descripción</Text>
-          <ScrollView style={{height: 100}}>
-            <Text style={{color: colors.grey, textAlign: 'justify'}}>{product.description}</Text>
+        <View style={{marginTop: 10}}>
+          <ScrollView style={{height: 200}}>
+            <Text style={{fontWeight: 'bold', fontSize: 20}}>Descripción</Text>
+            <HTML html={product.descriptionHtml} />
           </ScrollView>
         </View>
-        {/* <View style={{marginTop: 10}}>
-          <Text style={{fontWeight: 'bold', fontSize: 20}}>Características</Text>
-          <Text>{`\u2022 Tamaño del horno ajustable`}</Text>
-          <Text>{`\u2022 Herramienta para herbas incoroporada`}</Text>
-          <Text>{`\u2022 Tecnología Smart Path`}</Text>
-          <Text>{`\u2022 Control de temperatura con posición`}</Text>
-        </View> */}
-        <View style={{marginTop: 30}}>
+        <View style={{marginTop: 20}}>
           <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center',
             borderWidth: 2, borderColor: colors.black, height: 45, borderRadius: 22.5}} onPress={this.addToCart}>
             <Text style={{fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>Agregar al carrito</Text>
