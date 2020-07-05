@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName='Carrito'
+      initialRouteName='Inicio'
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
           let iconName;

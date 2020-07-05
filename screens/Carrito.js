@@ -8,14 +8,6 @@ import {productInfo} from '../lib/graphql-shopify'
 
 const colors = require('../assets/colors');
 
-async function getData(cartItems){
-  let promises = []
-  cartItems.forEach(item => {
-    promises.push(productInfo(item.id))
-  })
-  return Promise.all(promises)
-}
-
 class Carrito extends React.Component {
   constructor(props){
     super(props)
@@ -25,14 +17,6 @@ class Carrito extends React.Component {
       impuestos: 0,
       total: 0,
     }
-  }
-
-  async getData(cartItems){
-    let promises = []
-    cartItems.forEach(item => {
-      promises.push(productInfo(item.id))
-    })
-    return Promise.all(promises)
   }
   
   async componentDidMount(){
@@ -44,6 +28,14 @@ class Carrito extends React.Component {
       temp.push({product: data, variant: variant[0], quantity: cartItems[i].quantity})
     })
     this.setState({cartItems: temp})
+  }
+
+  async getData(cartItems){
+    let promises = []
+    cartItems.forEach(item => {
+      promises.push(productInfo(item.id))
+    })
+    return Promise.all(promises)
   }
 
   propsUpdated(){
@@ -119,7 +111,10 @@ class Carrito extends React.Component {
           <ScrollView>
             {cartItems.map((item, i) => (
                 <ItemCarrito key={i} product={item.product} variant={item.variant} quantity={item.quantity} 
-                onRemoveItem={(toRemove) => this.props.removeFromCart(toRemove)}/>
+                onRemoveItem={(toRemove) => this.props.removeFromCart(toRemove)}
+                onIncrement={(toIncrement) => this.props.incrementInCart(toIncrement)}
+                onDecrement={(toDecrement) => this.props.decrementInCart(toDecrement)}
+                />
               ))}
           </ScrollView>
           <View style={{justifyContent:'space-between',flexDirection:"row", borderTopColor:"rgba(0, 0, 0, 0.1)", borderTopWidth:1}}>
@@ -152,7 +147,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-      removeFromCart: (item) => dispatch({type: 'REMOVE_FROM_CART', payload: item})
+      removeFromCart: (item) => dispatch({type: 'REMOVE_FROM_CART', payload: item}),
+      incrementInCart: (item) => dispatch({type: 'INCREMENT_IN_CART', payload: item}),
+      decrementInCart: (item) => dispatch({type: 'DECREMENT_IN_CART', payload: item})
   }
 }
 
