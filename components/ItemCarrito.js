@@ -54,7 +54,7 @@ class ItemCarrito extends React.Component{
         <View style={{flex: 3, flexDirection:'column', alignItems: 'center', justifyContent: 'center', marginLeft: 15}}>
           <View style={{flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between'}}>
             <Text style={{fontWeight: 'bold', fontSize: 16, fontFamily: 'Verdana'}}>{displayName}</Text>
-            <TouchableOpacity style={styles.removeButton} onPress={() => this.props.onRemoveItem(product.id, variant.title)}>
+            <TouchableOpacity style={styles.removeButton} onPress={() => this.props.onRemoveItem({id: product.id, variant: variant.title})}>
               <Image style={{width: 15, height: 15}} source={require('../assets/icons/cancel.png')}></Image>
             </TouchableOpacity>
           </View>

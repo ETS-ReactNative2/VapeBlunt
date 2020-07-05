@@ -16,9 +16,9 @@ function addToCart(state, item){
 
 const cartItems = (state = [], action) => {
     if(action.type === 'ADD_TO_CART'){
-        return addToCart(state, action.payload)
+      return addToCart(state, action.payload)
     }else if(action.type === 'REMOVE_FROM_CART'){
-        return state.filter(cartItem=>cartItem.id !== action.payload.id)
+      return state.filter(cartItem=>(cartItem.id !== action.payload.id || cartItem.variant !== action.payload.variant))
     }
     return state
 }

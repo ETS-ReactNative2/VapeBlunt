@@ -18,16 +18,35 @@ class Carrito extends React.Component {
       total: 0,
     }
   }
-  
-  componentDidMount(){
-    this.props.cartItems.forEach(item => {
-      productInfo(item.id).then(data =>{
-        variant = data.variants.filter(v => v.title === item.variant)
-        this.setState((prev) => (
-          {cartItems: [...prev.cartItems, {product: data, variant: variant[0], quantity: item.quantity}]}
-        ))
-      })
+
+  async getData(cartItems){
+    let promises = []
+    cartItems.forEach(item => {
+      promises.push(productInfo(item.id))
     })
+    return Promise.all(promises)
+  }
+  
+  async componentDidMount(){
+    let {cartItems} = this.props
+    let temp = []
+    let dataArr = await this.getData(cartItems)
+    dataArr.forEach((data, i) => {
+      variant = data.variants.filter(v => v.title === cartItems[i].variant)
+      temp.push({product: data, variant: variant[0], quantity: cartItems[i].quantity})
+    })
+    this.setState({cartItems: temp})
+  }
+
+  async componentWillReceiveProps(nextProps){
+    let {cartItems} = nextProps
+    let temp = []
+    let dataArr = await this.getData(cartItems)
+    dataArr.forEach((data, i) => {
+      variant = data.variants.filter(v => v.title === cartItems[i].variant)
+      temp.push({product: data, variant: variant[0], quantity: cartItems[i].quantity})
+    })
+    this.setState({cartItems: temp})
   }
 
   componentDidUpdate(){
@@ -42,20 +61,22 @@ class Carrito extends React.Component {
       impuestos = (subtotal*0.16).toFixed()
       total = subtotal*1.16
       this.setState({subtotal, impuestos, total})
+    }else if(cartItems.length == 0 && this.state.subtotal > 0){
+      this.setState({subtotal: 0, impuestos: 0, total: 0})
     }
   }
 
   render(){
     let {navigation} = this.props
     let {cartItems, subtotal, impuestos, total} = this.state
-    console.log("INCI", cartItems)
     return(
       <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
         <Header onPress = {()=>{navigation.navigate('Inicio')} } arrow/>
         <View style={{ flex: 1, backgroundColor:'white'}}>
           <ScrollView>
             {cartItems.map((item, i) => (
-                <ItemCarrito key={i} product={item.product} variant={item.variant} quantity={item.quantity} />
+                <ItemCarrito key={i} product={item.product} variant={item.variant} quantity={item.quantity} 
+                onRemoveItem={(toRemove) => this.props.removeFromCart(toRemove)}/>
               ))}
           </ScrollView>
           <View style={{justifyContent:'space-between',flexDirection:"row", borderTopColor:"rgba(0, 0, 0, 0.1)", borderTopWidth:1}}>
@@ -86,4 +107,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Carrito);
+const mapDispatchToProps = (dispatch) => {
+  return{
+      removeFromCart: (item) => dispatch({type: 'REMOVE_FROM_CART', payload: item})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Carrito);
