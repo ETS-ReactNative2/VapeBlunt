@@ -1,12 +1,20 @@
 import * as React from 'react';
 import Header from '../components/Header';
-import {  View, Text, SafeAreaView,ScrollView} from 'react-native';
+import {View, Text, SafeAreaView,ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import ItemCarrito from '../components/ItemCarrito';
 import BlackButton from '../mini_components/BlackButton';
 import {productInfo} from '../lib/graphql-shopify'
 
 const colors = require('../assets/colors');
+
+async function getData(cartItems){
+  let promises = []
+  cartItems.forEach(item => {
+    promises.push(productInfo(item.id))
+  })
+  return Promise.all(promises)
+}
 
 class Carrito extends React.Component {
   constructor(props){
@@ -38,31 +46,66 @@ class Carrito extends React.Component {
     this.setState({cartItems: temp})
   }
 
-  async componentWillReceiveProps(nextProps){
-    let {cartItems} = nextProps
-    let temp = []
-    let dataArr = await this.getData(cartItems)
-    dataArr.forEach((data, i) => {
-      variant = data.variants.filter(v => v.title === cartItems[i].variant)
-      temp.push({product: data, variant: variant[0], quantity: cartItems[i].quantity})
+  propsUpdated(){
+    //added or removed item
+    if(this.props.cartItems.length !== this.state.cartItems.length){
+      return true
+    }
+    propsQuantities = 0
+    stateQuantities = 0
+    this.props.cartItems.forEach(item => {
+      propsQuantities += item.quantity
     })
-    this.setState({cartItems: temp})
+    this.state.cartItems.forEach(item => {
+      stateQuantities += item.quantity
+    })
+    //changed quantity in some item
+    if(stateQuantities !== propsQuantities){
+      return true
+    }
+    return false
   }
 
-  componentDidUpdate(){
-    let {cartItems} = this.state
-    let subtotal = 0
-    let impuestos = 0
-    let total = 0
-    if(cartItems.length > 0 && this.state.subtotal === 0){
-      cartItems.forEach(item => {
-        subtotal += parseInt(item.variant.price)
+  stateUpdated(prevState){
+    if(prevState.cartItems.length !== this.state.cartItems.length){
+      return true
+    }
+    prevStateQuantities = 0
+    stateQuantities = 0
+    prevState.cartItems.forEach(item => {
+      prevStateQuantities += item.quantity
+    })
+    this.state.cartItems.forEach(item => {
+      stateQuantities += item.quantity
+    })
+    if(prevStateQuantities !== stateQuantities){
+      return true
+    }
+    return false
+  }
+
+  async componentDidUpdate(prevProps, prevState){
+    if(this.propsUpdated()){
+      let {cartItems} = this.props
+      let temp = []
+      let dataArr = await this.getData(cartItems)
+      dataArr.forEach((data, i) => {
+        variant = data.variants.filter(v => v.title === cartItems[i].variant)
+        temp.push({product: data, variant: variant[0], quantity: cartItems[i].quantity})
       })
-      impuestos = (subtotal*0.16).toFixed()
-      total = subtotal*1.16
+      this.setState({cartItems: temp})
+    }
+
+    if(this.stateUpdated(prevState)){
+      subtotal = 0
+      impuestos = 0
+      total = 0
+      this.state.cartItems.forEach(item => {
+        subtotal += parseInt(item.variant.price)*item.quantity
+      })
+      impuestos = (subtotal*0.16).toFixed(2)
+      total = (subtotal*1.16).toFixed(2)
       this.setState({subtotal, impuestos, total})
-    }else if(cartItems.length == 0 && this.state.subtotal > 0){
-      this.setState({subtotal: 0, impuestos: 0, total: 0})
     }
   }
 
