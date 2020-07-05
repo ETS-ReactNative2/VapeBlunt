@@ -1,16 +1,14 @@
 // React
 import * as React from 'react';
-import { Image, Text } from 'react-native';
+import { Image } from 'react-native';
 //Stacks
 import { InicioStack, TiendaStack, CarritoStack, BlogStack,  NoticiasStack } from './screens/Stacks'
 //Redux
 import {createStore} from 'redux'
-import {Provider, connect} from 'react-redux'
+import {Provider} from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
 import {persistStore, persistReducer} from 'redux-persist'
 import {PersistGate} from 'redux-persist/integration/react'
-import cartItems from './reducers/cartItems'
-import store from './store'
 import rootReducer from './reducers'
 //Components
 import Sidemenu from './components/Sidemenu';
@@ -20,14 +18,13 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator();
 
 function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName='Inicio'
+      initialRouteName='Carrito'
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
           let iconName;
