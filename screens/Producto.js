@@ -52,10 +52,11 @@ class Producto extends React.Component {
 
   renderTab = () => {
     if(this.state.tab === 'Info'){
-      return <InfoTab rating={this.state.rating} product={this.state.product} 
+      return <InfoTab product={this.state.product} 
         onVariantSelect={variant=>this.selectVariant(variant)} onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)}/>
     }else if(this.state.tab === 'Res'){
-      return <InfoTab rating={this.state.rating} product={this.state.product}/>
+      return <InfoTab product={this.state.product} 
+        onVariantSelect={variant=>this.selectVariant(variant)} onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)}/>
     }
   }
 

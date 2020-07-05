@@ -48,7 +48,7 @@ export default class Accesorios extends React.Component{
     var { navigation } = this.props
     return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
-      <Header onPress = {()=>{ navigation.navigate('Tienda') }} arrow/>
+      <Header onPress = {()=>{ navigation.navigate('Tienda') }} arrow text={"Accesorios"}/>
       <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{alignItems: 'center', paddingBottom: 80, paddingTop: 10, paddingHorizontal: 20}}>
         {this.renderProducts()}
       </ScrollView>

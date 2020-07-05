@@ -82,7 +82,7 @@ export default class Categorias extends React.Component{
     var { activeTab } = this.state
     return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
-      <Header onPress = {()=>{ navigation.navigate('Tienda') }} arrow/>
+      <Header onPress = {()=>{ navigation.pop() }} arrow text={"Vaporizadores"}/>
       <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{alignItems: 'center', paddingBottom: 80, paddingTop: 10, paddingHorizontal: 20}}>
         <ScrollView horizontal style={{paddingVertical: 10, marginBottom: 10}}>
           {categories.map((category) => {

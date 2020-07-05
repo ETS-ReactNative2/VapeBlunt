@@ -41,7 +41,7 @@ export default class Tienda extends React.Component{
     var { jumbo, newProducts, bestSellers } = this.state;
     return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
-        <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow searchBar text={'Vaporizadores'}/>
+        <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow searchBar text={'Tienda'}/>
         <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80}}>
           <ImageBackground source={require('../assets/images/pax3.jpg')} 
             style={[styles.imgBackgroundStyle, {width: jumbo.width, height: jumbo.height}]}>

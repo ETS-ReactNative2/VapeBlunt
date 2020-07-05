@@ -114,6 +114,7 @@ class Carrito extends React.Component {
                 onRemoveItem={(toRemove) => this.props.removeFromCart(toRemove)}
                 onIncrement={(toIncrement) => this.props.incrementInCart(toIncrement)}
                 onDecrement={(toDecrement) => this.props.decrementInCart(toDecrement)}
+                navigation={navigation}
                 />
               ))}
           </ScrollView>

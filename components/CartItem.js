@@ -26,7 +26,7 @@ class CartItem extends React.Component{
   }
 
   render(){
-    let {variant, quantity, product} = this.props
+    let {variant, quantity, product, navigation} = this.props
     let {title, displayName, price} = variant
     if(title === 'Default Title'){
       displayName = product.title
@@ -36,7 +36,7 @@ class CartItem extends React.Component{
         {
           product.images ? (
         <DynamicImage backgroundColor={colors.lightgrey} width={60} containerWidth={80}
-        containerHeight={80} source={{uri: product.images[0]}}/>
+        containerHeight={80} source={{uri: product.images[0]}} onPress={() => navigation.navigate('Producto', {productId: product.id})}/>
           ) : null
         }
         <View style={{flex: 3, flexDirection:'column', alignItems: 'center', justifyContent: 'center', marginLeft: 15}}>

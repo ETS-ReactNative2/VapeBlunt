@@ -49,10 +49,9 @@ export default class InfoTab extends React.Component{
   }
 
   render(){
-    let rating = Math.round(this.props.rating)
     let {product} = this.props
     let {variants} = product
-    
+    let rating = product.rating || 0
     return(
       <View style={{paddingHorizontal: 20}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10}}>
@@ -61,13 +60,19 @@ export default class InfoTab extends React.Component{
         </View>
         <View style={{flexDirection: 'row', marginVertical: 5}}>
           {/* Render active stars */}
-          {Array(rating).fill().map((_, i) => (
+          {Array(Math.floor(rating)).fill().map((_, i) => (
             <Image key={i} source={require('../assets/icons/star-active.png')}
             style={{width: 16, height: 16}}
             />
           ))}
+          {/* Render half stars */}
+          {Array((rating / 0.5) % 2).fill().map((_, i) => (
+            <Image key={i} source={require('../assets/icons/star-medium.png')}
+            style={{width: 16, height: 16}}
+            />
+          ))}
           {/* Render inactive stars */}
-          {Array(5-rating).fill().map((_, i) => (
+          {Array(5-Math.floor(rating) - ((rating / 0.5) % 2)).fill().map((_, i) => (
             <Image key={i} source={require('../assets/icons/star-inactive.png')}
             style={{width: 16, height: 16}}
             />
