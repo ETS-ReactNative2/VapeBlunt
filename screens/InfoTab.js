@@ -56,8 +56,8 @@ export default class InfoTab extends React.Component{
     return(
       <View style={{paddingHorizontal: 20}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}>{product.title}</Text>
-          <Text style={{fontSize: 16}}>${variants ? variants[0].price : ""}</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 18, flex: 1}}>{product.title}</Text>
+          <Text style={{fontSize: 16, width: 100, textAlign: 'right'}}>${variants ? variants[0].price : ""}</Text>
         </View>
         <View style={{flexDirection: 'row', marginVertical: 5}}>
           {/* Render active stars */}

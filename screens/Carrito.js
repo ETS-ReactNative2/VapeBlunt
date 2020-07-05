@@ -2,7 +2,7 @@ import * as React from 'react';
 import Header from '../components/Header';
 import {View, Text, SafeAreaView,ScrollView} from 'react-native';
 import {connect} from 'react-redux';
-import ItemCarrito from '../components/ItemCarrito';
+import CartItem from '../components/CartItem';
 import BlackButton from '../mini_components/BlackButton';
 import {productInfo} from '../lib/graphql-shopify'
 
@@ -110,7 +110,7 @@ class Carrito extends React.Component {
         <View style={{ flex: 1, backgroundColor:'white'}}>
           <ScrollView>
             {cartItems.map((item, i) => (
-                <ItemCarrito key={i} product={item.product} variant={item.variant} quantity={item.quantity} 
+                <CartItem key={i} product={item.product} variant={item.variant} quantity={item.quantity} 
                 onRemoveItem={(toRemove) => this.props.removeFromCart(toRemove)}
                 onIncrement={(toIncrement) => this.props.incrementInCart(toIncrement)}
                 onDecrement={(toDecrement) => this.props.decrementInCart(toDecrement)}
