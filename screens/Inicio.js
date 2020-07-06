@@ -6,13 +6,15 @@ import {SafeAreaView,ScrollView,StyleSheet } from 'react-native';
 import PromoImage from '../components/PromoImage';
 import PromoProduct from '../components/PromoProduct';
 import PromoBlog from '../components/PromoBlog';
+import Header from '../components/Header';
 
 const Inicio = ({ navigation }) => {
   return (
     <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
+      <Header onPress={()=> navigation.openDrawer()}/>
       <ScrollView contentContainerStyle ={styles.container}>
         <PromoImage onPress ={()=> navigation.navigate('Tienda')}/>
-        <PromoProduct onPress ={()=> navigation.navigate('Tienda')}/>
+        <PromoProduct id={"gid://shopify/Product/4417083146327"} navigation={navigation}/>
         <PromoBlog onPress ={()=> navigation.navigate('Blog')}/>
       </ScrollView>
     </SafeAreaView>

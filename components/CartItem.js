@@ -36,7 +36,7 @@ class CartItem extends React.Component{
         {
           product.images ? (
         <DynamicImage backgroundColor={colors.lightgrey} width={60} containerWidth={80}
-        containerHeight={80} source={{uri: product.images[0]}} onPress={() => navigation.navigate('Producto', {productId: product.id})}/>
+        containerHeight={80} source={{uri: product.images[0]}} onPress={() => navigation.navigate('Producto', {id: product.id})}/>
           ) : null
         }
         <View style={{flex: 3, flexDirection:'column', alignItems: 'center', justifyContent: 'center', marginLeft: 15}}>

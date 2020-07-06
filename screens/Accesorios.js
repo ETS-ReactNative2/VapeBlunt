@@ -23,14 +23,14 @@ export default class Accesorios extends React.Component{
       if(products[i+1]){
         rendered.push(<View key={i} style={styles.productsRow}>
           <ProductCard title={products[i].title} source={{uri: products[i].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto', {productId: products[i].id})}/>
+            onPress={()=> navigation.navigate('Producto', {id: products[i].id})}/>
           <ProductCard title={products[i+1].title} source={{uri: products[i+1].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto', {productId: products[i+1].id})}/>
+            onPress={()=> navigation.navigate('Producto', {id: products[i+1].id})}/>
         </View>)
       }else{
         rendered.push(<View key={i} style={styles.productsRow}>
           <ProductCard title={products[i].title} source={{uri: products[i].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto', {productId: products[i].id})}/>
+            onPress={()=> navigation.navigate('Producto', {id: products[i].id})}/>
         </View>)
       }
     }

@@ -78,7 +78,7 @@ class Producto extends React.Component {
   }
 
   componentDidMount(){
-    let id = this.props.route.params.productId
+    let {id} = this.props.route.params
     productInfo(id).then((data)=> {
       images = this.prepareImages(data)
       data.id = id

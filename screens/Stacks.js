@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
 //libraries
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -12,22 +11,20 @@ import Accesorios from './Accesorios';
 import Carrito from './Carrito';
 import Blog from './Blog';
 import Noticias from './Noticias';
-//Components
-import Header from '../components/Header';
 
-const StackTienda = createStackNavigator();
-const StackCarrito = createStackNavigator();
-const StackBlog = createStackNavigator();
-const StackNoticias = createStackNavigator();
+
+const StackInicio = createStackNavigator()
+const StackTienda = createStackNavigator()
+const StackCarrito = createStackNavigator()
+const StackBlog = createStackNavigator()
+const StackNoticias = createStackNavigator()
 
 function InicioStack({ navigation }) {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
-      <Header onPress={()=> navigation.openDrawer()}/>
-      <View style={{flex:1, backgroundColor:'white'}}>
-          <Inicio navigation={navigation}/>
-      </View>
-    </SafeAreaView>
+    <StackInicio.Navigator initialRouteName="Inicio" headerMode="none" >
+      <StackInicio.Screen name="Inicio" component={Inicio}/>
+      <StackTienda.Screen name="Producto" component={Producto}/>
+    </StackInicio.Navigator>
   )
 }
 
