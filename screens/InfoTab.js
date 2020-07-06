@@ -50,15 +50,42 @@ export default class InfoTab extends React.Component{
     this.props.onAddToCart(cartItem)
   }
 
+  renderButtons(){
+    let {product, variantIndex} = this.props
+    renderArr = []
+    if(product.variants[variantIndex].inventoryQuantity === 0){
+      renderArr.push(
+        <TouchableOpacity key={'nd'} style={{justifyContent: 'center', alignItems: 'center', borderWidth: 2,
+          borderColor: colors.black, height: 45, borderRadius: 22.5}}>
+          <Text style={{fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>No disponible</Text>
+        </TouchableOpacity>
+      )
+    }else{
+      renderArr.push(
+        <TouchableOpacity key={'add'} style={{justifyContent: 'center', alignItems: 'center',
+        borderWidth: 2, borderColor: colors.black, height: 45, borderRadius: 22.5}} onPress={this.addToCart}>
+          <Text style={{fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>Agregar al carrito</Text>
+        </TouchableOpacity>)
+
+      renderArr.push(
+        <BlackButton key={'buy'} text="Comprar ahora" fontSize={20} style={{height: 49, borderRadius: 22.5, marginVertical: 15}}/>
+      )
+    }
+    return renderArr
+  }
+
   render(){
     let {product, variantIndex} = this.props
     let {variants} = product
     let rating = product.rating || 0
+    if(!product || !variants){
+      return(<View></View>)
+    }
     return(
       <View style={{paddingHorizontal: 20}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10}}>
           <Text style={{fontWeight: 'bold', fontSize: 18, flex: 1}}>{product.title}</Text>
-          <Text style={{fontSize: 16, width: 100, textAlign: 'right'}}>${variants ? variants[variantIndex].price : ""}</Text>
+          <Text style={{fontSize: 16, width: 100, textAlign: 'right'}}>${variants[variantIndex].price}</Text>
         </View>
         <View style={{flexDirection: 'row', marginVertical: 5}}>
           {/* Render active stars */}
@@ -88,12 +115,7 @@ export default class InfoTab extends React.Component{
           </ScrollView>
         </View>
         <View style={{marginTop: 20}}>
-          <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center',
-            borderWidth: 2, borderColor: colors.black, height: 45, borderRadius: 22.5}} onPress={this.addToCart}>
-            <Text style={{fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>Agregar al carrito</Text>
-          </TouchableOpacity>
-          {/* receives text, style, fontSize, and onPress */}
-          <BlackButton text="Comprar ahora" fontSize={20} style={{height: 49, borderRadius: 22.5, marginVertical: 15}}/>
+          {this.renderButtons()}
         </View>
       </View>
     )
