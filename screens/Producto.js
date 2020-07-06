@@ -37,7 +37,7 @@ class Producto extends React.Component {
       tab: 'Info',
       rating: 4,
       product: {},
-      selectedVariant: '',
+      variantIndex: 0,
       images: [],
     }
     this.renderImageIndicator = this.renderImageIndicator.bind(this)
@@ -50,10 +50,10 @@ class Producto extends React.Component {
     this.setState({ selectedImageIndex })
   }
 
-  renderTab = () => {
+  renderTab(){
     if(this.state.tab === 'Info'){
-      return <InfoTab product={this.state.product} 
-        onVariantSelect={variant=>this.selectVariant(variant)} onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)}/>
+      return <InfoTab product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}
+      onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)} variantIndex={this.state.variantIndex}/>
     }else if(this.state.tab === 'Res'){
       return <InfoTab product={this.state.product} 
         onVariantSelect={variant=>this.selectVariant(variant)} onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)}/>
@@ -102,7 +102,18 @@ class Producto extends React.Component {
     //   }
     // })
     // //set scrollview index here
-    this.setState({selectedVariant: variantTitle})
+    let {product} = this.state
+    found = false
+    i = 0
+    while(!found && i < product.variants.length){
+      if(product.variants[i].title === variantTitle){
+        found = true
+      }
+      i++
+    }
+    if(found){
+      this.setState({variantIndex: (i-1)})
+    }
   }
   
   render(){

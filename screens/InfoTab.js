@@ -11,10 +11,8 @@ export default class InfoTab extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      option: '',
-      options: []
+      options: [],
     }
-    this.renderPicker = this.renderPicker.bind(this)
     this.addToCart = this.addToCart.bind(this)
   }
 
@@ -24,17 +22,18 @@ export default class InfoTab extends React.Component{
       let options = []
       variants.forEach(variant => {
         options.push({label: variant.title, value: variant.title})
+        this.setState({options: options})
       })
-      this.setState({options: options, option: options[0].label})
     }
   }
   
-  renderPicker = ()=>{
-    if(this.state.options.length > 1){
+  renderPicker(){
+    let {options} = this.state
+    if(options.length > 1){
       return(
         <DropDownPicker
-            items={this.state.options}
-            defaultValue={this.state.option}
+            items={options}
+            defaultValue={options[0].label}
             containerStyle={{height: 40}}
             style={{backgroundColor: '#fafafa'}}
             dropDownStyle={{backgroundColor: '#fafafa'}}
@@ -44,20 +43,22 @@ export default class InfoTab extends React.Component{
     }
   }
 
-  addToCart = () => {
-    let cartItem = {id: this.props.product.id, variant: this.state.option, quantity: 1}
+  addToCart(){
+    let {product} = this.props
+    let {options} = this.state
+    let cartItem = {id: product.id, variant: options[this.props.variantIndex].value, quantity: 1}
     this.props.onAddToCart(cartItem)
   }
 
   render(){
-    let {product} = this.props
+    let {product, variantIndex} = this.props
     let {variants} = product
     let rating = product.rating || 0
     return(
       <View style={{paddingHorizontal: 20}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10}}>
           <Text style={{fontWeight: 'bold', fontSize: 18, flex: 1}}>{product.title}</Text>
-          <Text style={{fontSize: 16, width: 100, textAlign: 'right'}}>${variants ? variants[0].price : ""}</Text>
+          <Text style={{fontSize: 16, width: 100, textAlign: 'right'}}>${variants ? variants[variantIndex].price : ""}</Text>
         </View>
         <View style={{flexDirection: 'row', marginVertical: 5}}>
           {/* Render active stars */}
@@ -81,9 +82,9 @@ export default class InfoTab extends React.Component{
         </View>
         {this.renderPicker()}
         <View style={{marginTop: 10}}>
-          <ScrollView style={{height: 200}}>
+          <ScrollView style={{maxHeight: 200}}>
             <Text style={{fontWeight: 'bold', fontSize: 20}}>Descripción</Text>
-            <HTML html={product.descriptionHtml} />
+            <HTML html={product.descriptionHtml || "<p></p>"} />
           </ScrollView>
         </View>
         <View style={{marginTop: 20}}>
