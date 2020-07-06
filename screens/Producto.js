@@ -44,25 +44,13 @@ class Producto extends React.Component {
     this.selectVariant = this.selectVariant.bind(this)
   }
 
-  setselectedImageIndex = event => {
-    const contentOffset = event.nativeEvent.contentOffset;
-    const selectedImageIndex = Math.round(contentOffset.x / winWidth)
-    this.setState({ selectedImageIndex })
-  }
-
-  renderTab(){
-    if(this.state.tab === 'Info'){
-      return <InfoTab product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}
-      onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)} variantIndex={this.state.variantIndex}/>
-    }else if(this.state.tab === 'Res'){
-      return <InfoTab product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}
-      onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)} variantIndex={this.state.variantIndex}/>
-    }
-  }
-
-  renderImageIndicator = (i) => {
-    let color = (i === this.state.selectedImageIndex) ? colors.black : colors.grey
-    return <Text key={i} style={{textAlign: 'center', fontSize: 40, color: color}}>{`\u2022`}</Text>
+  componentDidMount(){
+    let {id} = this.props.route.params
+    productInfo(id).then((data)=> {
+      images = this.prepareImages(data)
+      data.id = id
+      this.setState({product: data, selectedVariant: data.variants[0].title, images: images})
+    })
   }
 
   prepareImages = (product) => {
@@ -77,32 +65,33 @@ class Producto extends React.Component {
     return images
   }
 
-  componentDidMount(){
-    let {id} = this.props.route.params
-    productInfo(id).then((data)=> {
-      images = this.prepareImages(data)
-      data.id = id
-      this.setState({product: data, selectedVariant: data.variants[0].title, images: images})
-    })
+  setSelectedImageIndex = (event) => {
+    const contentOffset = event.nativeEvent.contentOffset;
+    const selectedImageIndex = Math.round(contentOffset.x / winWidth)
+    this.setState({ selectedImageIndex })
   }
 
   selectVariant = (variantTitle) => {
-    // //change image
-    // let {product, selectedImageIndex, images} = this.state
-    // let index = selectedImageIndex
-    // let imageURL = ""
-    // product.variants.forEach((variant) => {
-    //   if(variant.title === variantTitle){
-    //     imageURL = variant.image
-    //   }
-    // })
-    // images.forEach((image, i) => {
-    //   if(image === imageURL){
-    //     index = i
-    //   }
-    // })
-    // //set scrollview index here
-    let {product} = this.state
+    //change image
+    let {product, selectedImageIndex, images} = this.state
+    let index = selectedImageIndex
+    let imageURL = ""
+    //get image of variant
+    product.variants.forEach((variant) => {
+      if(variant.title === variantTitle){
+        imageURL = variant.image
+      }
+    })
+    if(imageURL){//get index of image
+      images.forEach((image, i) => {
+        if(image === imageURL){
+          index = i
+        }
+      })
+    }
+    //set scrollview index
+    this.refs.imagesSV.scrollTo({x: winWidth*index});
+    
     found = false
     i = 0
     while(!found && i < product.variants.length){
@@ -115,6 +104,21 @@ class Producto extends React.Component {
       this.setState({variantIndex: (i-1)})
     }
   }
+
+  renderImageIndicator = (i) => {
+    let color = (i === this.state.selectedImageIndex) ? colors.black : colors.grey
+    return <Text key={i} style={{textAlign: 'center', fontSize: 40, color: color}}>{`\u2022`}</Text>
+  }
+
+  renderTab(){
+    if(this.state.tab === 'Info'){
+      return <InfoTab product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}
+      onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)} variantIndex={this.state.variantIndex}/>
+    }else if(this.state.tab === 'Res'){
+      return <InfoTab product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}
+      onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)} variantIndex={this.state.variantIndex}/>
+    }
+  }
   
   render(){
     var {tab} = this.state
@@ -124,8 +128,8 @@ class Producto extends React.Component {
       <SafeAreaView style={{backgroundColor: 'white'}}>
         <Header color={colors.white} onPress = {()=>{ navigation.pop() }} arrow/>
         <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}
-        onMomentumScrollEnd={this.setselectedImageIndex}
-        ref={this.scrollRef}>
+        onMomentumScrollEnd={this.setSelectedImageIndex}
+        ref={"imagesSV"}>
           {images.map((image, i) => (
             <DynamicImage 
             key={i}
