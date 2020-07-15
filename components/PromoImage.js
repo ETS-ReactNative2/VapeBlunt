@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {Image, TouchableOpacity, Dimensions} from 'react-native';
-import resolveAssetSource from 'resolveAssetSource'
 
-let image = resolveAssetSource(require('../assets/images/PromoImage.png'))
+let image = Image.resolveAssetSource(require('../assets/images/PromoImage.png'))
 const width  = Dimensions.get('window').width;
 const  height  = Dimensions.get('window').width*(image.height/image.width);
 

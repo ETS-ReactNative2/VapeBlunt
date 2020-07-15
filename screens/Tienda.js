@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { ScrollView, Text, SafeAreaView, ImageBackground, Dimensions, StyleSheet, View} from 'react-native';
-import resolveAssetSource from 'resolveAssetSource';
+import { ScrollView, Text, SafeAreaView, ImageBackground, Dimensions, StyleSheet, View, Image} from 'react-native';
 
 import Header from '../components/Header';
 import BlackButton from '../mini_components/BlackButton'
@@ -14,7 +13,7 @@ const colors = require('../assets/colors');
 export default class Tienda extends React.Component{
   constructor(props){
     super(props)
-    let image = resolveAssetSource(require('../assets/images/pax3.jpg'))
+    let image = Image.resolveAssetSource(require('../assets/images/pax3.jpg'))
     this.state = {
       jumbo: {
         width: Math.round(Dimensions.get('window').width),

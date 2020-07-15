@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
-import resolveAssetSource from 'resolveAssetSource'
 import BlackButton from '../mini_components/BlackButton'
 import {productInfo} from '../lib/graphql-shopify'
 
 const width = 300;
-let image = resolveAssetSource(require('../assets/images/PromoImage.png'))
+let image = Image.resolveAssetSource(require('../assets/images/PromoImage.png'))
 const height = width * (image.height / image.width)
 
 class PromoProduct extends React.Component {
