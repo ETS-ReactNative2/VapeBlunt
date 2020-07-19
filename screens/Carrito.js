@@ -4,7 +4,7 @@ import {View, Text, SafeAreaView,ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import CartItem from '../components/CartItem';
 import BlackButton from '../mini_components/BlackButton';
-import {productInfo} from '../lib/graphql-shopify'
+import {productInfo, productInfoo} from '../lib/graphql-shopify'
 
 const colors = require('../assets/colors');
 
@@ -30,12 +30,8 @@ class Carrito extends React.Component {
     this.setState({cartItems: temp})
   }
 
-  async getData(cartItems){
-    let promises = []
-    cartItems.forEach(item => {
-      promises.push(productInfo(item.id))
-    })
-    return Promise.all(promises)
+  getData(cartItems){
+    return Promise.all((cartItems.map(item => (productInfo(item.id)))))
   }
 
   propsUpdated(){
