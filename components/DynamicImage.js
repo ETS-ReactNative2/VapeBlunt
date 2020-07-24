@@ -14,10 +14,15 @@ function DynamicImage(props) {
   let source = require('../assets/images/davinci-black.png')
   let width = props.width || 120
   let height = width
+  let containerWidth = props.containerWidth || (width + 10)
+  let containerHeight = props.containerHeight || (height + 10)
+
   if(props.source && props.source.uri){
     let uri = props.source.uri
     Image.getSize(uri, (w, h)=>{
       height = Math.round(width*(h/w))
+      containerWidth = props.containerWidth || (width + 10)
+      containerHeight = props.containerHeight || (height + 10)
     })
     source = props.source
   }else{
@@ -26,8 +31,8 @@ function DynamicImage(props) {
     height = Math.round(width*(image.height/image.width))
   }
 
-  let containerWidth = props.containerWidth || (width + 10)
-  let containerHeight = props.containerHeight || (height + 10)
+ // let containerWidth = props.containerWidth || (width + 10)
+ // let containerHeight = props.containerHeight || (height + 10)
 
   let bgColor = props.backgroundColor || colors.lightgrey
   

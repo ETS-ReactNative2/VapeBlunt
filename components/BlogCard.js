@@ -12,8 +12,8 @@ function BlogCard(props) {
                 style={{aspectRatio:1, height: undefined, width: '100%', backgroundColor:colors.lightgrey, resizeMode:'cover', borderColor:'green'}}/>
             </View>
             <View>
-                <Text style={{fontWeight:"bold",fontSize:20,marginTop:20}}> {props.title} </Text>
-                <Text style={{ color:'grey',opacity:.9}}>{props.description}</Text>
+                <Text style={{fontWeight:"bold",fontSize:20,marginTop:20}}>{props.title} </Text>
+                <Text numberOfLines={3} style={{ color:'grey',opacity:.9 }}>{props.description}</Text>
             </View>
             <TouchableOpacity style={{borderWidth:1,borderColor:'black',borderRadius:30,marginTop:20}}>
                 <Text style={{color:"black", textAlign: 'center',fontSize:22,alignSelf:'center',padding:10,fontWeight:'500'}}>Leer más</Text>

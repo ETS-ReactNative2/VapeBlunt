@@ -11,7 +11,8 @@ import Accesorios from './Accesorios';
 import Carrito from './Carrito';
 import Blog from './Blog';
 import Noticias from './Noticias';
-
+import BlogLeer from './BlogLeer';
+import NoticiasLeer from './NoticiasLeer'
 
 const StackInicio = createStackNavigator()
 const StackTienda = createStackNavigator()
@@ -51,6 +52,7 @@ function BlogStack() {
   return (
     <StackBlog.Navigator initialRouteName="Blog" headerMode="none">
       <StackBlog.Screen name="Blog" component={Blog} options={{ title: 'Blogs' }} />
+      <StackBlog.Screen name="BlogLeer" component={BlogLeer}/>
     </StackBlog.Navigator>
   )
 }
@@ -59,6 +61,7 @@ function NoticiasStack() {
   return (
     <StackBlog.Navigator initialRouteName="Noticias" headerMode="none">
       <StackNoticias.Screen name="Noticias" component={Noticias} options={{ title: 'Noticias y promociones' }} />
+      <StackNoticias.Screen name="NoticiasLeer" component={NoticiasLeer}/>
     </StackBlog.Navigator>
   )
 }

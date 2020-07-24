@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { ScrollView, Text, SafeAreaView, ImageBackground, Dimensions, StyleSheet, View, Image} from 'react-native';
-
 import Header from '../components/Header';
 import BlackButton from '../mini_components/BlackButton'
 import ProductCard from '../components/ProductCard';
