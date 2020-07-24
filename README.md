@@ -4,7 +4,7 @@ and memorable experience for users who wish to acquire vapes of the utmost quali
 
 ## Getting Started
 This project constitutes, obviously, only the front end half of the whole application. This app is meant to be used in conjunction with the
-[BlogContentManager](https://github.com/AlfreddGco/BlogContentManager) as it's back end, since this is how you can manage the news and blogs that
+[BlogContentManager](https://github.com/AlfreddGco/BlogContentManager) as its back end, since this is how you can manage the news and blogs that
 are displayed on the app, as well
 as most of the API calls. The exact setup of the BlogContentManager for this app is not provided here (for security reasons), so we strongly advice that you first
 try getting it up and running on its own so that you get familiar with it.
