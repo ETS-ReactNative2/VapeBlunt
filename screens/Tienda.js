@@ -52,7 +52,7 @@ export default class Tienda extends React.Component{
           <View style={{marginTop: 30, paddingHorizontal: 20}}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
               <Text style={{fontSize: 20, fontWeight: 'bold'}}>Nuevos</Text>
-              <Text accessibilityRole='button' onPress={()=>{}}
+              <Text accessibilityRole='button' onPress={()=>{ navigation.navigate("NuevosProds") }}
                 style={{color: colors.lightgreen, fontSize: 16}} >
                 Ver todo
               </Text>
@@ -72,7 +72,7 @@ export default class Tienda extends React.Component{
           <View style={{marginTop: 30, paddingHorizontal: 20}}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
               <Text style={{fontSize: 20, fontWeight: 'bold'}}>Los más vendidos</Text>
-              <Text accessibilityRole='button' onPress={()=>console.log()}
+              <Text accessibilityRole='button' onPress={()=>{ navigation.navigate("MasVendidos")}}
                 style={{color: colors.lightgreen, fontSize: 16}} >
                 Ver todo
               </Text>

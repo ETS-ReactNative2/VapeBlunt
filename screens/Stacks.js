@@ -12,7 +12,9 @@ import Carrito from './Carrito';
 import Blog from './Blog';
 import Noticias from './Noticias';
 import BlogLeer from './BlogLeer';
-import NoticiasLeer from './NoticiasLeer'
+import NoticiasLeer from './NoticiasLeer';
+import MasVendidos from './MasVendidos';
+import NuevosProds from './NuevosProds';
 
 const StackInicio = createStackNavigator()
 const StackTienda = createStackNavigator()
@@ -36,6 +38,8 @@ function TiendaStack() {
       <StackTienda.Screen name="Categorias" component={Categorias}/>
       <StackTienda.Screen name="Accesorios" component={Accesorios}/>
       <StackTienda.Screen name="Producto" component={Producto}/>
+      <StackTienda.Screen name="MasVendidos" component={MasVendidos}/>
+      <StackTienda.Screen name="NuevosProds" component={NuevosProds}/>
     </StackTienda.Navigator>
   )
 }
