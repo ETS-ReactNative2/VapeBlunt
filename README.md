@@ -56,9 +56,9 @@ Pull requests are welcome. Feel free to message us about any questions you might
 
 ## Authors
 
-* **Alfredo García** - *Initial work and local hero*
-* **Carlos Brito** - *Back end work*
-* **Casta Casta** - *Front end work*
+* **[Alfredo García](https://github.com/AlfreddGco)** - *Initial work and local hero*
+* **[Carlos Brito](https://github.com/thehaiwave)** - *Back end work*
+* **[Casta Casta](https://github.com/casta42)** - *Front end work*
 
 You can also check out the list of [contributors](https://github.com/AlfreddGco/VapeBlunt/graphs/contributors).
 
