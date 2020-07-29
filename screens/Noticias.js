@@ -27,7 +27,7 @@ export default class Noticias extends React.Component {
         <Header onPress={() => {navigation.navigate("Inicio")}}/>
         <View style={{ flex: 1, padding: 16, backgroundColor: "white" }}>
           <ScrollView>
-            {reportItems.map((report) => {
+            {reportItems.slice(0).reverse().map((report) => {
               return (
                 <TouchableNativeFeedback onPress={()=>{navigation.navigate('NoticiasLeer', {id: report._id, items: reportItems})}} key={report._id}>
                 <NoticiasCard

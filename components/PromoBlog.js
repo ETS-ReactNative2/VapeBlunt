@@ -6,6 +6,7 @@ const width  = Dimensions.get('window').width;
 const  height  = Dimensions.get('window').width*(image.height/image.width);
 
 function PromoBlog(props){
+
     return(
         <TouchableOpacity onPress={() => props.onPress()}>
             <Image source={require('../assets/images/boundless.jpg')} 

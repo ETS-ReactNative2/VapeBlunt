@@ -32,7 +32,7 @@ export default class Header extends React.Component{
       )
     }else if(searching){
       return (
-        <TextInput style={{flex: 1, fontSize: 17, backgroundColor: colors.white, marginVertical: 10, paddingVertical: 0}} autoFocus={true}/>
+        <TextInput placeholder = "Buscar..." style={{flex: 1, fontSize: 17, backgroundColor: colors.white, marginVertical: 10, paddingVertical: 0}} autoFocus={true}/>
       )
     }
     else{

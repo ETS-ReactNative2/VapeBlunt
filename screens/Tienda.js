@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScrollView, Text, SafeAreaView, ImageBackground, Dimensions, StyleSheet, View, Image} from 'react-native';
+import { Keyboard, ScrollView, Text, SafeAreaView, ImageBackground, Dimensions, StyleSheet, View, Image} from 'react-native';
 import Header from '../components/Header';
 import BlackButton from '../mini_components/BlackButton'
 import ProductCard from '../components/ProductCard';
@@ -40,7 +40,8 @@ export default class Tienda extends React.Component{
     return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
         <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow searchBar text={'Tienda'}/>
-        <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80}}>
+        <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80}}
+        onScroll={()=>Keyboard.dismiss()}>
           <ImageBackground source={require('../assets/images/pax3.jpg')} 
             style={[styles.imgBackgroundStyle, {width: jumbo.width, height: jumbo.height}]}>
             <BlackButton style={{width: 100, height: 30}} text={"Comprar"} onPress={()=>console.log()}/>
