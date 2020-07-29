@@ -111,13 +111,8 @@ class Producto extends React.Component {
   }
 
   renderTab(){
-    if(this.state.tab === 'Info'){
-      return <InfoTab product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}
-      onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)} variantIndex={this.state.variantIndex}/>
-    }else if(this.state.tab === 'Res'){
-      return <InfoTab product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}
-      onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)} variantIndex={this.state.variantIndex}/>
-    }
+    return <InfoTab product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}
+    onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)} variantIndex={this.state.variantIndex}/>
   }
   
   render(){
@@ -146,7 +141,6 @@ class Producto extends React.Component {
         {/* END Carousel indicators  */}
         <View style={{flexDirection: 'row'}}>
           <MiniTab text="INFORMACIÓN" onPress={() => this.setState({tab: 'Info'})} active={tab === 'Info'}/>
-          <MiniTab text="RESEÑAS" onPress={() => this.setState({tab: 'Res'})} active={tab === 'Res'}/>
         </View>
         <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 290}}>
           {this.renderTab()}
