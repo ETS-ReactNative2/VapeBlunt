@@ -37,7 +37,7 @@ export default class Tienda extends React.Component{
   render(){
     var { navigation } = this.props;
     var { jumbo, newProducts, bestSellers } = this.state;
-    return(
+	return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
         <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow searchBar text={'Tienda'}/>
         <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 80}}

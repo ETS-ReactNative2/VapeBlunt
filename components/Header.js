@@ -7,7 +7,6 @@ const colors = require('../assets/colors')
 //color (background color). If arrow is false hamburguer icon will be shown
 //icons colors adjust to background color
 export default class Header extends React.Component{
-  
   constructor(props){
     super(props)
     this.state = {
@@ -32,10 +31,10 @@ export default class Header extends React.Component{
       )
     }else if(searching){
       return (
-        <TextInput placeholder = "Buscar..." style={{flex: 1, fontSize: 17, backgroundColor: colors.white, marginVertical: 10, paddingVertical: 0}} autoFocus={true}/>
+        <TextInput onBlur = {() =>this.toggleSearchBar()} placeholder = " Buscar..." style={{flex: 1, fontSize: 17, backgroundColor: colors.white, marginVertical: 10, paddingVertical: 0, 
+												borderRadius:20}} autoFocus={true} onScroll = {() => {console.log("shit")}}/>
       )
-    }
-    else{
+    }else{
       return(
         <View style={{flex: 1}} />
       )
@@ -60,7 +59,7 @@ export default class Header extends React.Component{
     let {arrow, onPress} = this.props
     let color = this.props.color || 'black'
     let image = require('../assets/icons/hamburger.png')
-    if(arrow){
+	if(arrow){
       image = require('../assets/icons/BackArrow.png')
     }
     if(arrow && (color == 'transparent' || color == 'white' || color == colors.lightgrey)){
