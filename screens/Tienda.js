@@ -19,38 +19,41 @@ import {
   NavigationButton,
 } from '../mini_components';
 
-import { newProducts, bestSellers } from '../lib/graphql-shopify'
+import * as Shopify from '../lib/graphql-shopify'
 
 import { colors } from '../assets';
 
-export default class Tienda extends React.Component{
-  constructor(props){
-    super(props)
-    let image = Image.resolveAssetSource(require('../assets/images/pax3.jpg'))
-    this.state = {
-      jumbo: {
-        width: Math.round(Dimensions.get('window').width),
-        height: Math.round(Dimensions.get('window').width*(image.height/image.width)),
-      },
-      newProducts: [],
-      bestSellers: [],
-    }
+const Tienda = (props) => {
+  const { navigation } = props;
+  const jumbo = React.useRef({
+    width: 0,
+    height: 0,
+  })
+  const [newProducts, setNewProducts] = React.useState();
+  const [bestSellers, setBestSellers] = React.useState();
+
+  const image = Image.resolveAssetSource(require('../assets/images/pax3.jpg'))
+  jumbo.current = {
+    width: Math.round(Dimensions.get('window').width),
+    height: Math.round(Dimensions.get('window').width*(image.height/image.width)),
   }
 
-  componentDidMount(){
-    newProducts().then((res) => {
-      this.setState({newProducts: res})
-    })
-    //best sellers
-    bestSellers().then((res) => {
-      this.setState({bestSellers: res})
-    })
+  React.useEffect(() => {
+    Shopify.newProducts()
+      .then(setNewProducts)
+      .catch((err) => console.log("Error fetching new products", err))
+    Shopify.bestSellers()
+      .then(setBestSellers)
+      .catch((err) => console.log("Error fetching best sellers", err))
+  }, [])
+
+  console.log("new", newProducts)
+  console.log("best", bestSellers)
+  
+  if(!newProducts || !bestSellers){
+    return <></>
   }
 
-
-  render(){
-    var { navigation } = this.props;
-    var { jumbo, newProducts, bestSellers } = this.state;
 	return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
         <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow searchBar text={'Tienda'}/>
@@ -75,10 +78,14 @@ export default class Tienda extends React.Component{
             {/* Start Product cards */}
             <View>
               <ScrollView horizontal={true} style={{paddingVertical: 20}}>
-                {newProducts.map((product) => {
-                  return <ProductCard key={product.id} title={product.title} source={{uri: product.featuredImage.transformedSrc}}
-                  width={140} style={{marginRight: 20}} onPress={() => navigation.navigate('Producto', {id: product.id})}/>
-                })}
+                {newProducts.map((product) => (
+                  <ProductCard key={product.id}
+                    title={product.title}
+                    source={{uri: product.featuredImage.transformedSrc}}
+                    width={140} style={{marginRight: 20}}
+                    onPress={() => navigation.navigate('Producto', {id: product.id})}
+                  />
+                ))}
               </ScrollView>
             </View>
             {/* End Product cards */}
@@ -106,7 +113,6 @@ export default class Tienda extends React.Component{
         </ScrollView>
       </SafeAreaView>
     )
-  }
 }
 
 const styles = StyleSheet.create({
@@ -117,3 +123,5 @@ const styles = StyleSheet.create({
     padding: 20,
   }
 })
+
+export default Tienda;

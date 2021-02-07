@@ -23,34 +23,36 @@ const Inicio = (props) => {
 
   React.useEffect(() => {
     newProducts().then((res) => {
-      setNewestProduct(res.pop());//Last one
+      if(res.length > 0){
+        setNewestProduct(res.pop());//Last one
+      }
     }).catch((err) => {
       console.log("Error fetching products", err)
     })
 
     loadBlogsCollection().then((res) => {
-      console.log("Blogs", res)
-      setNewestBlog(res.pop())//Last one
+      if(res.length > 0){
+        setNewestBlog(res.pop())//Last one
+      }
     }).catch((err) => {
       console.log("Error fetching blogs", err)
     })
   }, [])
 
-  console.log("Product", newestProduct)
-  console.log("Blog", newestBlog)
-
   return(
-    (newestProduct && newestBlog) ? (
+    (newestProduct) ? (
       <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
         <Header onPress={navigation.openDrawer}/>
         <ScrollView contentContainerStyle ={styles.container}>
           <PromoImage onPress ={()=> navigation.navigate('Tienda')}/>
-          <PromoProduct id = {newestProduct.id} navigation={navigation}/>
-          <PromoBlog title={newestBlog.title}
-            description={newestBlog.description}
-            source={newestBlog.thumbnail}
-            onPress ={()=> navigation.navigate('Blog')}
-          />
+          <PromoProduct id={newestProduct.id} navigation={navigation}/>
+          {newestBlog && (
+            <PromoBlog title={newestBlog.title}
+              description={newestBlog.description}
+              source={newestBlog.thumbnail}
+              onPress ={()=> navigation.navigate('Blog')}
+            />
+          )}
         </ScrollView>
       </SafeAreaView>
     ) : <></>
