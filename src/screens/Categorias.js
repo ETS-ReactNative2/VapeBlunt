@@ -1,9 +1,15 @@
-import * as React from 'react';
-import { ScrollView, Text, SafeAreaView, TouchableOpacity, View, StyleSheet} from 'react-native';
+import React from 'react';
+import {
+  ScrollView,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  View,
+  StyleSheet
+} from 'react-native';
 
-import Header from '../components/Header';
-import ProductCard from '../components/ProductCard';
-import BlackButton from '../mini_components/BlackButton';
+import { Header, ProductCard } from '../components';
+import { BlackButton } from '../mini_components';
 
 import { loadCollectionProducts } from '../lib/graphql-shopify'
 
@@ -31,69 +37,46 @@ const SubCategoryButton = (props) => {
   }
 }
 
-export default class Categorias extends React.Component{
-  constructor(props){
-    super(props)
-    this.renderProducts = this.renderProducts.bind(this)
-    this.state = {
-      activeTab: 'Portátil',
-      products: []
-    }
-  }
+const Categorias = (props) => {
+  const { navigation } = props;
+  const [products, setProducts] = React.useState([]);
+  const [selectedCategory, setSelectedCategory] = React.useState(categories[0]);
 
-  loadProducts = (category) => {
-    let id = categoryTable[category]
-    loadCollectionProducts(id).then((res) => {
-      this.setState({activeTab: category, products: res})
-    });
-  }
+  React.useEffect(() => {
+    loadCollectionProducts(categoryTable[selectedCategory])
+      .then(setProducts);
+  }, [])
 
-  renderProducts = () => {
-    let rendered = [];
-    let {products} = this.state
-    let {navigation} = this.props
-    for(let i=0; i<products.length; i+=2){
-      if(products[i+1]){
-        rendered.push(<View key={i} style={styles.productsRow}>
-          <ProductCard title={products[i].title} source={{uri: products[i].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto', {id: products[i].id})}/>
-          <ProductCard title={products[i+1].title} source={{uri: products[i+1].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto', {id: products[i+1].id})}/>
-        </View>)
-      }else{
-        rendered.push(<View key={i} style={styles.productsRow}>
-          <ProductCard title={products[i].title} source={{uri: products[i].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto', {id: products[i].id})}/>
-        </View>)
-      }
-    }
-    return rendered;
-  }
-
-  componentDidMount(){
-    loadCollectionProducts(categoryTable[this.state.activeTab]).then((res) => {
-      this.setState({products: res})
-    })
-  }
-
-  render(){
-    var { navigation } = this.props
-    var { activeTab } = this.state
-    return(
-      <SafeAreaView style={{ backgroundColor: 'black' }}>
-      <Header onPress = {()=>{ navigation.pop() }} arrow text={"Vaporizadores"}/>
-      <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{alignItems: 'center', paddingBottom: 80, paddingTop: 10, paddingHorizontal: 20}}>
-        <ScrollView horizontal style={{paddingVertical: 10, marginBottom: 10}}>
-          {categories.map((category) => {
-            return <SubCategoryButton key={category} text={category} onPress={() => this.loadProducts(category)}
-            active = {activeTab === category}/>
-          })}
-        </ScrollView>
-        {this.renderProducts()}
+  React.useEffect(() => {
+    loadCollectionProducts(categoryTable[selectedCategory])
+      .then(setProducts);
+  }, [selectedCategory])
+  
+  return(
+    <SafeAreaView style={{ backgroundColor: 'black' }}>
+    <Header onPress={navigation.pop} arrow text="Vaporizadores"/>
+    <ScrollView style={{backgroundColor: 'white'}}
+      contentContainerStyle={styles.contentContainer}
+    >
+      <ScrollView horizontal style={{paddingVertical: 10, marginBottom: 10}}>
+        {categories.map((category) => (
+          <SubCategoryButton 
+            text={category} key={category}
+            onPress={() => setSelectedCategory(category)}
+            active={selectedCategory === category}
+          />
+        ))}
       </ScrollView>
-    </SafeAreaView>
-    )
-  }
+      {
+        products.map((product, i) => (
+          <ProductCard product={product} key={i}
+          onPress={()=> navigation.navigate('Producto', {id: product.id})}
+          />
+        ))
+      }
+    </ScrollView>
+  </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -102,5 +85,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16
+  },
+  contentContainer: {
+    alignItems: 'center',
+    paddingBottom: 80,
+    paddingTop: 10,
+    paddingHorizontal: 20,
   }
 })
+
+export default Categorias;

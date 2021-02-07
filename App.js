@@ -2,17 +2,23 @@
 import * as React from 'react';
 import { Image } from 'react-native';
 //Stacks
-import { InicioStack, TiendaStack, CarritoStack, BlogStack,  NoticiasStack } from './screens/Stacks'
+import {
+  InicioStack,
+  TiendaStack,
+  CarritoStack,
+  BlogStack,
+  NoticiasStack
+} from './src/screens/Stacks'
 //Redux
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
-import {persistStore, persistReducer} from 'redux-persist'
-import {PersistGate} from 'redux-persist/integration/react'
-import rootReducer from './reducers'
+import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+import rootReducer from './src/reducers'
 //Components
-import Sidemenu from './components/Sidemenu';
-import ShoppingCartIcon from './mini_components/ShoppingCartIcon';
+import { Sidemenu } from './src/components';
+import { ShoppingCartIcon } from './src/mini_components';
 //extra
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -30,23 +36,23 @@ function TabNavigator() {
           let iconName;
           if (route.name === 'Inicio') {
             iconName = focused
-              ? require('./assets/icons/inicio.png')
-              : require('./assets/icons/iniciob.png');
+              ? require('./src/assets/icons/inicio.png')
+              : require('./src/assets/icons/iniciob.png');
           } else if (route.name === 'Tienda') {
             iconName = focused
-              ? require('./assets/icons/tienda.png')
-              : require('./assets/icons/tiendab.png');
+              ? require('./src/assets/icons/tienda.png')
+              : require('./src/assets/icons/tiendab.png');
           }
           else if (route.name === 'Carrito') {
             iconName = focused
-              ? require('./assets/icons/carrito.png')
-              : require('./assets/icons/carritob.png');
+              ? require('./src/assets/icons/carrito.png')
+              : require('./src/assets/icons/carritob.png');
               return <ShoppingCartIcon active={focused}/>
           }
           else if (route.name === 'Blog') {
             iconName = focused
-              ? require('./assets/icons/blog.png')
-              : require('./assets/icons/blogb.png');
+              ? require('./src/assets/icons/blog.png')
+              : require('./src/assets/icons/blogb.png');
           }
           // You can return any component that you like here!
           return <Image source={iconName} style={{ width: 30, height: 30 }} resizeMode="contain" />;
