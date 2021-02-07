@@ -5,28 +5,27 @@ import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import BlackButton from '../mini_components/BlackButton';
 
-import {loadCollectionProducts} from '../lib/graphql-shopify'
+import { loadCollectionProducts } from '../lib/graphql-shopify'
 
-const categories = ["Portátil", "De mesa", "Estilo pluma", "Herbales", "De ceras", "De líquidos"]
+import { categoryTable } from '../config';
 
-const categoryTable = {
-  "Portátil": "30285443",
-  "De mesa": "30285491",
-  "Estilo pluma": "30285895",
-  "Herbales": "29357859",
-  "De ceras": "9845669912",
-  "De líquidos": "400596878",
-}
+const categories = Object.keys(categoryTable);
 
-function SubCategoryButton(props){
+const SubCategoryButton = (props) => {
+  const { text } = props;
   if(props.active){
     return(
-      <BlackButton style={{marginRight: 20, height: 25}} text={props.text} onPress={() => props.onPress()}/>
+      <BlackButton style={{marginRight: 20, height: 25}}
+        text={text}
+        onPress={props.onPress}
+      />
     )
   }else{
     return(
-      <TouchableOpacity style={{marginRight: 20}} onPress={() => props.onPress()}>
-        <Text style={{color: 'rgba(91, 91, 91, 0.4)'}}>{props.text}</Text>
+      <TouchableOpacity style={{marginRight: 20}} onPress={props.onPress}>
+        <Text style={{color: 'rgba(91, 91, 91, 0.4)'}}>
+          {text}
+        </Text>
       </TouchableOpacity>
     )
   }
