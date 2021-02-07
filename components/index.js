@@ -1,0 +1,11 @@
+export { default as BlogCard } from './BlogCard';
+export { default as CartItem } from './CartItem';
+export { default as ColorPicker } from './ColorPicker';
+export { default as DynamicImage } from './DynamicImage';
+export { default as Header } from './Header';
+export { default as NoticiasCard } from './NoticiasCard';
+export { default as ProductCard } from './ProductCard';
+export { default as PromoBlog } from './PromoBlog';
+export { default as PromoImage } from './PromoImage';
+export { default as PromoProduct } from './PromoProduct';
+export { default as Sidemenu } from './Sidemenu';
