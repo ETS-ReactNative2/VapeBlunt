@@ -1,60 +1,40 @@
 import * as React from 'react';
-import { ScrollView, SafeAreaView, View, StyleSheet} from 'react-native';
+import {
+  ScrollView,
+  SafeAreaView,
+  View,
+  StyleSheet,
+} from 'react-native';
+import {
+  Header,
+  ProductCard,
+} from '../components';
 
-import Header from '../components/Header';
-import ProductCard from '../components/ProductCard';
+import { loadCollectionProducts } from '../lib/graphql-shopify'
 
-import {loadCollectionProducts} from '../lib/graphql-shopify'
+const Accesorios = (props) => {
+  const { navigation } = props;
+  const [products, setProducts] = React.useState([]);
 
-export default class Accesorios extends React.Component{
-  constructor(props){
-    super(props)
-    this.renderProducts = this.renderProducts.bind(this)
-    this.state = {
-      products: []
-    }
-  }
+  React.useEffect(() => {
+    loadCollectionProducts('30121787').then(setProducts);
+  }, [])
 
-  renderProducts = () => {
-    let rendered = [];
-    let {products} = this.state
-    let {navigation} = this.props
-    for(let i=0; i<products.length; i+=2){
-      if(products[i+1]){
-        rendered.push(<View key={i} style={styles.productsRow}>
-          <ProductCard title={products[i].title} source={{uri: products[i].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto', {id: products[i].id})}/>
-          <ProductCard title={products[i+1].title} source={{uri: products[i+1].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto', {id: products[i+1].id})}/>
-        </View>)
-      }else{
-        rendered.push(<View key={i} style={styles.productsRow}>
-          <ProductCard title={products[i].title} source={{uri: products[i].featuredImage.transformedSrc}}
-            onPress={()=> navigation.navigate('Producto', {id: products[i].id})}/>
-        </View>)
+  return(
+    <SafeAreaView style={{ backgroundColor: 'black' }}>
+    <Header onPress = {()=>{ navigation.navigate('Tienda') }} arrow text={"Accesorios"}/>
+    <ScrollView style={{backgroundColor: 'white'}}
+    contentContainerStyle={styles.containerSyle}>
+      {
+        products.map((product, i) => (
+          <ProductCard product={product} key={product.id}
+          onPress={()=> navigation.navigate('Producto', {id: product.id})}
+          />
+        ))
       }
-    }
-    return rendered;
-  }
-
-  componentDidMount(){
-    //id accesorios
-    loadCollectionProducts('30121787').then((res) => {
-      this.setState({products: res})
-    })
-  }
-
-  render(){
-    var { navigation } = this.props
-    return(
-      <SafeAreaView style={{ backgroundColor: 'black' }}>
-      <Header onPress = {()=>{ navigation.navigate('Tienda') }} arrow text={"Accesorios"}/>
-      <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{alignItems: 'center', paddingBottom: 80, paddingTop: 10, paddingHorizontal: 20}}>
-        {this.renderProducts()}
-      </ScrollView>
-    </SafeAreaView>
-    )
-  }
+    </ScrollView>
+  </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -63,5 +43,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16
+  },
+  containerSyle: {
+    alignItems: 'center',
+    paddingBottom: 80,
+    paddingTop: 10,
+    paddingHorizontal: 20,
   }
 })
+
+export default Accesorios;
