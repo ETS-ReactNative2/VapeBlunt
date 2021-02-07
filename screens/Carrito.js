@@ -6,7 +6,7 @@ import CartItem from '../components/CartItem';
 import BlackButton from '../mini_components/BlackButton';
 import {productInfo, productInfoo} from '../lib/graphql-shopify'
 
-const colors = require('../assets/colors');
+import { colors } from '../assets';
 
 class Carrito extends React.Component {
   constructor(props){

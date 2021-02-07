@@ -1,10 +1,16 @@
 // React Native Bottom Navigation - Example using React Navigation V5 //
 // https://aboutreact.com/react-native-bottom-navigation //
 import * as React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Image
+} from 'react-native';
 import DynamicImage from './DynamicImage'
 
-const colors = require('../assets/colors');
+import { colors } from '../assets';
 
 function Adder(props){
   return(

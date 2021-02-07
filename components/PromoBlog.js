@@ -1,5 +1,11 @@
 import * as React from 'react';
-import {Image, Text, TouchableOpacity, Dimensions, View} from 'react-native';
+import {
+  Image,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  View
+} from 'react-native';
 
 let image = Image.resolveAssetSource(require('../assets/images/PromoImage.png'))
 const width  = Dimensions.get('window').width;

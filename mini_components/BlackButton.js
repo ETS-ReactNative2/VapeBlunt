@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, StyleSheet,TouchableOpacity } from 'react-native';
-const colors = require('../assets/colors');
+import { colors } from '../assets';
 
 //receives text, style, fontSize, and onPress
 function BlackButton(props) {

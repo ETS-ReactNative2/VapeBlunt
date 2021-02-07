@@ -1,7 +1,7 @@
 // React Native Bottom Navigation - Example using React Navigation V5 //
 // https://aboutreact.com/react-native-bottom-navigation //
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -24,12 +24,20 @@ const Inicio = (props) => {
   React.useEffect(() => {
     newProducts().then((res) => {
       setNewestProduct(res.pop());//Last one
+    }).catch((err) => {
+      console.log("Error fetching products", err)
     })
 
     loadBlogsCollection().then((res) => {
+      console.log("Blogs", res)
       setNewestBlog(res.pop())//Last one
+    }).catch((err) => {
+      console.log("Error fetching blogs", err)
     })
-  })
+  }, [])
+
+  console.log("Product", newestProduct)
+  console.log("Blog", newestBlog)
 
   return(
     (newestProduct && newestBlog) ? (

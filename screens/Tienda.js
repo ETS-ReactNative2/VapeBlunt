@@ -1,13 +1,27 @@
 import * as React from 'react';
-import { Keyboard, ScrollView, Text, SafeAreaView, ImageBackground, Dimensions, StyleSheet, View, Image} from 'react-native';
-import Header from '../components/Header';
-import BlackButton from '../mini_components/BlackButton'
-import ProductCard from '../components/ProductCard';
-import NavigationButton from '../mini_components/NavigationButton';
+import {
+  Keyboard,
+  ScrollView,
+  Text,
+  SafeAreaView,
+  ImageBackground,
+  Dimensions,
+  StyleSheet,
+  View,
+  Image
+} from 'react-native';
+import {
+  Header,
+  ProductCard
+} from '../components';
+import {
+  BlackButton,
+  NavigationButton,
+} from '../mini_components';
 
 import { newProducts, bestSellers } from '../lib/graphql-shopify'
 
-const colors = require('../assets/colors');
+import { colors } from '../assets';
 
 export default class Tienda extends React.Component{
   constructor(props){

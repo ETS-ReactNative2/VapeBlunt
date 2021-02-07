@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import {SafeAreaView,ScrollView,StyleSheet, View,Text,TouchableOpacity,Image } from 'react-native';
 
-const colors = require('../assets/colors');
+import { colors } from '../assets';
 
 function NoticiasCard(props) {
     return (

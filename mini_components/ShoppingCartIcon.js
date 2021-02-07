@@ -2,7 +2,7 @@ import * as React from 'react'
 import {View, Image, Text} from 'react-native'
 import {Provider, connect} from 'react-redux'
 
-const colors = require('../assets/colors');
+import { colors } from '../assets';
 
 const ShoppingCartIcon = (props) => {
     let image = require('../assets/icons/carritob.png')

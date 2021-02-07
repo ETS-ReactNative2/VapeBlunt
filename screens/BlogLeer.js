@@ -5,7 +5,7 @@ import BlackButton from '../mini_components/BlackButton'
 import NavigationButton from '../mini_components/NavigationButton';
 import DynamicImage from '../components/DynamicImage';
 
-const colors = require('../assets/colors');
+import { colors } from '../assets';
 const win_width = Dimensions.get('window').width;
 
 export default class BlogLeer extends React.Component {
