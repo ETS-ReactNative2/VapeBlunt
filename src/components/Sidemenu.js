@@ -1,36 +1,55 @@
-import * as React from 'react';
-import { View, Text, TouchableOpacity, Image, SafeAreaView, ScrollView } from 'react-native';
+import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+} from 'react-native';
 import NavigationButton from '../mini_components/NavigationButton';
 
 function Sidemenu(props) {
+  const { navigation } = props;
   return (
-    <SafeAreaView style={{ backgroundColor: "black", flex: 1 }}>
-      <View style={{ height: 50, flexDirection: 'row', alignItems: 'center', backgroundColor: 'black', paddingLeft: 10, paddingRight: 10}}>
-          <TouchableOpacity onPress={() => props.navigation.navigate('Inicio')}>
+    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
+      <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.navigate('Inicio')}>
             <Image style={{ height: 30, width: 30 }} source={require('../assets/icons/hamburger.png')} />
           </TouchableOpacity>
-          <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={{ fontSize: 25, color: 'white' }}>MENU</Text>
-          </View>
+          <Text style={{ fontSize: 25, color: 'white', textAlign: 'center', flex: 1}}>
+            MENU
+          </Text>
       </View>
-
-      <ScrollView style={{backgroundColor:'white'}}>
-        <NavigationButton text="Tienda" onPress={() => props.navigation.navigate('Tienda')}/>
-        <NavigationButton text="Blog" onPress={() => props.navigation.navigate('Blog')}/>
-        {/* <NavigationButton text="Noticias y promociones" onPress={() => props.navigation.navigate('Noticias')}/> */}
-        <NavigationButton text="Carrito" onPress={() => props.navigation.navigate('Carrito')}/>
-
-        <Image style={{
-          height: 160,
-          width: 160,
-          marginTop: 20,
-          opacity: 0.4,
-          alignSelf: 'center'
-        }}
-          source={require('../assets/images/logo.png')} />
-      </ScrollView>
+      <NavigationButton text="Tienda"
+        onPress={() => navigation.navigate('Tienda')}
+      />
+      <NavigationButton text="Blog"
+        onPress={() => navigation.navigate('Blog')}
+      />
+      <NavigationButton text="Carrito" onPress={() => navigation.navigate('Carrito')}/>
+      
+      <Image style={styles.image}
+        source={require('../assets/images/logo.png')} />
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  header: {
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    paddingHorizontal: 10,
+  },
+  image: {
+    height: 160,
+    width: 160,
+    marginTop: 20,
+    opacity: 0.4,
+    alignSelf: 'center'
+  }
+})
 
 export default Sidemenu;

@@ -1,13 +1,21 @@
-import * as React from 'react';
-import { ScrollView, Text, SafeAreaView, TouchableOpacity, View, Dimensions} from 'react-native';
-import {connect} from 'react-redux';
-import Header from '../components/Header';
-import DynamicImage from '../components/DynamicImage'
+import React from 'react';
+import {
+  ScrollView,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  View,
+  Dimensions
+} from 'react-native';
+
 import InfoTab from './InfoTab'
+import { Header, DynamicImage } from '../components';
 
-import {productInfo} from '../lib/graphql-shopify'
+import { colors } from '../assets';
 
-const colors = require('../assets/colors')
+import { connect } from 'react-redux';
+import { productInfo } from '../lib/graphql-shopify'
+
 const winWidth = Math.round(Dimensions.get('window').width)
 
 function MiniTab({text, active, onPress}){
