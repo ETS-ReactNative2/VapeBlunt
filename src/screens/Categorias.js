@@ -19,22 +19,18 @@ const categories = Object.keys(categoryTable);
 
 const SubCategoryButton = (props) => {
   const { text } = props;
-  if(props.active){
-    return(
-      <BlackButton style={{marginRight: 20, height: 25}}
-        text={text}
-        onPress={props.onPress}
-      />
-    )
-  }else{
-    return(
-      <TouchableOpacity style={{marginRight: 20}} onPress={props.onPress}>
-        <Text style={{color: 'rgba(91, 91, 91, 0.4)'}}>
-          {text}
-        </Text>
-      </TouchableOpacity>
-    )
-  }
+  return props.active ? (
+    <BlackButton style={{marginRight: 20, height: 25}}
+      text={text}
+      onPress={props.onPress}
+    />
+  ) : (
+    <TouchableOpacity style={{marginRight: 20}} onPress={props.onPress}>
+      <Text style={{color: 'rgba(91, 91, 91, 0.4)'}}>
+        {text}
+      </Text>
+    </TouchableOpacity>
+  )
 }
 
 const Categorias = (props) => {
@@ -69,9 +65,7 @@ const Categorias = (props) => {
       </ScrollView>
       {
         products.map((product, i) => (
-          <ProductCard product={product} key={i}
-          onPress={()=> navigation.navigate('Producto', {id: product.id})}
-          />
+          <ProductCard product={product} key={i}/>
         ))
       }
     </ScrollView>

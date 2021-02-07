@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {
   Keyboard,
   ScrollView,
@@ -99,7 +99,6 @@ const Tienda = (props) => {
             {newProducts.map((product) => (
               <ProductCard style={{marginRight: 20}}
                 key={product.id} product={product}
-                onPress={() => navigation.navigate('Producto', {id: product.id})}
               />
             ))}
           </ScrollView>
@@ -111,7 +110,6 @@ const Tienda = (props) => {
             {bestSellers.map((product) => (
               <ProductCard style={{marginRight: 20}}
                 key={product.id} product={product}
-                onPress={() => navigation.navigate('Producto', {id: product.id})}
               />
             ))}
           </ScrollView>

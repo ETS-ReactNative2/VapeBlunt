@@ -7,21 +7,27 @@ import {
   StyleSheet
 } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+
 const colors = require('../assets/colors')
 
 const ProductCard = (props) => {
+  const navigation = useNavigation();
   const { product } = props;
+
+  const navigateToProduct = () => {
+    navigation.navigate('Producto', {id: product.id})
+  }
 
   return (
     <TouchableOpacity style={[{alignItems: 'center'}, props.style]}
-      onPress={() => props.onPress()}
+      onPress={navigateToProduct}
     >
       <Image style={styles.image}
         resizeMode='center'
         source={{uri: product.featuredImage}}
       />
-      <Text style={styles.title}
-      >
+      <Text style={styles.title}>
         {product.title || ""}
       </Text>
     </TouchableOpacity>
