@@ -19,9 +19,26 @@ import {
   NavigationButton,
 } from '../mini_components';
 
+import { colors } from '../assets';
+
 import * as Shopify from '../lib/graphql-shopify'
 
-import { colors } from '../assets';
+const SectionHeader = (props) => {
+  const { title = ""} = props;
+  return(
+    <View style={styles.sectionHeader}>
+      <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+        {title}
+      </Text>
+      <Text style={{color: colors.lightgreen, fontSize: 16}}
+        accessibilityRole='button'
+        onPress={props.onPress}
+      >
+        Ver todo
+      </Text>
+    </View>
+  )
+}
 
 const Tienda = (props) => {
   const { navigation } = props;
@@ -53,84 +70,69 @@ const Tienda = (props) => {
       <SafeAreaView style={{ backgroundColor: 'black' }}>
         <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow searchBar text={'Tienda'}/>
         <ScrollView style={{backgroundColor: 'white'}}
-          contentContainerStyle={{paddingBottom: 80}}
-          onScroll={()=>Keyboard.dismiss()}
+          contentContainerStyle={{
+            paddingBottom: 80,
+            paddingHorizontal: 20
+          }}
+          onScroll={Keyboard.dismiss}
         >
           <ImageBackground source={require('../assets/images/pax3.jpg')} 
             style={[styles.imgBackgroundStyle, jumbo.current]}>
             <BlackButton style={{width: 100, height: 30}}
-              text={"Comprar"} onPress={()=>console.log()}
+              text={"Comprar"}
             />
           </ImageBackground>
 
           <NavigationButton text="Vaporizadores"
-            onPress={()=>{navigation.navigate('Categorias')}}
+            style={{marginHorizontal: -20}}
+            onPress={()=>navigation.navigate('Categorias')}
           />
           <NavigationButton text="Accesorios"
-            onPress={()=>{navigation.navigate('Accesorios')}}
+            style={{marginHorizontal: -20}}
+            onPress={()=>navigation.navigate('Accesorios')}
           />
-          
-          <View style={{marginTop: 30, paddingHorizontal: 20}}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                Nuevos
-              </Text>
-              <Text style={{
-                  color: colors.lightgreen,
-                  fontSize: 16
-                }}
-                accessibilityRole='button'
-                onPress={() => navigation.navigate("NuevosProds")}
-              >
-                Ver todo
-              </Text>
-            </View>
-            {/* Start Product cards */}
-            <View>
-              <ScrollView horizontal={true} style={{paddingVertical: 20}}>
-                {newProducts.map((product) => (
-                  <ProductCard style={{marginRight: 20}}
-                    key={product.id} product={product}
-                    onPress={() => navigation.navigate('Producto', {id: product.id})}
-                  />
-                ))}
-              </ScrollView>
-            </View>
-            {/* End Product cards */}
-          </View>
-
-          <View style={{marginTop: 30, paddingHorizontal: 20}}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold'}}>Los más vendidos</Text>
-              <Text accessibilityRole='button' onPress={()=>{ navigation.navigate("MasVendidos")}}
-                style={{color: colors.lightgreen, fontSize: 16}} >
-                Ver todo
-              </Text>
-            </View>
-            {/* Start Product cards */}
-            <View>
-              <ScrollView horizontal={true} style={{paddingVertical: 20}}>
-                {bestSellers.map((product) => (
-                  <ProductCard style={{marginRight: 20}}
-                    key={product.id} product={product}
-                    onPress={() => navigation.navigate('Producto', {id: product.id})}
-                  />
-                ))}
-              </ScrollView>
-            </View>
-            {/* End Product cards */}
-          </View>
+          <SectionHeader title="Nuevos"
+            onPress={()=>{ navigation.navigate("NuevosProds")}}
+          />
+          {/* Start Product cards */}
+          <ScrollView horizontal={true} style={{paddingVertical: 20}}>
+            {newProducts.map((product) => (
+              <ProductCard style={{marginRight: 20}}
+                key={product.id} product={product}
+                onPress={() => navigation.navigate('Producto', {id: product.id})}
+              />
+            ))}
+          </ScrollView>
+          {/* End Product cards */}
+          <SectionHeader title="Los más vendidos"
+            onPress={()=>{ navigation.navigate("MasVendidos")}}
+          />
+          <ScrollView horizontal={true} style={{paddingVertical: 20}}>
+            {bestSellers.map((product) => (
+              <ProductCard style={{marginRight: 20}}
+                key={product.id} product={product}
+                onPress={() => navigation.navigate('Producto', {id: product.id})}
+              />
+            ))}
+          </ScrollView>
         </ScrollView>
       </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
+  sectionHeader: {
+    marginTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   imgBackgroundStyle: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     padding: 20,
+    marginHorizontal: -20
   }
 })
 
