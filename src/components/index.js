@@ -9,3 +9,4 @@ export { default as PromoBlog } from './PromoBlog';
 export { default as PromoImage } from './PromoImage';
 export { default as PromoProduct } from './PromoProduct';
 export { default as Sidemenu } from './Sidemenu';
+export { default as ProductsScrollView } from './ProductsScrollView';

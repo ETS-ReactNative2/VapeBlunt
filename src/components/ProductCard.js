@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import {
   TouchableOpacity,
   Image,
   Text,
-  View,
   StyleSheet
 } from 'react-native';
 
@@ -20,11 +19,11 @@ const ProductCard = (props) => {
   }
 
   return (
-    <TouchableOpacity style={[{alignItems: 'center'}, props.style]}
+    <TouchableOpacity style={[styles.touchable, props.style]}
       onPress={navigateToProduct}
     >
       <Image style={styles.image}
-        resizeMode='center'
+        resizeMode='contain'
         source={{uri: product.featuredImage}}
       />
       <Text style={styles.title}>
@@ -35,6 +34,10 @@ const ProductCard = (props) => {
 }
 
 const styles = StyleSheet.create({
+  touchable: {
+    alignItems: 'center',
+    width: 150,
+  },
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -42,14 +45,14 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   image: {
-    width: 120,
+    width: '100%',
     height: 120,
     backgroundColor: colors.lightgrey
   },
   title: {
     color: 'black',
     fontWeight: 'bold',
-    textAlign: 'left'
+    textAlign: 'left',
   }
 })
 

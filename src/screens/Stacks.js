@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 //libraries
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,8 +13,7 @@ import Blog from './Blog';
 import Noticias from './Noticias';
 import BlogLeer from './BlogLeer';
 import NoticiasLeer from './NoticiasLeer';
-import MasVendidos from './MasVendidos';
-import NuevosProds from './NuevosProds';
+import DisplayProducts from './DisplayProducts';
 
 const StackInicio = createStackNavigator()
 const StackTienda = createStackNavigator()
@@ -38,8 +37,7 @@ function TiendaStack() {
       <StackTienda.Screen name="Categorias" component={Categorias}/>
       <StackTienda.Screen name="Accesorios" component={Accesorios}/>
       <StackTienda.Screen name="Producto" component={Producto}/>
-      <StackTienda.Screen name="MasVendidos" component={MasVendidos}/>
-      <StackTienda.Screen name="NuevosProds" component={NuevosProds}/>
+      <StackTienda.Screen name="Display Products" component={DisplayProducts}/>
     </StackTienda.Navigator>
   )
 }

@@ -66,6 +66,17 @@ const Tienda = (props) => {
     return <></>
   }
 
+  const navigateDisplay = (title) => {
+    let products = newProducts
+    if(title === 'Más Vendidos'){
+      products = bestSellers
+    }
+    navigation.navigate('Display Products', {
+      title,
+      products: products,
+    });
+  }
+
 	return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
         <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow searchBar text={'Tienda'}/>
@@ -85,17 +96,17 @@ const Tienda = (props) => {
 
           <NavigationButton text="Vaporizadores"
             style={{marginHorizontal: -20}}
-            onPress={()=>navigation.navigate('Categorias')}
+            onPress={() => navigation.navigate('Categorias')}
           />
           <NavigationButton text="Accesorios"
             style={{marginHorizontal: -20}}
-            onPress={()=>navigation.navigate('Accesorios')}
-          />
-          <SectionHeader title="Nuevos"
-            onPress={()=>{ navigation.navigate("NuevosProds")}}
+            onPress={() => navigation.navigate('Accesorios')}
           />
           {/* Start Product cards */}
-          <ScrollView horizontal={true} style={{paddingVertical: 20}}>
+          <SectionHeader title="Nuevos"
+            onPress={() => navigateDisplay('Nuevos Productos')}
+          />
+          <ScrollView horizontal style={{paddingVertical: 20}}>
             {newProducts.map((product) => (
               <ProductCard style={{marginRight: 20}}
                 key={product.id} product={product}
@@ -104,9 +115,9 @@ const Tienda = (props) => {
           </ScrollView>
           {/* End Product cards */}
           <SectionHeader title="Los más vendidos"
-            onPress={()=>{ navigation.navigate("MasVendidos")}}
+            onPress={() => navigateDisplay('Más Vendidos')}
           />
-          <ScrollView horizontal={true} style={{paddingVertical: 20}}>
+          <ScrollView horizontal style={{paddingVertical: 20}}>
             {bestSellers.map((product) => (
               <ProductCard style={{marginRight: 20}}
                 key={product.id} product={product}
