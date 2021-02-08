@@ -66,16 +66,23 @@ const Tienda = (props) => {
     return <></>
   }
 
-  const navigateDisplay = (title) => {
-    let products = newProducts
-    if(title === 'Más Vendidos'){
-      products = bestSellers
+  const navigateDisplay = React.useCallback((title) => {
+    let params = { title };
+    switch(title){
+      case 'Nuevos Productos': {
+        params.products = newProducts;
+        break;
+      }
+      case 'Más Vendidos': {
+        params.products = bestSellers;
+        break;
+      }
+      case 'Accesorios': {
+        params.fetcher = () => Shopify.loadCollectionProducts('30121787');
+      }
     }
-    navigation.navigate('Display Products', {
-      title,
-      products: products,
-    });
-  }
+    return () => navigation.navigate('Display Products', params);
+  }, [navigation, Shopify.loadCollectionProducts, newProducts, bestSellers]);
 
 	return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
@@ -100,11 +107,11 @@ const Tienda = (props) => {
           />
           <NavigationButton text="Accesorios"
             style={{marginHorizontal: -20}}
-            onPress={() => navigation.navigate('Accesorios')}
+            onPress={navigateDisplay('Accesorios')}
           />
           {/* Start Product cards */}
           <SectionHeader title="Nuevos"
-            onPress={() => navigateDisplay('Nuevos Productos')}
+            onPress={navigateDisplay('Nuevos Productos')}
           />
           <ScrollView horizontal style={{paddingVertical: 20}}>
             {newProducts.map((product) => (
@@ -115,7 +122,7 @@ const Tienda = (props) => {
           </ScrollView>
           {/* End Product cards */}
           <SectionHeader title="Los más vendidos"
-            onPress={() => navigateDisplay('Más Vendidos')}
+            onPress={navigateDisplay('Más Vendidos')}
           />
           <ScrollView horizontal style={{paddingVertical: 20}}>
             {bestSellers.map((product) => (

@@ -7,7 +7,6 @@ import Inicio from './Inicio';
 import Tienda from './Tienda';
 import Producto from './Producto';
 import Categorias from './Categorias';
-import Accesorios from './Accesorios';
 import Carrito from './Carrito';
 import Blog from './Blog';
 import Noticias from './Noticias';
@@ -35,7 +34,6 @@ function TiendaStack() {
     <StackTienda.Navigator initialRouteName="Tienda" headerMode="none" >
       <StackTienda.Screen name="Tienda" component={Tienda}/>
       <StackTienda.Screen name="Categorias" component={Categorias}/>
-      <StackTienda.Screen name="Accesorios" component={Accesorios}/>
       <StackTienda.Screen name="Producto" component={Producto}/>
       <StackTienda.Screen name="Display Products" component={DisplayProducts}/>
     </StackTienda.Navigator>

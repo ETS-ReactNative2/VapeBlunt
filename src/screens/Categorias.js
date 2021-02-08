@@ -13,7 +13,8 @@ import { BlackButton } from '../mini_components';
 
 import { loadCollectionProducts } from '../lib/graphql-shopify'
 
-import { categoryTable } from '../config';
+import config from '../config';
+const { categoryTable } = config;
 
 const categories = Object.keys(categoryTable);
 
