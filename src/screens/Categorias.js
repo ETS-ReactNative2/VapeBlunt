@@ -8,7 +8,7 @@ import {
   StyleSheet
 } from 'react-native';
 
-import { Header, ProductCard } from '../components';
+import { Header, ProductsScrollView } from '../components';
 import { BlackButton } from '../mini_components';
 
 import { loadCollectionProducts } from '../lib/graphql-shopify'
@@ -50,27 +50,25 @@ const Categorias = (props) => {
   }, [selectedCategory])
   
   return(
-    <SafeAreaView style={{ backgroundColor: 'black' }}>
-    <Header onPress={navigation.pop} arrow text="Vaporizadores"/>
-    <ScrollView style={{backgroundColor: 'white'}}
-      contentContainerStyle={styles.contentContainer}
-    >
-      <ScrollView horizontal style={{paddingVertical: 10, marginBottom: 10}}>
-        {categories.map((category) => (
-          <SubCategoryButton 
-            text={category} key={category}
-            onPress={() => setSelectedCategory(category)}
-            active={selectedCategory === category}
-          />
-        ))}
-      </ScrollView>
-      {
-        products.map((product, i) => (
-          <ProductCard product={product} key={i}/>
-        ))
-      }
-    </ScrollView>
-  </SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: 'white'}}>
+      <Header onPress={navigation.pop} arrow text="Vaporizadores"/>
+      <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
+        <ScrollView horizontal 
+          contentContainerStyle = {{
+            justifyContent: 'flex-start'
+          }}
+        >
+          {categories.map((category) => (
+            <SubCategoryButton 
+              text={category} key={category}
+              onPress={() => setSelectedCategory(category)}
+              active={selectedCategory === category}
+            />
+          ))}
+        </ScrollView>
+      </View>
+      <ProductsScrollView products={products}/>
+    </SafeAreaView>
   )
 }
 
