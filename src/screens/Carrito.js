@@ -24,6 +24,9 @@ const Carrito = (props) => {
   //Fetch items and merge web info with store info
   const fetchItems = async() => {
     const { cartItems } = props;
+    if(cartItems.length === 0){
+      return setItems([])
+    }
     const products = await productsInfo(cartItems.map((item) => (item.id)));
     let newItems = [];
     for(let i=0; i<products.length; i++){
