@@ -44,7 +44,7 @@ const Inicio = (props) => {
       <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
         <Header onPress={navigation.openDrawer}/>
         <ScrollView contentContainerStyle ={styles.container}>
-          <PromoImage onPress ={()=> navigation.navigate('Tienda')}/>
+          <PromoImage onPress ={() => navigation.navigate('Tienda')}/>
           <PromoProduct id={newestProduct.id} navigation={navigation}/>
           {newestBlog && (
             <PromoBlog title={newestBlog.title}
