@@ -1,6 +1,6 @@
 // React Native Bottom Navigation - Example using React Navigation V5 //
 // https://aboutreact.com/react-native-bottom-navigation //
-import * as React from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -9,6 +9,8 @@ import {
   Image
 } from 'react-native';
 import DynamicImage from './DynamicImage'
+
+import { useNavigation } from '@react-navigation/native';
 
 import { colors } from '../assets';
 
@@ -32,11 +34,14 @@ class CartItem extends React.Component{
   }
 
   render(){
-    let {variant, quantity, product, navigation} = this.props
+    const { navigation } = this.props
+    const { product, variant, quantity } = this.props.item;
     let {title, displayName, price} = variant
+
     if(title === 'Default Title'){
       displayName = product.title
     }
+
     return (
       <View style={styles.container}>
         {

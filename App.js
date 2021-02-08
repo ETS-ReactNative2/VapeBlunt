@@ -1,5 +1,8 @@
+import 'react-native-gesture-handler';
 // React
 import React from 'react';
+//Components
+import { Sidemenu } from './src/components';
 //Stacks
 import {
   InicioStack,
@@ -9,20 +12,14 @@ import {
   NoticiasStack
 } from './src/screens/Stacks'
 //Redux
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import AsyncStorage from '@react-native-community/async-storage'
-import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
-import rootReducer from './src/reducers'
-//Components
-import { Sidemenu } from './src/components';
-//extra
-import 'react-native-gesture-handler';
+import { store, persistor } from './src/store';
+//Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
+//Config
 import config from './src/config';
 
 const Tab = createBottomTabNavigator();
@@ -51,17 +48,9 @@ function TabNavigator() {
 
 const Drawer = createDrawerNavigator();
 
-const persistConfig = {
-  key: 'root',
-  storage: AsyncStorage,
-}
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-const store_ = createStore(persistedReducer)
-const persistor = persistStore(store_)
-
 function App() {
   return (
-    <Provider store={store_}>
+    <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <NavigationContainer>
         <Drawer.Navigator drawerContent={props => Sidemenu(props)}>

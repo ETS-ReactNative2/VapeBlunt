@@ -1,17 +1,16 @@
-function addToCart(state, item) {
-  let i = 0
-  let found = false
-  while (i < state.length && !found) {
-    if (state[i].id === item.id && state[i].variant === item.variant) {
-      // state[i].quantity += item.quantity
-      found = true
+function compare(a, b){
+  let same_id = a.id === b.id;
+  let same_variant = a.variant === b.variant;
+  return same_id && same_variant;
+}
+
+function findProduct(state, item){
+  for(let i=0; i<state.length; i++){
+    if(compare(state[i], item)){
+      return i;
     }
-    i++
   }
-  if (!found) {
-    state.push(item)
-  }
-  return [...state]//for some reason returning just state doesnt work
+  return -1;
 }
 
 function increment(state, payload){
@@ -47,9 +46,14 @@ function decrement(state, payload){
 
 const cartItems = (state = [], action) => {
   if (action.type === 'ADD_TO_CART') {
-    return addToCart(state, action.payload)
+    const item = action.payload;
+    if (findProduct(state, item) === -1) {
+      return [...state, item];
+    }
+    return [...state]
   } else if (action.type === 'REMOVE_FROM_CART') {
-    return state.filter(cartItem => (cartItem.id !== action.payload.id || cartItem.variant !== action.payload.variant))
+    const toRemove = action.payload;
+    return state.filter(cartItem => !compare(cartItem, toRemove))
   } else if (action.type === 'INCREMENT_IN_CART'){
     return increment(state, action.payload)
   }else if (action.type === 'DECREMENT_IN_CART'){

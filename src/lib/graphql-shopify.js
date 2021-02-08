@@ -12,7 +12,6 @@ export async function newProducts(){
   }
 }
 
-
 export async function bestSellers() {
   try{
     const response = await axios.get(baseUrl+'/api/bestsellers');
@@ -22,7 +21,6 @@ export async function bestSellers() {
     return [];
   }
 }
-
 
 export function loadCollectionProducts(collection_id) {
   let vapeBluntPOST = {
@@ -35,7 +33,6 @@ export function loadCollectionProducts(collection_id) {
   return axios(vapeBluntPOST).then(({data})=>(data))
 }
 
-
 export async function productInfo(product_id){
   let vapeBluntPOST = {
     method: 'POST',
@@ -45,4 +42,15 @@ export async function productInfo(product_id){
     }
   }
   return axios(vapeBluntPOST).then(({data}) => (data))
+}
+
+export async function productsInfo(products_id){
+  let request = {
+    method: 'GET',
+    url: baseUrl + '/api/products',
+    params: {
+      ids: products_id,
+    }
+  }
+  return axios(request).then(({data}) => (data))
 }

@@ -35,7 +35,6 @@ function MiniTab({text, active, onPress}){
   }
 }
 
-
 class Producto extends React.Component {
   constructor(props){
     super(props)
@@ -159,9 +158,9 @@ class Producto extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return{
-        addItemToCart: (product) => dispatch({type: 'ADD_TO_CART', payload: product})
-    }
+  return{
+    addItemToCart: (product) => dispatch({type: 'ADD_TO_CART', payload: product})
+  }
 }
 
 export default connect(null, mapDispatchToProps)(Producto)
