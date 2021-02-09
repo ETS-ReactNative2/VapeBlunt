@@ -5,7 +5,6 @@ import {
   SafeAreaView,
   TouchableOpacity,
   View,
-  StyleSheet
 } from 'react-native';
 
 import { Header, ProductsScrollView } from '../components';
@@ -71,20 +70,5 @@ const Categorias = (props) => {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  productsRow: {
-    alignSelf: 'stretch',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 16
-  },
-  contentContainer: {
-    alignItems: 'center',
-    paddingBottom: 80,
-    paddingTop: 10,
-    paddingHorizontal: 20,
-  }
-})
 
 export default Categorias;

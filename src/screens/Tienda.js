@@ -21,7 +21,11 @@ import {
 
 import { colors } from '../assets';
 
-import { newProducts, bestSellers } from '../shopify/products'
+import {
+  newProducts as getNewProducts,
+  bestSellers as getBestSellers,
+  loadCollectionProducts,
+} from '../shopify/products'
 
 import config from '../config';
 const { categoryTable } = config;
@@ -59,8 +63,8 @@ const Tienda = (props) => {
   }
 
   React.useEffect(() => {
-    newProducts().then(setNewProducts)
-    bestSellers().then(setBestSellers)
+    getNewProducts().then(setNewProducts)
+    getBestSellers().then(setBestSellers)
   }, [])
   
   if(!newProducts || !bestSellers){
@@ -79,11 +83,11 @@ const Tienda = (props) => {
         break;
       }
       case 'Accesorios': {
-        params.fetcher = () => Shopify.loadCollectionProducts(categoryTable['Accesorios']);
+        params.fetcher = () => loadCollectionProducts(categoryTable['Accesorios']);
       }
     }
     return () => navigation.navigate('Display Products', params);
-  }, [navigation, Shopify.loadCollectionProducts, newProducts, bestSellers]);
+  }, [navigation, loadCollectionProducts, newProducts, bestSellers]);
 
 	return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>

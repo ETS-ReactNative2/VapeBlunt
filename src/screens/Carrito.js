@@ -70,7 +70,6 @@ const Carrito = (props) => {
         <ScrollView>
           {items.map((item, i) => (
             <CartItem key={i} item={item}
-            navigation={navigation}
             onRemoveItem={props.removeFromCart}
             onIncrement={props.incrementInCart}
             onDecrement={props.decrementInCart}
