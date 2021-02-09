@@ -14,7 +14,7 @@ import { Header, DynamicImage } from '../components';
 import { colors } from '../assets';
 
 import { connect } from 'react-redux';
-import { productInfo } from '../lib/shopify'
+import { productInfo } from '../shopify/products';
 
 const winWidth = Math.round(Dimensions.get('window').width)
 

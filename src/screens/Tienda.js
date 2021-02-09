@@ -21,7 +21,7 @@ import {
 
 import { colors } from '../assets';
 
-import * as Shopify from '../lib/shopify'
+import { newProducts, bestSellers } from '../shopify/products'
 
 import config from '../config';
 const { categoryTable } = config;
@@ -59,10 +59,8 @@ const Tienda = (props) => {
   }
 
   React.useEffect(() => {
-    Shopify.newProducts()
-      .then(setNewProducts)
-    Shopify.bestSellers()
-      .then(setBestSellers)
+    newProducts().then(setNewProducts)
+    bestSellers().then(setBestSellers)
   }, [])
   
   if(!newProducts || !bestSellers){

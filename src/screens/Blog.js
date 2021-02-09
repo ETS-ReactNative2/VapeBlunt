@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { View, Text, SafeAreaView } from "react-native";
 import BlogCard from "../components/BlogCard";
 import { ScrollView, TouchableOpacity, TouchableNativeFeedback } from "react-native-gesture-handler";
-import { getBlogs } from '../lib/shopify';
+import { getBlogs } from '../shopify/products';
 
 export default class Blog extends React.Component {
   constructor(props) {

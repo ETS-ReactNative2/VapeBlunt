@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { View, Text, SafeAreaView } from "react-native";
 import NoticiasCard from "../components/NoticiasCard";
 import { ScrollView, TouchableNativeFeedback } from "react-native-gesture-handler";
-import { getNews } from "../lib/shopify";
+import { getNews } from "../shopify/products";
 
 export default class Noticias extends React.Component {
   constructor(props) {

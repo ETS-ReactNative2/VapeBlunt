@@ -13,7 +13,7 @@ import {
 import { BlackButton } from '../mini_components';
 
 import { connect } from 'react-redux';
-import { productInfo } from '../lib/shopify'
+import { productInfo } from '../shopify/products'
 
 const Carrito = (props) => {
   const {

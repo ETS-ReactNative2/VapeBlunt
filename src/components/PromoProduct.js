@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
 import BlackButton from '../mini_components/BlackButton'
-import { productInfo } from '../lib/shopify'
+import { productInfo } from '../shopify/products'
 
 const width = 300;
 let image = Image.resolveAssetSource(require('../assets/images/PromoImage.png'))

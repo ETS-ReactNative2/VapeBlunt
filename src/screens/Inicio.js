@@ -13,7 +13,7 @@ import {
   PromoBlog,
   Header,
 } from '../components';
-import { newProducts } from "../lib/shopify";
+import { newProducts } from "../shopify/products";
 
 const Inicio = (props) => {
   const { navigation } = props;
