@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { View, Text, SafeAreaView } from "react-native";
 import BlogCard from "../components/BlogCard";
 import { ScrollView, TouchableOpacity, TouchableNativeFeedback } from "react-native-gesture-handler";
-import { loadBlogsCollection, loadNewsCollection } from "../lib/mongodb-server";
+import { getBlogs } from '../lib/shopify';
 
 export default class Blog extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class Blog extends React.Component {
   }
 
   componentDidMount() {
-    loadBlogsCollection().then((res) => {
+    getBlogs().then((res) => {
       this.setState({ blogItems: res });
     });
   }
@@ -35,7 +35,7 @@ export default class Blog extends React.Component {
                   description={blog.description}
                   source={blog.thumbnail}
                 />
-               </TouchableNativeFeedback>
+                </TouchableNativeFeedback>
               );
             })}
             

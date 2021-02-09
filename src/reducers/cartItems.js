@@ -1,7 +1,7 @@
 function compare(a, b){
-  let same_id = a.id === b.id;
+  let same_handle = a.handle === b.handle;
   let same_variant = a.variant === b.variant;
-  return same_id && same_variant;
+  return same_handle && same_variant;
 }
 
 function findProduct(state, item){
@@ -18,7 +18,7 @@ function increment(state, payload){
   i = 0
   found = false
   while (i < result.length && !found) {
-    if (result[i].id === payload.id && result[i].variant === payload.variant) {
+    if (result[i].handle === payload.handle && result[i].variant === payload.variant) {
       result[i].quantity += 1
       found = true
     }
@@ -32,7 +32,7 @@ function decrement(state, payload){
   i = 0
   found = false
   while (i < result.length && !found) {
-    if (result[i].id === payload.id && result[i].variant === payload.variant) {
+    if (result[i].handle === payload.handle && result[i].variant === payload.variant) {
       result[i].quantity -= 1
       found = true
     }
@@ -45,20 +45,28 @@ function decrement(state, payload){
 }
 
 const cartItems = (state = [], action) => {
-  if (action.type === 'ADD_TO_CART') {
-    const item = action.payload;
-    if (findProduct(state, item) === -1) {
-      return [...state, item];
+  switch(action.type){
+    case 'ADD_TO_CART': {
+      const item = action.payload;
+      if (findProduct(state, item) === -1) {
+        return [...state, item];
+      }
+      return [...state]
     }
-    return [...state]
-  } else if (action.type === 'REMOVE_FROM_CART') {
-    const toRemove = action.payload;
-    return state.filter(cartItem => !compare(cartItem, toRemove))
-  } else if (action.type === 'INCREMENT_IN_CART'){
-    return increment(state, action.payload)
-  }else if (action.type === 'DECREMENT_IN_CART'){
-    return decrement(state, action.payload)
+    case 'REMOVE_FROM_CART': {
+      const toRemove = action.payload;
+      return state.filter(cartItem => !compare(cartItem, toRemove))
+    }
+    case 'INCREMENT_IN_CART': {
+      return increment(state, action.payload)
+    }
+    case 'DECREMENT_IN_CART': {
+      return decrement(state, action.payload)
+    }
+    case 'EMPTY': {
+      return state.filter(item => false)
+    }
+    default: return state;
   }
-  return state
 }
 export default cartItems

@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  StyleSheet,
   View,
   Text,
   SafeAreaView,
@@ -12,12 +13,11 @@ import {
 import { BlackButton } from '../mini_components';
 
 import { connect } from 'react-redux';
-import { productsInfo } from '../lib/graphql-shopify'
+import { productInfo } from '../lib/shopify'
 
 const Carrito = (props) => {
   const {
     navigation,
-    cartItems,
   } = props;
   const [items, setItems] = React.useState([]);
 
@@ -27,19 +27,24 @@ const Carrito = (props) => {
     if(cartItems.length === 0){
       return setItems([])
     }
-    const products = await productsInfo(cartItems.map((item) => (item.id)));
-    let newItems = [];
-    for(let i=0; i<products.length; i++){
-      const { variants } = products[i];
-      const variant = variants.filter(v => v.title === cartItems[i].variant)[0]
-      const toAdd = {
-        product: products[i],
-        variant: variant,
-        quantity: cartItems[i].quantity
+
+    try{
+      const products = await Promise.all(cartItems.map(({handle}) => productInfo(handle)))
+      let newItems = [];
+      for(let i=0; i<products.length; i++){
+        const { variants } = products[i];
+        const variant = variants.filter(v => v.title === cartItems[i].variant)[0]
+        const toAdd = {
+          product: products[i],
+          variant: variant,
+          quantity: cartItems[i].quantity
+        }
+        newItems.push(toAdd);
       }
-      newItems.push(toAdd);
+      setItems(newItems);
+    }catch(e){
+      console.log("Error merging cart items", e);
     }
-    setItems(newItems);
   }
 
   React.useEffect(() => {
@@ -86,12 +91,23 @@ const Carrito = (props) => {
         </View>
         
         <View style={{alignItems:"center"}}>
-          <BlackButton style={{width: 325, height: 50,marginTop:20,marginBottom:20,borderRadius:30}} text={"Pagar"} fontSize={18} onPress={()=>console.log()}/>
+          <BlackButton style={styles.pay_button}
+          text={"Pagar"} fontSize={18}
+          onPress={props.emptyCart}/>
         </View>
       </View>
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  pay_button: {
+    width: 325,
+    height: 50,
+    marginVertical: 20,
+    borderRadius: 30,
+  }
+})
 
 const mapStateToProps = (state) => {
   return {
@@ -103,7 +119,8 @@ const mapDispatchToProps = (dispatch) => {
   return{
       removeFromCart: (item) => dispatch({type: 'REMOVE_FROM_CART', payload: item}),
       incrementInCart: (item) => dispatch({type: 'INCREMENT_IN_CART', payload: item}),
-      decrementInCart: (item) => dispatch({type: 'DECREMENT_IN_CART', payload: item})
+      decrementInCart: (item) => dispatch({type: 'DECREMENT_IN_CART', payload: item}),
+      emptyCart: () => dispatch({type: 'EMPTY'})
   }
 }
 

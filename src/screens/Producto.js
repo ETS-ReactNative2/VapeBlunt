@@ -14,7 +14,7 @@ import { Header, DynamicImage } from '../components';
 import { colors } from '../assets';
 
 import { connect } from 'react-redux';
-import { productInfo } from '../lib/graphql-shopify'
+import { productInfo } from '../lib/shopify'
 
 const winWidth = Math.round(Dimensions.get('window').width)
 
@@ -52,10 +52,9 @@ class Producto extends React.Component {
   }
 
   componentDidMount(){
-    let {id} = this.props.route.params
-    productInfo(id).then((data)=> {
+    let {handle} = this.props.route.params
+    productInfo(handle).then((data)=> {
       images = this.prepareImages(data)
-      data.id = id
       this.setState({product: data, selectedVariant: data.variants[0].title, images: images})
     })
   }
@@ -116,11 +115,6 @@ class Producto extends React.Component {
     let color = (i === this.state.selectedImageIndex) ? colors.black : colors.grey
     return <Text key={i} style={{textAlign: 'center', fontSize: 40, color: color}}>{`\u2022`}</Text>
   }
-
-  renderTab(){
-    return <InfoTab product={this.state.product} onVariantSelect={variant=>this.selectVariant(variant)}
-    onAddToCart={(cartItem) => this.props.addItemToCart(cartItem)} variantIndex={this.state.variantIndex}/>
-  }
   
   render(){
     var {tab} = this.state
@@ -150,7 +144,11 @@ class Producto extends React.Component {
           <MiniTab text="INFORMACIÓN" onPress={() => this.setState({tab: 'Info'})} active={tab === 'Info'}/>
         </View>
         <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 290}}>
-          {this.renderTab()}
+          <InfoTab product={this.state.product}
+            onVariantSelect={this.selectVariant}
+            onAddToCart={this.props.addItemToCart}
+            variantIndex={this.state.variantIndex}
+          />
         </ScrollView>
       </SafeAreaView>
     )

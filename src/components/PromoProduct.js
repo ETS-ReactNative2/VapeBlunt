@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
 import BlackButton from '../mini_components/BlackButton'
-import { productInfo } from '../lib/graphql-shopify'
+import { productInfo } from '../lib/shopify'
 
 const width = 300;
 let image = Image.resolveAssetSource(require('../assets/images/PromoImage.png'))
@@ -19,8 +19,8 @@ export default class PromoProduct extends React.Component {
   }
 
   componentDidMount(){
-    productInfo(this.props.id).then(product => {
-      Image.getSize(product.featuredImage, (w, h)=>{
+    productInfo(this.props.handle).then(product => {
+      Image.getSize(product.image, (w, h)=>{
         imgHeight = (this.state.imgWidth)*(h/w)
         this.setState({product, imgHeight})
       })
@@ -29,13 +29,13 @@ export default class PromoProduct extends React.Component {
 
 
   render() {
-    let { navigation, id } = this.props
+    let { navigation, handle } = this.props
     let {product, imgWidth, imgHeight} = this.state
     return (
       <View style={{ marginVertical: 15, alignItems: 'center', justifyContent: 'center' }}>
-        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={() => navigation.navigate('Producto', {id: id})}>
+        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={() => navigation.navigate('Producto', {handle: handle})}>
           {
-            product ? <Image source={{uri: product.featuredImage}}
+            product ? <Image source={{uri: product.image}}
             style={{ resizeMode: 'contain', width: imgWidth, height:imgHeight }} /> : null
           }
         </TouchableOpacity>

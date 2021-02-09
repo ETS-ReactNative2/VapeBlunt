@@ -5,9 +5,10 @@ import { ShoppingCartIcon } from './mini_components';
 const config = {
   api_url: 'http://192.168.10.185:8080/',
   categoryTable : {
-    "Herbales": "29357859",
-    "De Ceras": "9845669912",
-    "Líquidos": "400596878",
+    "Herbales": "vaporizadores-herbales",
+    "De Ceras": "vaporizadores-de-cera",
+    "Líquidos": "vaporizadores-de-liquidos",
+    "Accesorios": "accesorios",
   },
   tabScreenOptions: ({ route }) => ({
     tabBarIcon: ({ focused }) => {

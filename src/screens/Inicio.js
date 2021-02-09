@@ -13,13 +13,11 @@ import {
   PromoBlog,
   Header,
 } from '../components';
-import { loadBlogsCollection } from "../lib/mongodb-server";
-import { newProducts } from "../lib/graphql-shopify.js";
+import { newProducts } from "../lib/shopify";
 
 const Inicio = (props) => {
   const { navigation } = props;
   const [newestProduct, setNewestProduct] = React.useState();
-  const [newestBlog, setNewestBlog] = React.useState();
 
   React.useEffect(() => {
     newProducts().then((res) => {
@@ -29,14 +27,6 @@ const Inicio = (props) => {
     }).catch((err) => {
       console.log("Error fetching products", err)
     })
-
-    loadBlogsCollection().then((res) => {
-      if(res.length > 0){
-        setNewestBlog(res.pop())//Last one
-      }
-    }).catch((err) => {
-      console.log("Error fetching blogs", err)
-    })
   }, [])
 
   return(
@@ -45,14 +35,7 @@ const Inicio = (props) => {
         <Header onPress={navigation.openDrawer}/>
         <ScrollView contentContainerStyle ={styles.container}>
           <PromoImage onPress ={() => navigation.navigate('Tienda')}/>
-          <PromoProduct id={newestProduct.id} navigation={navigation}/>
-          {newestBlog && (
-            <PromoBlog title={newestBlog.title}
-              description={newestBlog.description}
-              source={newestBlog.thumbnail}
-              onPress ={()=> navigation.navigate('Blog')}
-            />
-          )}
+          <PromoProduct handle={newestProduct.handle} navigation={navigation}/>
         </ScrollView>
       </SafeAreaView>
     ) : <></>

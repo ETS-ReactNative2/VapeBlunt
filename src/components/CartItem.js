@@ -17,11 +17,11 @@ import { colors } from '../assets';
 function Adder(props){
   return(
     <View style={{flexDirection:"row", alignItems:"center"}}>
-        <TouchableOpacity style={{borderColor:'black',borderWidth:1,marginTop:10}} onPress={()=>props.onDecrement()}>
+        <TouchableOpacity style={{borderColor:'black',borderWidth:1,marginTop:10}} onPress={props.onDecrement}>
             <Image style={{ height: 23, width: 23}} source={require('../assets/icons/minus.png')}/>
         </TouchableOpacity>
         <Text style={{padding:10,fontSize:20,fontWeight:'bold',marginTop:5}}>{props.quantity}</Text>
-        <TouchableOpacity style={{marginTop:10, borderColor:'black',borderWidth:1}} onPress={()=>props.onIncrement()}>
+        <TouchableOpacity style={{marginTop:10, borderColor:'black',borderWidth:1}} onPress={props.onIncrement}>
             <Image style={{ height: 23, width: 23}} source={require('../assets/icons/more.png')}/>
         </TouchableOpacity>
     </View>
@@ -47,20 +47,20 @@ class CartItem extends React.Component{
         {
           product.images ? (
         <DynamicImage backgroundColor={colors.lightgrey} width={60} containerWidth={80}
-        containerHeight={80} source={{uri: product.images[0]}} onPress={() => navigation.navigate('Producto', {id: product.id})}/>
+        containerHeight={80} source={{uri: product.images[0]}} onPress={() => navigation.navigate('Producto', {handle: product.handle})}/>
           ) : null
         }
         <View style={{flex: 3, flexDirection:'column', alignItems: 'center', justifyContent: 'center', marginLeft: 15}}>
           <View style={{flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between'}}>
             <Text style={{fontWeight: 'bold', fontSize: 16, fontFamily: 'Verdana', flex: 1}}>{displayName}</Text>
-            <TouchableOpacity style={styles.removeButton} onPress={() => this.props.onRemoveItem({id: product.id, variant: variant.title})}>
+            <TouchableOpacity style={styles.removeButton} onPress={() => this.props.onRemoveItem({handle: product.handle, variant: variant.title})}>
               <Image style={{width: 15, height: 15}} source={require('../assets/icons/cancel.png')}></Image>
             </TouchableOpacity>
           </View>
           <Text style={{alignSelf: 'stretch', fontFamily: 'Verdana'}}>Vaporizador herbal</Text>
           <View style={{flexDirection:"row", alignItems:'center', justifyContent: 'space-between', alignSelf: 'stretch'}}>
-            <Adder quantity={quantity} onIncrement={() => this.props.onIncrement({id: product.id, variant: title})}
-            onDecrement={() => this.props.onDecrement({id: product.id, variant: title})}
+            <Adder quantity={quantity} onIncrement={() => this.props.onIncrement({handle: product.handle, variant: title})}
+            onDecrement={() => this.props.onDecrement({handle: product.handle, variant: title})}
             />
             <View style={{marginTop:10, backgroundColor: colors.green, borderRadius: 17, width: 100}} >
               <Text style={styles.textPrice}>${price}</Text>

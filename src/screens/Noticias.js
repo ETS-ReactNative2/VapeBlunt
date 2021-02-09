@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { View, Text, SafeAreaView } from "react-native";
 import NoticiasCard from "../components/NoticiasCard";
 import { ScrollView, TouchableNativeFeedback } from "react-native-gesture-handler";
-import { loadNewsCollection } from "../lib/mongodb-server";
+import { getNews } from "../lib/shopify";
 
 export default class Noticias extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class Noticias extends React.Component {
   }
 
   componentDidMount() {
-    loadNewsCollection().then((res) => {
+    getNews().then((res) => {
       this.setState({ reportItems: res });
     });
   }

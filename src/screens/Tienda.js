@@ -21,7 +21,10 @@ import {
 
 import { colors } from '../assets';
 
-import * as Shopify from '../lib/graphql-shopify'
+import * as Shopify from '../lib/shopify'
+
+import config from '../config';
+const { categoryTable } = config;
 
 const SectionHeader = (props) => {
   const { title = ""} = props;
@@ -78,7 +81,7 @@ const Tienda = (props) => {
         break;
       }
       case 'Accesorios': {
-        params.fetcher = () => Shopify.loadCollectionProducts('30121787');
+        params.fetcher = () => Shopify.loadCollectionProducts(categoryTable['Accesorios']);
       }
     }
     return () => navigation.navigate('Display Products', params);

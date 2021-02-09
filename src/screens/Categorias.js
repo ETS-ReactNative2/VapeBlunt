@@ -11,7 +11,7 @@ import {
 import { Header, ProductsScrollView } from '../components';
 import { BlackButton } from '../mini_components';
 
-import { loadCollectionProducts } from '../lib/graphql-shopify'
+import { loadCollectionProducts } from '../lib/shopify'
 
 import config from '../config';
 const { categoryTable } = config;

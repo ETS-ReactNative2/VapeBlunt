@@ -44,9 +44,13 @@ export default class InfoTab extends React.Component{
   }
 
   addToCart(){
-    let {product} = this.props
-    let {options} = this.state
-    let cartItem = {id: product.id, variant: options[this.props.variantIndex].value, quantity: 1}
+    let { product } = this.props
+    let { options } = this.state
+    let cartItem = {
+      handle: product.handle,
+      variant: options[this.props.variantIndex].value,
+      quantity: 1
+    }
     this.props.onAddToCart(cartItem)
   }
 
@@ -75,8 +79,8 @@ export default class InfoTab extends React.Component{
   }
 
   render(){
-    let {product, variantIndex} = this.props
-    let {variants} = product
+    let { product, variantIndex } = this.props
+    let { variants } = product
     let rating = product.rating || 0
     if(!product || !variants){
       return(<View></View>)

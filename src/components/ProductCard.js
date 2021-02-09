@@ -15,7 +15,7 @@ const ProductCard = (props) => {
   const { product } = props;
 
   const navigateToProduct = () => {
-    navigation.navigate('Producto', {id: product.id})
+    navigation.navigate('Producto', {handle: product.handle})
   }
 
   return (
@@ -24,7 +24,7 @@ const ProductCard = (props) => {
     >
       <Image style={styles.image}
         resizeMode='contain'
-        source={{uri: product.featuredImage}}
+        source={{uri: product.image}}
       />
       <Text style={styles.title}>
         {product.title || ""}
