@@ -1,47 +1,38 @@
-import * as React from "react";
-import Header from "../components/Header";
-import { View, Text, SafeAreaView } from "react-native";
-import BlogCard from "../components/BlogCard";
-import { ScrollView, TouchableOpacity, TouchableNativeFeedback } from "react-native-gesture-handler";
-import { getBlogs } from '../shopify/products';
+import React from "react";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity
+} from "react-native";
+import {
+  Header,
+  BlogCard
+} from '../components';
 
-export default class Blog extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      blogItems: [],
-    };
-  }
+import { getArticles } from '../shopify/articles';
 
-  componentDidMount() {
-    getBlogs().then((res) => {
-      this.setState({ blogItems: res });
-    });
-  }
+const Blog = (props) => {
+  const { navigation } = props;
+  const [articles, setArticles] = React.useState([]);
 
-  render() { 
-    let { navigation } = this.props;
-    var { blogItems } = this.state;
-    return ( 
-      <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
-        <Header onPress={() => { navigation.navigate("Inicio")}} arrow text = {'Blog'}  />
-        <View style={{ flex: 1, padding: 16, backgroundColor: "white" }}>
-          <ScrollView>
-            {blogItems.slice(0).reverse().map((blog) => {
-              return (
-                <TouchableNativeFeedback onPress={()=>{navigation.navigate('BlogLeer', {id: blog._id, items: blogItems})}} key={blog._id}>
-                <BlogCard
-                  title={blog.title}
-                  description={blog.description}
-                  source={blog.thumbnail}
-                />
-                </TouchableNativeFeedback>
-              );
-            })}
-            
-          </ScrollView>
-          </View>
-      </SafeAreaView> 
-    );
-  }
+  React.useEffect(() => {
+    getArticles().then(setArticles);
+  }, [])
+
+  return ( 
+    <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+      <Header onPress={navigation.goBack} arrow text = {'Blog'} />
+      <View style={{ flex: 1, padding: 16, backgroundColor: "white" }}>
+        {
+          articles.map((article) => (
+            <BlogCard article={article} key={article.handle}/>
+          ))
+        }
+      </View>
+    </SafeAreaView> 
+  )
 }
+
+export default Blog;

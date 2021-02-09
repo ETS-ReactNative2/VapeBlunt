@@ -28,7 +28,7 @@ const config = {
           : require('./assets/icons/carritob.png');
           return <ShoppingCartIcon active={focused}/>
       }
-      else if (route.name === 'Blogs') {
+      else if (route.name === 'Blog') {
         iconName = focused
           ? require('./assets/icons/blog.png')
           : require('./assets/icons/blogb.png');
