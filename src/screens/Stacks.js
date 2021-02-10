@@ -8,6 +8,7 @@ import Tienda from './Tienda';
 import Producto from './Producto';
 import Categorias from './Categorias';
 import Carrito from './Carrito';
+import Checkout from './Checkout';
 import Blog from './Blog';
 import DisplayProducts from './DisplayProducts';
 
@@ -15,7 +16,6 @@ const StackInicio = createStackNavigator()
 const StackTienda = createStackNavigator()
 const StackCarrito = createStackNavigator()
 const StackBlog = createStackNavigator()
-const StackNoticias = createStackNavigator()
 
 function InicioStack({ navigation }) {
   return (
@@ -41,6 +41,7 @@ function CarritoStack() {
   return (
     <StackCarrito.Navigator initialRouteName="Carrito" headerMode="none">
       <StackCarrito.Screen name="Carrito" component={Carrito}  />
+      <StackCarrito.Screen name="Checkout" component={Checkout}  />
     </StackCarrito.Navigator>
   )
 }

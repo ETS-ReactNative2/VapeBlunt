@@ -159,6 +159,7 @@ export async function productInfo(handle) {
       variants(first: 15) {
         edges {
           node {
+            id
             priceV2 {
               amount
             }
