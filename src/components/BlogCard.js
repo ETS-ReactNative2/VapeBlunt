@@ -10,7 +10,14 @@ import {
 import { colors } from '../assets';
 
 const BlogCard = (props) => {
-  const { title, content, publishedAt, image } = props.article
+  const {
+    title,
+    content,
+    publishedAt,
+    image,
+    url,//open url on browser with RN linking library
+  } = props.article
+
   return (
     <View style={[styles.container, props.style]}>
       <Image source={{uri: image}} 
@@ -30,7 +37,7 @@ const BlogCard = (props) => {
           fontSize: 22,
           alignSelf:'center',
           padding: 10,
-          fontWeight:'500'
+          fontWeight:'bold'
         }}>
           Leer más
         </Text>
@@ -41,13 +48,14 @@ const BlogCard = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-
+    height: 400,
+    marginBottom: 50,
   },
   image: {
+    flex: 1,
     width: '100%',
-    height: 200,
-    backgroundColor:colors.lightgrey,
-    borderColor:'green',
+    backgroundColor: colors.lightgrey,
+    borderColor: 'green',
   },
   title: {
     fontWeight: "bold",
@@ -55,7 +63,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   read_button: {
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: 'black',
     borderRadius: 30,
     marginTop: 20,

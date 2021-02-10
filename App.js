@@ -34,7 +34,7 @@ function TabNavigator() {
       <Tab.Screen name="Inicio" component={InicioStack}/>
       <Tab.Screen name="Tienda" component={TiendaStack}/>
       <Tab.Screen name="Carrito" component={CarritoStack}/>
-      <Tab.Screen name="Blogs" component={BlogStack}/>
+      <Tab.Screen name="Blog" component={BlogStack}/>
     </Tab.Navigator>
   )
 }
