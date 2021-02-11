@@ -13,7 +13,12 @@ import {
 //Checkout screen
 const Checkout = (props) => {
   return(
-    <SafeAreaView style={{paddingHorizontal: 20, paddingTop: 20}}>
+    <SafeAreaView style={{
+        paddingHorizontal: 20,
+        paddingTop: 10,
+        backgroundColor: 'white'
+      }}
+    >
       <Text style={styles.title}>
         Información de Contacto
       </Text>
