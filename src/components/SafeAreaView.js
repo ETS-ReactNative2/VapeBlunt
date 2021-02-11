@@ -8,7 +8,7 @@ import {
 const SafeAreaView = (props) => {
   return(
     <SAV style={{flex: 1}}>
-      <View style={props.style}>
+      <View style={[{flex: 1}, props.style]}>
         {props.children}
       </View>
     </SAV>

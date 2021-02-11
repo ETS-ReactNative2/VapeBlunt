@@ -46,7 +46,7 @@ function App() {
     <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <NavigationContainer>
-        <Drawer.Navigator drawerContent={props => Sidemenu(props)}>
+        <Drawer.Navigator drawerContent={Sidemenu}>
           <Drawer.Screen name="App" component={TabNavigator} />
         </Drawer.Navigator>
       </NavigationContainer>

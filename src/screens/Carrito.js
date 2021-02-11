@@ -88,7 +88,7 @@ const Carrito = (props) => {
       
       <View style={{alignItems:"center"}}>
         <BlackButton style={styles.pay_button}
-        text={"Pagar"} fontSize={18}
+        text="Checkout" fontSize={18}
         onPress={() => navigation.navigate('Checkout')}/>
       </View>
     </SafeAreaView>

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   Image,
   StyleSheet,
 } from 'react-native';
@@ -18,12 +17,9 @@ function Sidemenu(props) {
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.navigate('Inicio')}>
-            <Image style={{ height: 30, width: 30 }} source={require('../assets/icons/hamburger.png')} />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 25, color: 'white', textAlign: 'center', flex: 1}}>
-            MENU
-          </Text>
+        <Text style={{ fontSize: 25, color: 'white', textAlign: 'left', flex: 1}}>
+          MENU
+        </Text>
       </View>
       <NavigationButton text="Tienda"
         onPress={() => navigation.navigate('Tienda')}

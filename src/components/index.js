@@ -11,3 +11,4 @@ export { default as Sidemenu } from './Sidemenu';
 export { default as ProductsScrollView } from './ProductsScrollView';
 export { default as Carousel } from './Carousel';
 export { default as SafeAreaView } from './SafeAreaView';
+export { default as InputForm } from './InputForm';
