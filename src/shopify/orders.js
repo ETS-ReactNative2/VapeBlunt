@@ -1,9 +1,19 @@
 
 import axios from 'axios';
 import { axiosOptions } from './config';
-import { destructureEdges } from './helpers';
 
-export async function createCheckout() {
+export async function createCheckout(checkout_info) {
+  const {
+    email,
+    firstName,
+    lastName,
+    address,
+    zip,
+    city,
+    province,
+    country,
+    phone,
+  } = checkout_info;
   //Query
   axiosOptions.url = 'https://vapebluntmexico.myshopify.com/api/2021-04/graphql.json';
 
@@ -35,23 +45,22 @@ export async function createCheckout() {
     }",
     "variables": {
       "checkout": {
-        "email": "correo electronico",
+        "email": "${email}",
         "lineItems": [{"quantity":1,"variantId":"Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zODQxMDI3ODMzODc0MQ=="}],
         "shippingAddress": {
-          "firstName": "Nombre",
-          "lastName": "Apellido",
-          "address1": "Direccion completa",
-          "zip": "Codigo postal",
-          "city": "Ciudad",
-          "province": "Estado",
-          "country": "México",
-          "phone": "telefono"
+          "firstName": "${firstName}",
+          "lastName": "${lastName}",
+          "address1": "${address}",
+          "zip": "${zip}",
+          "city": "${city}",
+          "province": "${province}",
+          "country": "${country}",
+          "phone": "${phone}"
         }
       }
     },
     "operationName":"checkoutCreate"
-  }
-`
+  }`
 
   try{
     const { data } = await axios(axiosOptions)

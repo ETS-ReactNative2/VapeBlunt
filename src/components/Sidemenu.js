@@ -4,10 +4,14 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  SafeAreaView,
   StyleSheet,
 } from 'react-native';
-import NavigationButton from '../mini_components/NavigationButton';
+import {
+  SafeAreaView,
+} from '../components';
+import {
+  NavigationButton
+} from '../mini_components';
 
 function Sidemenu(props) {
   const { navigation } = props;

@@ -2,12 +2,14 @@ import React from 'react';
 import {
   ScrollView,
   Text,
-  SafeAreaView,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-import { Header, ProductsScrollView } from '../components';
+import {
+  SafeAreaView,
+  ProductsScrollView,
+} from '../components';
 import { BlackButton } from '../mini_components';
 
 import { loadCollectionProducts } from '../shopify/products'
@@ -39,6 +41,9 @@ const Categorias = (props) => {
   const [selectedCategory, setSelectedCategory] = React.useState(categories[0]);
 
   React.useEffect(() => {
+    navigation.setOptions({
+      title: ''
+    })
     loadCollectionProducts(categoryTable[selectedCategory])
       .then(setProducts);
   }, [])
@@ -50,7 +55,6 @@ const Categorias = (props) => {
   
   return(
     <SafeAreaView style={{ backgroundColor: 'white'}}>
-      <Header onPress={navigation.pop} arrow text="Vaporizadores"/>
       <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
         <ScrollView horizontal 
           contentContainerStyle = {{

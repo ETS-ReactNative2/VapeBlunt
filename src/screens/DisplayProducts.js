@@ -1,6 +1,6 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
 import {
+  SafeAreaView,
   Header,
   ProductsScrollView,
 } from '../components';
@@ -22,9 +22,6 @@ const DisplayProducts = (props) => {
 
   return(
     <SafeAreaView style={{ backgroundColor: 'black' }}>
-      <Header onPress = {navigation.goBack}
-        arrow searchBar text={title}
-      />
       {renderedProducts && (
         <ProductsScrollView products={renderedProducts}/>
       )}

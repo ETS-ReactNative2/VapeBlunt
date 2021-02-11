@@ -3,11 +3,10 @@ import {
   StyleSheet,
   View,
   Text,
-  SafeAreaView,
   ScrollView
 } from 'react-native';
 import {
-  Header,
+  SafeAreaView,
   CartItem
 } from '../components';
 import { BlackButton } from '../mini_components';
@@ -64,36 +63,33 @@ const Carrito = (props) => {
   const { subtotal, impuestos, total } = calculatedCosts;
 
   return(
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
-      <Header onPress = {() => navigation.navigate('Inicio')} arrow/>
-      <View style={{ flex: 1, backgroundColor:'white'}}>
-        <ScrollView>
-          {items.map((item, i) => (
-            <CartItem key={i} item={item}
-            onRemoveItem={props.removeFromCart}
-            onIncrement={props.incrementInCart}
-            onDecrement={props.decrementInCart}
-            />
-          ))}
-        </ScrollView>
-        <View style={{justifyContent:'space-between',flexDirection:"row", borderTopColor:"rgba(0, 0, 0, 0.1)", borderTopWidth:1}}>
-            <Text style={{fontSize:15,fontWeight:'bold',padding:10}}>Subtotal</Text>
-            <Text style={{padding:10,fontSize:15}}>${subtotal}</Text>
-        </View>
-        <View style={{justifyContent:'space-between',flexDirection:"row", borderTopColor:"rgba(0, 0, 0, 0.1)", borderTopWidth:1}}>
-            <Text style={{fontSize:15,fontWeight:'bold',padding:10}}>Impuestos</Text>
-            <Text style={{padding:10,fontSize:15}}>${impuestos}</Text>
-        </View>
-        <View style={{justifyContent:'space-between',flexDirection:"row", borderTopColor:"rgba(0, 0, 0, 0.1)", borderTopWidth:1,borderBottomColor:"rgba(0, 0, 0, 0.1)",borderBottomWidth:1}}>
-            <Text style={{fontSize:15,fontWeight:'bold',padding:10}}>Total</Text>
-            <Text style={{padding:10,fontSize:15}}>${total}</Text>
-        </View>
-        
-        <View style={{alignItems:"center"}}>
-          <BlackButton style={styles.pay_button}
-          text={"Pagar"} fontSize={18}
-          onPress={props.emptyCart}/>
-        </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <ScrollView>
+        {items.map((item, i) => (
+          <CartItem key={i} item={item}
+          onRemoveItem={props.removeFromCart}
+          onIncrement={props.incrementInCart}
+          onDecrement={props.decrementInCart}
+          />
+        ))}
+      </ScrollView>
+      <View style={{justifyContent:'space-between',flexDirection:"row", borderTopColor:"rgba(0, 0, 0, 0.1)", borderTopWidth:1}}>
+        <Text style={{fontSize:15,fontWeight:'bold',padding:10}}>Subtotal</Text>
+        <Text style={{padding:10,fontSize:15}}>${subtotal}</Text>
+      </View>
+      <View style={{justifyContent:'space-between',flexDirection:"row", borderTopColor:"rgba(0, 0, 0, 0.1)", borderTopWidth:1}}>
+        <Text style={{fontSize:15,fontWeight:'bold',padding:10}}>Impuestos</Text>
+        <Text style={{padding:10,fontSize:15}}>${impuestos}</Text>
+      </View>
+      <View style={{justifyContent:'space-between',flexDirection:"row", borderTopColor:"rgba(0, 0, 0, 0.1)", borderTopWidth:1,borderBottomColor:"rgba(0, 0, 0, 0.1)",borderBottomWidth:1}}>
+        <Text style={{fontSize:15,fontWeight:'bold',padding:10}}>Total</Text>
+        <Text style={{padding:10,fontSize:15}}>${total}</Text>
+      </View>
+      
+      <View style={{alignItems:"center"}}>
+        <BlackButton style={styles.pay_button}
+        text={"Pagar"} fontSize={18}
+        onPress={() => navigation.navigate('Checkout')}/>
       </View>
     </SafeAreaView>
   )

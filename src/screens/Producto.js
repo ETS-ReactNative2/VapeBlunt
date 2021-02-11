@@ -2,14 +2,17 @@ import React from 'react';
 import {
   ScrollView,
   Text,
-  SafeAreaView,
   TouchableOpacity,
   View,
   Dimensions
 } from 'react-native';
 
 import InfoTab from './InfoTab'
-import { Header, DynamicImage } from '../components';
+import { 
+  SafeAreaView,
+  Header,
+  DynamicImage,
+} from '../components';
 
 import { colors } from '../assets';
 
@@ -52,10 +55,17 @@ class Producto extends React.Component {
   }
 
   componentDidMount(){
-    let {handle} = this.props.route.params
+    const {handle} = this.props.route.params
     productInfo(handle).then((data)=> {
       images = this.prepareImages(data)
       this.setState({product: data, selectedVariant: data.variants[0].title, images: images})
+    })
+    this.props.navigation.setOptions({
+      headerShown: false,
+      headerStyle: {
+        backgroundColor: 'transparent',
+      },
+      headerTintColor: 'black',
     })
   }
 

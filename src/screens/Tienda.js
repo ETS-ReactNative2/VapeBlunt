@@ -3,7 +3,6 @@ import {
   Keyboard,
   ScrollView,
   Text,
-  SafeAreaView,
   ImageBackground,
   Dimensions,
   StyleSheet,
@@ -11,7 +10,7 @@ import {
   Image
 } from 'react-native';
 import {
-  Header,
+  SafeAreaView,
   ProductCard
 } from '../components';
 import {
@@ -91,7 +90,6 @@ const Tienda = (props) => {
 
 	return(
       <SafeAreaView style={{ backgroundColor: 'black' }}>
-        <Header onPress = {()=>{ navigation.navigate('Inicio') }} arrow searchBar text={'Tienda'}/>
         <ScrollView style={{backgroundColor: 'white'}}
           contentContainerStyle={{
             paddingBottom: 80,

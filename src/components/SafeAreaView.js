@@ -1,0 +1,18 @@
+import React from 'react';
+import {
+  StyleSheet,
+  SafeAreaView as SAV,
+  View
+} from 'react-native';
+
+const SafeAreaView = (props) => {
+  return(
+    <SAV style={{flex: 1}}>
+      <View style={props.style}>
+        {props.children}
+      </View>
+    </SAV>
+  )
+}
+
+export default SafeAreaView;
