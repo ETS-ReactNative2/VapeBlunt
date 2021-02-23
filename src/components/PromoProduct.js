@@ -1,46 +1,60 @@
 import * as React from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import BlackButton from '../mini_components/BlackButton'
 import { productInfo } from '../shopify/products'
 
-const width = 300;
-let image = Image.resolveAssetSource(require('../assets/images/PromoImage.png'))
-const height = width * (image.height / image.width)
+const defaultImage = Image.resolveAssetSource(require('../assets/images/PromoImage.png'))
 
-export default class PromoProduct extends React.Component {
+const PromoProduct = (props) => {
+  const { navigation } = props;
+  const [product, setProduct] = React.useState();
 
-  constructor(props){
-    super(props)
-    this.state = {
-      product: {},
-      imgWidth: 200,
-      imgHeight: 0
-    }
-  }
+  React.useEffect(() => {
+    productInfo(props.handle).then(setProduct);
+  }, [])
 
-  componentDidMount(){
-    productInfo(this.props.handle).then(product => {
-      Image.getSize(product.image, (w, h)=>{
-        imgHeight = (this.state.imgWidth)*(h/w)
-        this.setState({product, imgHeight})
-      })
-    })
-  }
+  const navigateToProductDetail = React.useCallback(() => {
+    product && navigation.navigate('Producto', {handle: product.handle})
+  }, [product, navigation])
 
-
-  render() {
-    let { navigation, handle } = this.props
-    let {product, imgWidth, imgHeight} = this.state
-    return (
-      <View style={{ marginVertical: 15, alignItems: 'center', justifyContent: 'center' }}>
-        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={() => navigation.navigate('Producto', {handle: handle})}>
-          {
-            product ? <Image source={{uri: product.image}}
-            style={{ resizeMode: 'contain', width: imgWidth, height:imgHeight }} /> : null
-          }
-        </TouchableOpacity>
-        <BlackButton text={'Comprar'} style={{ width: 100, height: 35 }} onPress={() => navigation.navigate('Producto', {id: id})}/>
-      </View>
-    )
-  }
+  return product ? (
+    <View style={styles.mainContainer}>
+      <TouchableOpacity style={styles.imageButton}
+        onPress={navigateToProductDetail}
+      >
+        <Image source={{uri: product.image} || defaultImage}
+          resizeMode='contain'
+          width={200} height={200}
+          style={styles.image}
+        /> 
+      </TouchableOpacity>
+      <BlackButton text={'Comprar'}
+        style={{ width: 100, height: 35 }}
+        onPress={navigateToProductDetail}
+      />
+    </View>
+  ) : <></>
 }
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    marginVertical: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width: 200,
+    height: 200,
+  }
+})
+
+export default PromoProduct;

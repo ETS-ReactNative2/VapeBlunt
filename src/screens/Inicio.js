@@ -3,15 +3,15 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {
+  View,
   ScrollView,
-  StyleSheet
+  StyleSheet,
+  Text
 } from 'react-native';
 import {
   SafeAreaView,
   PromoImage,
   PromoProduct,
-  PromoBlog,
-  Header,
 } from '../components';
 
 import { newProducts } from "../shopify/products";
@@ -25,7 +25,7 @@ const Inicio = (props) => {
     navigation.setOptions({
       title: ''
     })
-    newProducts().then((res) => {
+    newProducts(1).then((res) => {
       if(res.length > 0){
         setNewestProduct(res.pop());//Last one
       }
@@ -36,8 +36,8 @@ const Inicio = (props) => {
 
   return(
     (newestProduct) ? (
-      <SafeAreaView style={{flex:1, backgroundColor:'white'}}>
-        <ScrollView contentContainerStyle ={styles.container}>
+      <SafeAreaView style={{backgroundColor:'white'}}>
+        <ScrollView contentContainerStyle={{flex: 1}}>
           <PromoImage onPress ={() => navigation.navigate('Tienda')}/>
           <PromoProduct handle={newestProduct.handle} navigation={navigation}/>
         </ScrollView>
@@ -45,13 +45,5 @@ const Inicio = (props) => {
     ) : <></>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'flex-start',
-    paddingBottom: 50,
-    backgroundColor:'white'
-  },
-});
 
 export default Inicio;

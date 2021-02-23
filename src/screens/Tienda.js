@@ -30,7 +30,7 @@ import config from '../config';
 const { categoryTable } = config;
 
 const SectionHeader = (props) => {
-  const { title = ""} = props;
+  const { title = "" } = props;
   return(
     <View style={styles.sectionHeader}>
       <Text style={{fontSize: 20, fontWeight: 'bold'}}>
@@ -62,8 +62,8 @@ const Tienda = (props) => {
   }
 
   React.useEffect(() => {
-    getNewProducts().then(setNewProducts)
-    getBestSellers().then(setBestSellers)
+    getNewProducts(10).then(setNewProducts)
+    getBestSellers(10).then(setBestSellers)
   }, [])
   
   if(!newProducts || !bestSellers){
@@ -74,15 +74,16 @@ const Tienda = (props) => {
     let params = { title };
     switch(title){
       case 'Nuevos Productos': {
-        params.products = newProducts;
+        params.fetcher = () => getNewProducts(50);
         break;
       }
       case 'Más Vendidos': {
-        params.products = bestSellers;
+        params.fetcher = () => getBestSellers(50);
         break;
       }
       case 'Accesorios': {
         params.fetcher = () => loadCollectionProducts(categoryTable['Accesorios']);
+        break;
       }
     }
     return () => navigation.navigate('Display Products', params);
