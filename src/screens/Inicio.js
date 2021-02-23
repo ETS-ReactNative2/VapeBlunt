@@ -1,12 +1,6 @@
-// React Native Bottom Navigation - Example using React Navigation V5 //
-// https://aboutreact.com/react-native-bottom-navigation //
-import 'react-native-gesture-handler';
 import React from 'react';
 import {
-  View,
   ScrollView,
-  StyleSheet,
-  Text
 } from 'react-native';
 import {
   SafeAreaView,
@@ -35,7 +29,7 @@ const Inicio = (props) => {
   }, [])
 
   return(
-    (newestProduct) ? (
+    newestProduct ? (
       <SafeAreaView style={{backgroundColor:'white'}}>
         <ScrollView contentContainerStyle={{flex: 1}}>
           <PromoImage onPress ={() => navigation.navigate('Tienda')}/>

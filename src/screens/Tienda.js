@@ -90,12 +90,9 @@ const Tienda = (props) => {
   }, [navigation, loadCollectionProducts, newProducts, bestSellers]);
 
 	return(
-      <SafeAreaView style={{ backgroundColor: 'black' }}>
+      <SafeAreaView>
         <ScrollView style={{backgroundColor: 'white'}}
-          contentContainerStyle={{
-            paddingBottom: 80,
-            paddingHorizontal: 20
-          }}
+          contentContainerStyle={{ paddingHorizontal: 20 }}
           onScroll={Keyboard.dismiss}
         >
           <ImageBackground source={require('../assets/images/pax3.jpg')} 

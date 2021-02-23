@@ -4,7 +4,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Dimensions
+  Dimensions,
+  StyleSheet
 } from 'react-native';
 
 import InfoTab from './InfoTab'
@@ -127,12 +128,17 @@ class Producto extends React.Component {
   }
   
   render(){
-    var {tab} = this.state
-    var {navigation} = this.props
-    var images = this.state.images
+    const { navigation } = this.props
+    const {
+      product,
+      tab,
+      selectedImageIndex,
+      images,
+    } = this.state
+
     return(
       <SafeAreaView style={{backgroundColor: 'white'}}>
-        <Header color={colors.white} onPress = {()=>{ navigation.pop() }} arrow/>
+        <Header color={colors.white} onPress={navigation.pop} arrow />
         <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}
         onMomentumScrollEnd={this.setSelectedImageIndex}
         ref={"imagesSV"}>
@@ -145,16 +151,24 @@ class Producto extends React.Component {
             source={{uri: image}} />
           ))}
         </ScrollView>
-        {/* Carousel indicators */}
-        <View style={{flexDirection: 'row', height: 40, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.white}}>
-          {images.map((_, i) => this.renderImageIndicator(i))}
+        <View style={styles.indicators}>
+          {images.map((_, i) => (
+            <Text key={i}
+              style={{
+                textAlign: 'center',
+                fontSize: 40,
+                color: i == selectedImageIndex ? colors.black : colors.grey
+              }}
+            >
+              {`\u2022`}
+            </Text>
+          ))}
         </View>
-        {/* END Carousel indicators  */}
         <View style={{flexDirection: 'row'}}>
           <MiniTab text="INFORMACIÓN" onPress={() => this.setState({tab: 'Info'})} active={tab === 'Info'}/>
         </View>
-        <ScrollView style={{backgroundColor: 'white'}} contentContainerStyle={{paddingBottom: 290}}>
-          <InfoTab product={this.state.product}
+        <ScrollView style={{backgroundColor: 'white'}} >
+          <InfoTab product={product}
             onVariantSelect={this.selectVariant}
             onAddToCart={this.props.addItemToCart}
             variantIndex={this.state.variantIndex}
@@ -164,6 +178,16 @@ class Producto extends React.Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  indicators: {
+    flexDirection: 'row',
+    height: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+  }
+})
 
 const mapDispatchToProps = (dispatch) => {
   return{
