@@ -64,7 +64,7 @@ export async function createCheckout(checkout_info) {
 
   try{
     const { data } = await axios(axiosOptions)
-    const { checkout, checkoutUserErrors } = data.data.ceckoutCreate;
+    const { checkout, checkoutUserErrors } = data.data.checkoutCreate;
     return checkout;
   }catch(e){
     return Promise.reject(`Request error ${e}`)
