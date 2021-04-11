@@ -11,12 +11,12 @@ const useUserCheckoutInfo = (default_info) => {
     email: "alfredd.gco@gmail.com",
     name: "Alfredo",
     lastName: "Garcia",
-    address: "Calzada los Encinos #3122",
-    postalCode: "67178",
+    address: "Calzada los Encinos #666",
+    postalCode: "67120",
     country: "Mexico",
     city: "Monterrey",
     province: "NL",
-    phoneNumber: "8123288466",
+    phoneNumber: "8123288522",
   });
 
   const setEmail = (email) => {
