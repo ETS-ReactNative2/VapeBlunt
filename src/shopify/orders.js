@@ -5,21 +5,22 @@ import { axiosOptions } from './config';
 export async function createCheckout(checkout_info) {
   const {
     email,
-    firstName,
+    name,
     lastName,
     address,
-    zip,
+    postalCode,
     city,
     province,
     country,
-    phone,
+    phoneNumber,
+    lineItems,
   } = checkout_info;
   //Query
   axiosOptions.url = 'https://vapebluntmexico.myshopify.com/api/2021-04/graphql.json';
+  axiosOptions.headers['Content-Type'] = 'application/json'
 
-  axiosOptions.data = `
-  {
-    "query": "mutation checkoutCreate($checkout: CheckoutCreateInput!) {
+  axiosOptions.data = {
+    query: `mutation checkoutCreate($checkout: CheckoutCreateInput!) {
       checkoutCreate(input: $checkout) {
         checkout {
           id
@@ -32,7 +33,7 @@ export async function createCheckout(checkout_info) {
         checkout {
           id
           webUrl
-          lineItems(first: 5){
+          lineItems(first: 10){
             edges {
               node {
                 title
@@ -42,31 +43,37 @@ export async function createCheckout(checkout_info) {
           }
         }
       }
-    }",
-    "variables": {
+    }`,
+    variables: {
       "checkout": {
-        "email": "${email}",
-        "lineItems": [{"quantity":1,"variantId":"Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zODQxMDI3ODMzODc0MQ=="}],
+        "email": `${email}`,
+        "lineItems": lineItems,
         "shippingAddress": {
-          "firstName": "${firstName}",
-          "lastName": "${lastName}",
-          "address1": "${address}",
-          "zip": "${zip}",
-          "city": "${city}",
-          "province": "${province}",
-          "country": "${country}",
-          "phone": "${phone}"
+          "firstName": `${name}`,
+          "lastName": `${lastName}`,
+          "address1": `${address}`,
+          "address2": ``,
+          "zip": `${postalCode}`,
+          "city": `${city}`,
+          "province": `${province}`,
+          "country": `${country}`,
+          "phone": `${phoneNumber}`
         }
       }
     },
     "operationName":"checkoutCreate"
-  }`
+  }
+  //console.log("Sending to checkout", axiosOptions.data.variables);
+  axiosOptions.data = JSON.stringify(axiosOptions.data)
 
   try{
     const { data } = await axios(axiosOptions)
     const { checkout, checkoutUserErrors } = data.data.checkoutCreate;
+    if(checkoutUserErrors.length > 0){
+      return Promise.reject(checkoutUserErrors)
+    }
     return checkout;
   }catch(e){
-    return Promise.reject(`Request error ${e}`)
+    return Promise.reject([e])
   }
 }

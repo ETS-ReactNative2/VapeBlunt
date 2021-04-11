@@ -190,7 +190,7 @@ export async function productInfo(handle) {
     let product = data.data.productByHandle;
     return Promise.resolve(populateProduct(product));
   }catch(e){
-    return Promise.reject(`Request error ${e}`)
+    return Promise.reject(e)
   }
 }
 

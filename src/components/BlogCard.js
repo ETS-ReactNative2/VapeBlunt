@@ -35,7 +35,7 @@ const BlogCard = (props) => {
             </Text>
             <TouchableOpacity
                 style={styles.read_button}
-                onPress={async () => await Linking.openURL(url)}
+                onPress={() => Linking.openURL(url)}
             >
                 <Text
                     style={{
