@@ -186,19 +186,9 @@ export async function productInfo(handle) {
     }
 }
 
-export async function getBlogs() {
-    return Promise.resolve([]);
-}
-
-export async function getNews() {
-    return Promise.resolve([]);
-}
-
 module.exports = {
     newProducts,
     bestSellers,
     loadCollectionProducts,
     productInfo,
-    getBlogs,
-    getNews,
 };

@@ -14,7 +14,6 @@ const BlogCard = (props) => {
     const {
         title,
         content,
-        publishedAt,
         image,
         url, //open url on browser with RN linking library
     } = props.article;
