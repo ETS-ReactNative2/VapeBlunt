@@ -11,7 +11,6 @@ import {
 import { colors } from "../assets";
 
 const BlogCard = (props) => {
-    console.log(props.article.url);
     const {
         title,
         content,

@@ -34,8 +34,7 @@ const Inicio = (props) => {
         getArticles({ first: 1 }).then(seNewestArticle);
     }, []);
 
-    console.log(newestArticle);
-    return newestProduct ? (
+    return newestProduct && newestArticle[0] ? (
         <SafeAreaView style={{ backgroundColor: "white" }}>
             {/* flex: 1 will cause the ScrollView to become un-scrollable, keep flexGrow`*/}
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
