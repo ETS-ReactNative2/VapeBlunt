@@ -9,7 +9,7 @@ const Blog = (props) => {
     const [articles, setArticles] = React.useState([]);
 
     React.useEffect(() => {
-        getArticles().then(setArticles);
+        getArticles({ first: 20 }).then(setArticles);
     }, []);
 
     //Delete articles from 2014 and back
