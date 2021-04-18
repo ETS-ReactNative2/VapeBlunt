@@ -48,7 +48,7 @@ function populateProduct(product) {
     return product;
 }
 
-export async function newProducts(first = 5) {
+export async function newProducts({ first = 5 }) {
     //Query
     axiosOptions.data = `
   query NewProducts{
@@ -90,7 +90,7 @@ export async function newProducts(first = 5) {
     }
 }
 
-async function bestSellers(first = 10) {
+async function bestSellers({ first = 10 }) {
     return loadCollectionProducts("mas-vendidos", first);
 }
 

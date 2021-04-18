@@ -7,43 +7,55 @@ import {
     PromoBlog,
 } from "../components";
 
-import { newProducts } from "../shopify/products";
+import { newProducts, bestSellers } from "../shopify/products";
 import { getArticles } from "../shopify/articles";
 
 const Inicio = (props) => {
     const { navigation } = props;
-    const [newestProduct, setNewestProduct] = React.useState();
-    const [newestArticle, seNewestArticle] = React.useState([]);
+    const [newestProduct, setNewestProduct] = React.useState([]);
+    const [bestSellingProduct, setBestSellingProduct] = React.useState([]);
+    const [newestArticles, setNewestArticles] = React.useState([]);
 
     React.useEffect(() => {
         navigation.setOptions({
             title: "",
-        });
-        newProducts(1)
-            .then((res) => {
-                if (res.length > 0) {
-                    setNewestProduct(res.pop()); //Last one
-                }
-            })
-            .catch((err) => {
-                console.log("Error fetching products", err);
-            });
+        }),
+            Promise.all([
+                newProducts({ first: 2 })
+                    .then(setNewestProduct)
+                    .catch((err) =>
+                        console.log("Error fetching newProducts", err)
+                    ),
+                bestSellers({ first: 1 })
+                    .then(setBestSellingProduct)
+                    .catch((err) =>
+                        console.log("Error fetching bestSellers", err)
+                    ),
+                ,
+                getArticles({ first: 2 })
+                    .then(setNewestArticles)
+                    .catch((err) =>
+                        console.log("Error fetching getArticles", err)
+                    ),
+                ,
+            ]);
     }, []);
 
-    React.useEffect(() => {
-        getArticles({ first: 1 }).then(seNewestArticle);
-    }, []);
-
-    return newestProduct && newestArticle[0] ? (
+    return newestProduct && newestArticles && bestSellingProduct ? (
         <SafeAreaView style={{ backgroundColor: "white" }}>
             {/* flex: 1 will cause the ScrollView to become un-scrollable, keep flexGrow`*/}
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 <PromoImage onPress={() => navigation.navigate("Tienda")} />
-                <PromoProduct
-                    handle={newestProduct.handle}
-                    navigation={navigation}
-                />
-                <PromoBlog article={newestArticle[0]} />
+                {newestProduct.map((item, i) => (
+                    <PromoProduct
+                        key={i}
+                        handle={item.handle}
+                        navigation={navigation}
+                    />
+                ))}
+                {newestArticles.map((item, i) => (
+                    <PromoBlog key={i} article={item} />
+                ))}
             </ScrollView>
         </SafeAreaView>
     ) : (
