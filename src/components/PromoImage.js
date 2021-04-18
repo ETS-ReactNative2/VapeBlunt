@@ -13,6 +13,7 @@ import { productInfo } from "../shopify/products";
 let defaultImage = Image.resolveAssetSource(
     require("../assets/images/PromoImage.png")
 );
+
 const width = Dimensions.get("window").width;
 const height =
     Dimensions.get("window").width * (defaultImage.height / defaultImage.width);
@@ -25,8 +26,14 @@ function PromoImage(props) {
         productInfo(props.handle).then(setProduct);
     }, []);
 
+    //Ideally would have this into its own file to import it as needed, but only 2
+    //componentes use it so not that big a deal
+    const navigateToProductDetail = React.useCallback(() => {
+        product && navigation.navigate("Producto", { handle: product.handle });
+    }, [product, navigation]);
+
     return (
-        <TouchableOpacity onPress={() => props.onPress()}>
+        <TouchableOpacity onPress={navigateToProductDetail}>
             {product ? (
                 <View style={styles.containerStyle}>
                     <ImageBackground
