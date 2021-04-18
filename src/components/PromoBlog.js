@@ -1,11 +1,13 @@
 import * as React from "react";
 import {
     Image,
+    ImageBackground,
     Text,
     TouchableOpacity,
     Dimensions,
     View,
     Linking,
+    StyleSheet,
 } from "react-native";
 
 let image = Image.resolveAssetSource(
@@ -21,26 +23,38 @@ function PromoBlog(props) {
         url, //open url on browser with RN linking library
     } = props.article;
 
+    const img = { uri: image };
+
     return (
         <TouchableOpacity onPress={() => Linking.openURL(url)}>
-            <Image
-                source={{ uri: image }}
-                style={{ width: width, height: height }}
-            />
-            <View style={{ marginBottom: 10 }}>
-                {/* Title looks ugly like this. Gotta change it later */}
-                <Text
-                    style={{
-                        fontWeight: "bold",
-                        paddingLeft: 10,
-                        fontSize: 20,
-                    }}
-                >
-                    {title}
-                </Text>
+            <View style={styles.containerStyle}>
+                <ImageBackground source={img} style={styles.imageStyle}>
+                    <Text style={styles.textStyle}>{title}</Text>
+                </ImageBackground>
             </View>
         </TouchableOpacity>
     );
 }
+
+const styles = StyleSheet.create({
+    containerStyle: {
+        flex: 1,
+        flexDirection: "row",
+    },
+    imageStyle: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center",
+        width: width,
+        height: height,
+    },
+    textStyle: {
+        color: "white",
+        fontSize: 22,
+        fontWeight: "bold",
+        textAlign: "center",
+        backgroundColor: "#000000bf",
+    },
+});
 
 export default PromoBlog;
