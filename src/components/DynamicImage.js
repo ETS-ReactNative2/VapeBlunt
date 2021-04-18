@@ -10,7 +10,9 @@ const colors = require("../assets/colors");
 function DynamicImage(props) {
     //let image = resolveAssetSource(props.source)
 
-    let source = require("../assets/images/davinci-black.png");
+    let defaultSource = Image.resolveAssetSource(
+        require("../assets/images/davinci-black.png")
+    );
     let width = props.width || 120;
     let height = width;
     let containerWidth = props.containerWidth || width + 10;
@@ -22,11 +24,15 @@ function DynamicImage(props) {
             height = Math.round(width * (h / w));
             containerWidth = props.containerWidth || width + 10;
             containerHeight = props.containerHeight || height + 10;
-        });
-        source = props.source;
+        }),
+            (err) => {
+                console.log("Error getting image size:", err);
+            };
+        defaultSource = props.source;
     } else {
-        source = props.source || require("../assets/images/davinci-black.png");
-        let image = resolveAssetSource(source);
+        defaultSource =
+            props.source || require("../assets/images/davinci-black.png");
+        let image = defaultSource;
         height = Math.round(width * (image.height / image.width));
     }
 

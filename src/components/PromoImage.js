@@ -25,7 +25,6 @@ function PromoImage(props) {
         productInfo(props.handle).then(setProduct);
     }, []);
 
-    console.log(product);
     return (
         <TouchableOpacity onPress={() => props.onPress()}>
             {product ? (

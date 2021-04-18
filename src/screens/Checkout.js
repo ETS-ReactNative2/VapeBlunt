@@ -57,7 +57,6 @@ const useUserCheckoutInfo = (default_info) => {
         setInfo({ ...info, phoneNumber: phoneNumber });
     };
 
-    console.log(info);
     return [
         info,
         {
