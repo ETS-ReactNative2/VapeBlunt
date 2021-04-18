@@ -45,7 +45,14 @@ const Inicio = (props) => {
         <SafeAreaView style={{ backgroundColor: "white" }}>
             {/* flex: 1 will cause the ScrollView to become un-scrollable, keep flexGrow`*/}
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                <PromoImage onPress={() => navigation.navigate("Tienda")} />
+                {/*   <PromoImage onPress={() => navigation.navigate("Tienda")} />*/}
+                {bestSellingProduct.map((item, i) => (
+                    <PromoImage
+                        key={i}
+                        handle={item.handle}
+                        navigation={navigation}
+                    />
+                ))}
                 {newestProduct.map((item, i) => (
                     <PromoProduct
                         key={i}

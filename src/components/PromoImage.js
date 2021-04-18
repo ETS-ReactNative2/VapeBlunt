@@ -1,17 +1,67 @@
-import * as React from 'react';
-import {Image, TouchableOpacity, Dimensions} from 'react-native';
+import * as React from "react";
+import {
+    Image,
+    ImageBackground,
+    TouchableOpacity,
+    Dimensions,
+    View,
+    StyleSheet,
+    Text,
+} from "react-native";
+import { productInfo } from "../shopify/products";
 
-let image = Image.resolveAssetSource(require('../assets/images/PromoImage.png'))
-const width  = Dimensions.get('window').width;
-const  height  = Dimensions.get('window').width*(image.height/image.width);
+let defaultImage = Image.resolveAssetSource(
+    require("../assets/images/PromoImage.png")
+);
+const width = Dimensions.get("window").width;
+const height =
+    Dimensions.get("window").width * (defaultImage.height / defaultImage.width);
 
-function PromoImage(props){
-    return(
+function PromoImage(props) {
+    const { navigation } = props;
+    const [product, setProduct] = React.useState();
+
+    React.useEffect(() => {
+        productInfo(props.handle).then(setProduct);
+    }, []);
+
+    return (
         <TouchableOpacity onPress={() => props.onPress()}>
-            <Image source={require('../assets/images/PromoImage.png')} 
-            style={{ width:width,height:height}}/>
+            {product ? (
+                <View style={styles.containerStyle}>
+                    <ImageBackground
+                        source={{ uri: product.image }}
+                        style={styles.imageStyle}
+                    >
+                        <Text style={styles.textStyle}>
+                            Nuevo {product.title}
+                        </Text>
+                    </ImageBackground>
+                </View>
+            ) : null}
         </TouchableOpacity>
-    )
+    );
 }
+
+const styles = StyleSheet.create({
+    containerStyle: {
+        flex: 1,
+        flexDirection: "row",
+    },
+    imageStyle: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center",
+        width: width,
+        height: height,
+    },
+    textStyle: {
+        color: "white",
+        fontSize: 22,
+        fontWeight: "bold",
+        textAlign: "center",
+        backgroundColor: "#000000bf",
+    },
+});
 
 export default PromoImage;
