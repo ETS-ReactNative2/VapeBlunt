@@ -2,17 +2,17 @@ import React from "react";
 import {
     Keyboard,
     ScrollView,
-    Text,
     ImageBackground,
     Dimensions,
     StyleSheet,
-    View,
     Image,
 } from "react-native";
 import { SafeAreaView, ProductCard } from "../components";
-import { BlackButton, NavigationButton } from "../mini_components";
-
-import { colors } from "../assets";
+import {
+    BlackButton,
+    NavigationButton,
+    SectionHeader,
+} from "../mini_components";
 
 import {
     newProducts as getNewProducts,
@@ -22,22 +22,6 @@ import {
 
 import config from "../config";
 const { categoryTable } = config;
-
-const SectionHeader = (props) => {
-    const { title = "" } = props;
-    return (
-        <View style={styles.sectionHeader}>
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>{title}</Text>
-            <Text
-                style={{ color: colors.lightgreen, fontSize: 16 }}
-                accessibilityRole="button"
-                onPress={props.onPress}
-            >
-                Ver todo
-            </Text>
-        </View>
-    );
-};
 
 const Tienda = (props) => {
     const { navigation } = props;
