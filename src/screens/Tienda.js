@@ -135,12 +135,6 @@ const Tienda = (props) => {
 };
 
 const styles = StyleSheet.create({
-    sectionHeader: {
-        marginTop: 30,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
     imgBackgroundStyle: {
         flex: 1,
         justifyContent: "flex-end",

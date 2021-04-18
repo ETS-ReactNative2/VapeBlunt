@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, Text } from "react-native";
 import {
     SafeAreaView,
     PromoImage,
@@ -12,8 +12,8 @@ import { getArticles } from "../shopify/articles";
 
 const Inicio = (props) => {
     const { navigation } = props;
-    const [newestProduct, setNewestProduct] = React.useState([]);
-    const [bestSellingProduct, setBestSellingProduct] = React.useState([]);
+    const [newestProducts, setNewestProducts] = React.useState([]);
+    const [bestSellingProducts, setBestSellingProducts] = React.useState([]);
     const [newestArticles, setNewestArticles] = React.useState([]);
 
     React.useEffect(() => {
@@ -22,12 +22,12 @@ const Inicio = (props) => {
         }),
             Promise.all([
                 newProducts({ first: 2 })
-                    .then(setNewestProduct)
+                    .then(setNewestProducts)
                     .catch((err) =>
                         console.log("Error fetching newProducts", err)
                     ),
                 bestSellers({ first: 1 })
-                    .then(setBestSellingProduct)
+                    .then(setBestSellingProducts)
                     .catch((err) =>
                         console.log("Error fetching bestSellers", err)
                     ),
@@ -41,19 +41,19 @@ const Inicio = (props) => {
             ]);
     }, []);
 
-    return newestProduct && newestArticles && bestSellingProduct ? (
+    return newestProducts && newestArticles && bestSellingProducts ? (
         <SafeAreaView style={{ backgroundColor: "white" }}>
             {/* flex: 1 will cause the ScrollView to become un-scrollable, keep flexGrow`*/}
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 {/*   <PromoImage onPress={() => navigation.navigate("Tienda")} />*/}
-                {bestSellingProduct.map((item, i) => (
+                {bestSellingProducts.map((item, i) => (
                     <PromoImage
                         key={i}
                         handle={item.handle}
                         navigation={navigation}
                     />
                 ))}
-                {newestProduct.map((item, i) => (
+                {newestProducts.map((item, i) => (
                     <PromoProduct
                         key={i}
                         handle={item.handle}

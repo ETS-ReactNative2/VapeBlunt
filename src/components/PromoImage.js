@@ -25,6 +25,7 @@ function PromoImage(props) {
         productInfo(props.handle).then(setProduct);
     }, []);
 
+    console.log(product);
     return (
         <TouchableOpacity onPress={() => props.onPress()}>
             {product ? (
@@ -54,13 +55,18 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         width: width,
         height: height,
+        padding: 0,
     },
     textStyle: {
-        color: "white",
+        color: "#84e315",
         fontSize: 22,
         fontWeight: "bold",
         textAlign: "center",
-        backgroundColor: "#000000bf",
+        borderTopRightRadius: 20,
+        borderBottomRightRadius: 20,
+        backgroundColor: "#000",
+        bottom: "-40%",
+        left: "-6%",
     },
 });
 

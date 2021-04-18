@@ -50,10 +50,14 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         color: "white",
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: "bold",
-        textAlign: "center",
         backgroundColor: "#000000bf",
+        borderTopRightRadius: 20,
+        borderBottomRightRadius: 20,
+        bottom: "-33%",
+        left: "-1%",
+        paddingLeft: 10,
     },
 });
 
