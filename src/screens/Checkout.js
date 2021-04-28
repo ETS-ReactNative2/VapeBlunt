@@ -5,6 +5,8 @@ import { SafeAreaView, InputForm } from "../components";
 import { createCheckout } from "../shopify/orders";
 import { connect } from "react-redux";
 import { productInfo } from "../shopify/products";
+import DropDownPicker from "react-native-dropdown-picker";
+import { mxStates } from "../assets";
 
 const useUserCheckoutInfo = (default_info) => {
     const [info, setInfo] = React.useState(
@@ -14,7 +16,7 @@ const useUserCheckoutInfo = (default_info) => {
             lastName: "",
             address: "",
             postalCode: "",
-            country: "",
+            country: "México",
             city: "",
             province: "",
             phoneNumber: "",
@@ -115,6 +117,7 @@ const Checkout = (props) => {
             })
             .catch((errors) => {
                 console.log("Error generating checkout:", errors);
+                Alert.alert("Ha habido un error", errors[0].message);
                 errors.forEach(console.log);
             });
     };
@@ -170,16 +173,20 @@ const Checkout = (props) => {
                 />
             </View>
             <View style={styles.container}>
-                <InputForm
-                    value={user.province}
-                    onChangeInput={editors.setProvince}
-                    placeholder="Estado"
-                    style={styles.inputForm}
+                <DropDownPicker
+                    items={mxStates}
+                    placeholder={"Estado"}
+                    containerStyle={{ height: 40, width: "48%" }}
+                    style={{ backgroundColor: "#fafafa" }}
+                    itemStyle={{
+                        justifyContent: "flex-start",
+                    }}
+                    dropDownStyle={{ backgroundColor: "#fafafa" }}
+                    onChangeItem={(item) => editors.setProvince(item.value)}
                 />
                 <InputForm
-                    value={user.country}
-                    onChangeInput={editors.setCountry}
-                    placeholder="País"
+                    editable={false}
+                    value={"México"}
                     style={styles.inputForm}
                 />
             </View>
