@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
         width: width,
         height: height,
         padding: 0,
+        position: 'relative',
     },
     textStyle: {
         color: "#84e315",
@@ -70,9 +71,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
         borderTopRightRadius: 20,
         borderBottomRightRadius: 20,
-        backgroundColor: "#000",
-        bottom: "-40%",
-        left: "-6%",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        paddingVertical: 5,
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
     },
 });
 

@@ -157,7 +157,9 @@ class Producto extends React.Component {
               style={{
                 textAlign: 'center',
                 fontSize: 40,
-                color: i == selectedImageIndex ? colors.black : colors.grey
+                color: i == selectedImageIndex ? colors.black : colors.grey,
+                marginBottom: 10,
+                height: 40,
               }}
             >
               {`\u2022`}
